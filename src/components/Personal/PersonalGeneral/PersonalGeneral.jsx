@@ -1,0 +1,47 @@
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
+import ListItemAvatar from '@material-ui/core/ListItemAvatar';
+import Avatar from '@material-ui/core/Avatar';
+import Divider from '@material-ui/core/Divider';
+import FontDownloadIcon from '@material-ui/icons/FontDownload';
+import SchoolIcon from '@material-ui/icons/School';
+import {useHistory} from 'react-router-dom';
+
+import useStyles from './styles';
+
+const PersonalGeneral = () => {
+    const classes = useStyles();
+    const history = useHistory();
+
+    const user = JSON.parse(localStorage.getItem('iu-student'));
+
+    if (!user) {
+        history.push('/');
+        return <></>
+    }
+
+    return (
+        <List className={classes.root}>
+            <ListItem>
+                <ListItemAvatar>
+                    <Avatar>
+                        <FontDownloadIcon />
+                    </Avatar>
+                </ListItemAvatar>
+                <ListItemText primary='Full name' secondary={user.info?.name ? user.info?.name : 'Tran Trong Thuc'} />
+            </ListItem>
+            <Divider variant="inset" component="li" />
+            <ListItem>
+                <ListItemAvatar>
+                    <Avatar>
+                        <SchoolIcon />
+                    </Avatar>
+                </ListItemAvatar>
+                <ListItemText primary='Room' secondary={user.info?.school ? user.info.school : 'B3212'} />
+            </ListItem>
+        </List>
+    )
+}
+
+export default PersonalGeneral;
