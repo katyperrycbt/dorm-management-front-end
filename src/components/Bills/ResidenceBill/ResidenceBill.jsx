@@ -24,7 +24,7 @@ const ResidenceBill = () => {
         'Content': [TocIcon, 'Health Insurance']
     }
 
-    const header = [sampleBill['Receipt Number'][1], sampleBill['Total'][1].toLocaleString('it-IT', {style : 'currency', currency : 'VND'}), `${sampleBill['Semester'][1]}(${sampleBill['Duration'][1]})`, sampleBill['Payment status'][1]];
+    const header = [`Receipt Number: ${sampleBill['Receipt Number'][1]}`, sampleBill['Total'][1].toLocaleString('it-IT', {style : 'currency', currency : 'VND'}), `${sampleBill['Semester'][1]}(${sampleBill['Duration'][1]})`, sampleBill['Payment status'][1]];
 
     const residentList = [{
         'header': header,

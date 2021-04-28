@@ -66,6 +66,7 @@ export default function SwipeableTemporaryDrawer({ sideMenu, setSideMenu }) {
                 history.push('/bills');
                 break;
             case 4:
+                history.push('/requests');
                 break;
             default:
                 localStorage.removeItem('iu-student');
