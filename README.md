@@ -1,3 +1,4 @@
+### [![Netlify Status](https://api.netlify.com/api/v1/badges/5b7e7b86-0128-4235-9b5e-ab30035cfe40/deploy-status)](https://app.netlify.com/sites/iu-dormitory/deploys)
 # Things To Do After Cloning
 
 Require: Git, NodeJS (and NPM) pre-installed
