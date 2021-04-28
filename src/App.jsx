@@ -13,6 +13,7 @@ import Auth from './components/Auth/Auth';
 import Personal from './components/Personal/Personal';
 import Resident from './components/Resident/Resident';
 import Bills from './components/Bills/Bills';
+import Requests from './components/Request/Requests';
 
 const App = () => {
     const dispatch = useDispatch();
@@ -35,6 +36,7 @@ const App = () => {
                     <Route exact path='/info' render={props => <Personal {...props} />} />
                     <Route exact path='/resident' render={props => <Resident {...props} />} />
                     <Route exact path='/bills' render={props => <Bills {...props} />} />
+                    <Route exact path='/requests' render={props => <Requests {...props} />} />
                 </Switch>
             </Container>
         </BrowserRouter>
