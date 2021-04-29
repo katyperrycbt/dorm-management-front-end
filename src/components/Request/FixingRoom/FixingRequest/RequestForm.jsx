@@ -1,7 +1,7 @@
 import React from 'react';
 import useStyles from './styles';
 import { useSelector, useDispatch } from 'react-redux';
-import { open, close } from './open';
+import { close } from './open';
 
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
@@ -10,10 +10,10 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import SendIcon from '@material-ui/icons/Send';
 
-import { useHistory } from 'react-router-dom';
+// import { useHistory } from 'react-router-dom';
 
-import { ADD_TO_LIST, REMOVE_FROM_LIST, ADD_TO_REQUEST_LIST, REMOVE_FROM_REQUEST_LIST, approve } from './RequestInfor';
-import { increment, decrement } from './RequestInfor';
+import {ADD_TO_REQUEST_LIST } from './RequestInfor';
+import { increment } from './RequestInfor';
 
 
 export default function RequestForm() {
@@ -42,9 +42,9 @@ export default function RequestForm() {
         })
     }
 
-    const handleOpen = () => {
-        dispatch(open());
-    }
+    // const handleOpen = () => {
+    //     dispatch(open());
+    // }
 
     const handleClose = () => {
         dispatch(close());

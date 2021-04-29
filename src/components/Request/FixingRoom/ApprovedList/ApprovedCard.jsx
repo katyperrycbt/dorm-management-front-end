@@ -69,7 +69,7 @@ export default function ApprovedCard({ title, image, id, approve, status }) {
                 <Grid container spacing={2}>
                     <Grid item>
                         <ButtonBase className={classes.image}>
-                            <img className={classes.img} alt="No Image"  src={image} />
+                            <img className={classes.img} alt="al"  src={image} />
                         </ButtonBase>
                     </Grid>
                     <Grid item xs={12} sm container>

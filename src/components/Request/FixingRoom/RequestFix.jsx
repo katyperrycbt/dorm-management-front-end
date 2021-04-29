@@ -1,7 +1,7 @@
 import React from 'react';
 import useStyles from './styles';
 import { useSelector, useDispatch } from 'react-redux';
-import { open, close} from './FixingRequest/open';
+import { open} from './FixingRequest/open';
 
 import PropTypes from 'prop-types';
 import SwipeableViews from 'react-swipeable-views';
@@ -64,7 +64,7 @@ export default function RequestFix() {
     const [ value, setValue ] = React.useState(0);
     const [ anchorEl, setAnchorEl ] = React.useState(null);
 
-    const isOpen = useSelector((state) => state.isOpen.openState);
+    // const isOpen = useSelector((state) => state.isOpen.openState);
     const dispatch = useDispatch();
 
     const list = useSelector((state) => state.RequestList.list);
@@ -120,7 +120,7 @@ export default function RequestFix() {
                 </Tabs>
             </AppBar>
             <SwipeableViews
-                axis={theme.direction == 'rtl' ? 'x-reverse' : 'x'}
+                axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
                 index={value}
                 onChangeIndex={handleChangeIndex}
             >

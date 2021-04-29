@@ -58,7 +58,7 @@ const initialState = {
     return_id: 0,
 }
 
-export default (state = initialState, action) => {
+const what2 = (state = initialState, action) => {
     switch (action.type){
         case ADD_TO_REQUEST_LIST:
             return {
@@ -90,7 +90,7 @@ export default (state = initialState, action) => {
             };
         case DISAPPROVE:
             const index_approve = state.list.findIndex((request) => request.id === action.id);
-            if((index_approve >= 0) && (state.list[index_approve].approve == true)){
+            if((index_approve >= 0) && (state.list[index_approve].approve === true)){
                 state.list[index_approve].approve = false;
                 console.log(state.list[index_approve].approve);
             }
@@ -131,3 +131,5 @@ export default (state = initialState, action) => {
             return state;
     }
 }
+
+export default what2;

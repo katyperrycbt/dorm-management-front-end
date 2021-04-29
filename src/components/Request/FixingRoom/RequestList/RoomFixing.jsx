@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { decrement, REMOVE_FROM_LIST, REMOVE_FROM_REQUEST_LIST } from '../FixingRequest/RequestInfor';
+import { REMOVE_FROM_REQUEST_LIST } from '../FixingRequest/RequestInfor';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
@@ -64,7 +64,7 @@ export default function RoomFixing({ title, image, id, approve, status }) {
                 <Grid container spacing={2}>
                     <Grid item>
                         <ButtonBase className={classes.image}>
-                            <img className={classes.img} alt="No Image"  src={image} />
+                            <img className={classes.img} alt="custom"  src={image} />
                         </ButtonBase>
                     </Grid>
                     <Grid item xs={12} sm container>

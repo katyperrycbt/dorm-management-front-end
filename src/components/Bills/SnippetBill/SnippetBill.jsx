@@ -1,6 +1,6 @@
 import Paper from '@material-ui/core/Paper';
 import useStyles from './styles';
-import { useEffect, useState } from 'react';
+// import { useEffect, useState } from 'react';
 import { Typography, Avatar } from '@material-ui/core';
 import Accordion from '@material-ui/core/Accordion';
 import AccordionSummary from '@material-ui/core/AccordionSummary';

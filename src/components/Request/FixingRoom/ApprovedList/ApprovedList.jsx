@@ -11,7 +11,7 @@ export default function ApprovedList(){
             {list.map((request) => {
                 if(request.approve === true){
                     return(<ApprovedCard key={request.id} id={request.id} title={request.title} image={request.image} status={request.status} approve={request.approve}/>);
-                }
+                } else return false;
             })}
         </div>
     );

@@ -2,14 +2,14 @@ import { useState } from 'react';
 
 import { Avatar, Button, Paper, Grid, Typography, Container, CircularProgress, Tooltip } from '@material-ui/core';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import { useDispatch, useSelector } from 'react-redux';
+// import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 
 import useStyles from './styles';
 import Input from './Input';
-import Icon from './icon';
+// import Icon from './icon';
 // import { signin, signup } from '../../actions/auth';
 import dotenv from 'dotenv';
 
@@ -27,7 +27,7 @@ const Auth = (props) => {
     const classes = useStyles();
     const [showPassword, setShowPassword] = useState(false);
     const [formData, setFormData] = useState(inititalState);
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
     const history = useHistory();
     const [progress, setProgress] = useState(false);
     const [errors, setErrors] = useState(undefined);

@@ -12,8 +12,7 @@ export const close = () => ({
 const initialState = {
     openState: false
 };
-
-export default (state=initialState, action) => {
+const what = (state=initialState, action) => {
     switch(action.type){
         case OPEN:
             return {...state, openState: true};
@@ -23,3 +22,5 @@ export default (state=initialState, action) => {
             return state;
     }
 }
+
+export default what;
