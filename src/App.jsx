@@ -28,7 +28,7 @@ const App = () => {
                     <LinearProgress color="secondary" />
                 </div>
             }
-            <Container maxWidth={false} style={{ padding: 0, margin: 0, }}>
+            <Container maxWidth='lg'>
                 <MainMenu />
                 <Switch>
                     <Route exact path='/' render={props => <Home {...props} />} />

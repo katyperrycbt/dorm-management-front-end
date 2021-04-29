@@ -1,5 +1,4 @@
 
-
 const auth = (state = { authData: null}, action) => {
     switch (action.type) {
         case 'A':
