@@ -20,6 +20,20 @@ import {
 } from '@material-ui/pickers';
 import Button from '@material-ui/core/Button';
 import SendIcon from '@material-ui/icons/Send';
+import { createMuiTheme } from '@material-ui/core/styles';
+import { ThemeProvider } from '@material-ui/styles';
+
+const theme = createMuiTheme({
+    overrides: {
+        MuiFormControl: {
+            marginNormal: {
+                margin: 0,
+                marginTop: 0,
+                marginBottom: 0
+            }
+        }
+    }
+});
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -51,113 +65,103 @@ export default function Return() {
     const classes = useStyles();
     const dispatch = useDispatch();
     // const request = useSelector((state) => state.RequestList.ReturnInfor);
-    const [gender, setGender] = React.useState('');
-    const [selectedDate, setSelectedDate] = React.useState(new Date(Date.now()));
-    const [feedBack, setFeedBack] = React.useState('');
-    const [room, setRoom] = React.useState('');
-    const [name, setName] = React.useState('');
-    const [id, setId] = React.useState('');
 
-    const handleChangeRoom = (e) => {
-        setRoom(e.target.value);
-    }
-
-    const handleDateChange = (date) => {
-        setSelectedDate(date);
-    }
-
-    const handleChange = (e) => {
-        setGender(e.target.value)
-    }
-
-    const handleChangeName = (e) => {
-        setName(e.target.value);
-    }
-
-    const handleChangeId = (e) => {
-        setId(e.target.value);
-    }
-
-    const handleChangeFeedBack = (e) => {
-        setFeedBack(e.target.value);
-    }
+    const [formData, setFormData] = React.useState({ name: '', id: '', gender: '', room: '', dateRequest: Date.now(), reason: '' });
 
     return (
-        <Container maxWidth="md">
+        <Container maxWidth="md" style={{padding: 0}}>
             <Grid container spacing={2} className={classes.gridContainer}>
-                <Grid item xs={12} style={{width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><Typography style={{display: 'flex', alignItems: 'center', justifyContent: 'center' }} variant="h4">Request for returning the room</Typography></Grid>
+                <Grid item xs={12} style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><Typography style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }} variant="h4">Request for returning the room</Typography></Grid>
                 <Grid item xs={12} >
                     <form noValidate autoComplete="off" style={{ marginTop: '50px' }}>
                         <Grid container className={classes.gridContainer} spacing={2}>
-
-                        </Grid>
-                        <TextField className={classes.name} value={name} id="name" label="Name" variant="outlined" onChange={handleChangeName}></TextField>
-                        <TextField className={classes.id} value={id} id="id" label="ID" variant="outlined" onChange={handleChangeId}></TextField>
-                        <FormControl className={classes.formControl}>
-                            <InputLabel id="GenderLabel">Gender</InputLabel>
-                            <Select
-                                className={classes.select}
-                                labelId="GenderLabel"
-                                id="selectGender"
-                                value={gender}
-                                onChange={handleChange}
-                            >
-                                <MenuItem value='Male'>Male</MenuItem>
-                                <MenuItem value='Female'>Female</MenuItem>
-                                <MenuItem value='Others'>Others</MenuItem>
-                            </Select>
-                        </FormControl>
-                        <FormControl>
-                            <InputLabel id="roomLabel">Room</InputLabel>
-                            <Select
-                                className={classes.select}
-                                labelId="roomLabel"
-                                id="selectRoom"
-                                value={room}
-                                onChange={handleChangeRoom}
-                            >
-                                <MenuItem value="A1.111">A1.111</MenuItem>
-                                <MenuItem value="A1.112">A1.112</MenuItem>
-                            </Select>
-                        </FormControl>
-                        <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                            <Grid container justify="space around">
-                                <KeyboardDatePicker
-                                    disableToolbar
-                                    variant="inline"
-                                    format="MM/dd/yyyy"
-                                    margin="normal"
-                                    id="date-picker-inline"
-                                    label="Date"
-                                    value={selectedDate}
-                                    onChange={handleDateChange}
-                                    KeyboardButtonProps={{
-                                        'arial-label': 'change date'
-                                    }}
+                            <Grid item xs={12} sm={6}>
+                                <TextField required fullWidth value={name} id="name" label="Name" variant="outlined" onChange={(e) => setFormData({ ...formData, name: e.target.value })}></TextField>
+                            </Grid>
+                            <Grid item xs={12} sm={6}>
+                                <TextField required fullWidth value={id} id="id" label="ID" variant="outlined" onChange={(e) => setFormData({ ...formData, id: e.target.value })}></TextField>
+                            </Grid>
+                            <Grid item xs={6} sm={4}>
+                                <FormControl fullWidth variant='outlined' required>
+                                    <InputLabel htmlFor="gender">Gender</InputLabel>
+                                    <Select
+                                        label="Gender"
+                                        id="selectGender"
+                                        value={formData.gender}
+                                        onChange={(e) => setFormData({ ...formData, gender: e.target.value })}
+                                        variant='outlined'
+                                        inputProps={{
+                                            name: 'gender',
+                                            id: `outlined-age-nativesdsd${Date.now()}`,
+                                        }}
+                                    >
+                                        <MenuItem value='Male'>Male</MenuItem>
+                                        <MenuItem value='Female'>Female</MenuItem>
+                                        <MenuItem value='Others'>Others</MenuItem>
+                                    </Select>
+                                </FormControl>                            </Grid>
+                            <Grid item xs={6} sm={4}>
+                                <FormControl fullWidth variant='outlined' required>
+                                    <InputLabel htmlFor='room'>Room</InputLabel>
+                                    <Select
+                                        label="Room"
+                                        inputProps={{
+                                            name: 'room',
+                                            id: `outlined-age-nassstivesdsd${Date.now()}`,
+                                        }}
+                                        value={formData.room}
+                                        onChange={(e) => setFormData({ ...formData, room: e.target.value })}
+                                    >
+                                        <MenuItem value="A1.111">A1.111</MenuItem>
+                                        <MenuItem value="A1.112">A1.112</MenuItem>
+                                    </Select>
+                                </FormControl>
+                            </Grid>
+                            <Grid item xs={12} sm={4}>
+                                <ThemeProvider theme={theme}>
+                                    <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                                        <KeyboardDatePicker
+                                            disableToolbar
+                                            variant="dialog"
+                                            format="MM/dd/yyyy"
+                                            margin="normal"
+                                            id="date-picker-inline"
+                                            label="Date"
+                                            value={formData.dateRequest}
+                                            onChange={(e) => setFormData({ ...formData, dateRequest: e })}
+                                            KeyboardButtonProps={{
+                                                'arial-label': 'change date'
+                                            }}
+                                            required
+                                            className={{ margin: '20px', padding: 0 }}
+                                        />
+                                    </MuiPickersUtilsProvider>
+                                </ThemeProvider>
+                            </Grid>
+                            <Grid item xs={12}>
+                                <TextField
+                                    id="outlined-multiline-static"
+                                    label="Reason"
+                                    multiline
+                                    rows={10}
+                                    // defaultValue=""
+                                    variant="outlined"
+                                    value={formData.reason}
+                                    onChange={(e) => setFormData({ ...formData, reason: e.target.value })}
+                                    fullWidth
                                 />
                             </Grid>
-                        </MuiPickersUtilsProvider>
-                        <div>
-                            <TextField
-                                className={classes.feedback}
-                                id="outlined-multiline-static"
-                                label="Multiline"
-                                multiline
-                                rows={10}
-                                // defaultValue=""
-                                variant="outlined"
-                                value={feedBack}
-                                onChange={handleChangeFeedBack}
-                            />
-                        </div>
-                        <Button
-                            variant="contained"
-                            color="primary"
-                            className={classes.button}
-                            endIcon={<SendIcon />}
-                        >
-                            Send
-                    </Button>
+                            <Grid item xs={12} md={6} lg={3}>
+                                <Button
+                                    variant="contained"
+                                    color="primary"
+                                    endIcon={<SendIcon />}
+                                    style={{width: '100%'}}
+                                >
+                                    Send
+                                </Button>
+                            </Grid>
+                        </Grid>
                     </form>
                 </Grid>
             </Grid>
