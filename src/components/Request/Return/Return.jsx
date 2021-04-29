@@ -76,10 +76,10 @@ export default function Return() {
                     <form noValidate autoComplete="off" style={{ marginTop: '50px' }}>
                         <Grid container className={classes.gridContainer} spacing={2}>
                             <Grid item xs={12} sm={6}>
-                                <TextField required fullWidth value={name} id="name" label="Name" variant="outlined" onChange={(e) => setFormData({ ...formData, name: e.target.value })}></TextField>
+                                <TextField required fullWidth id="name" label="Name" variant="outlined" onChange={(e) => setFormData({ ...formData, name: e.target.value })}></TextField>
                             </Grid>
                             <Grid item xs={12} sm={6}>
-                                <TextField required fullWidth value={id} id="id" label="ID" variant="outlined" onChange={(e) => setFormData({ ...formData, id: e.target.value })}></TextField>
+                                <TextField required fullWidth id="id" label="ID" variant="outlined" onChange={(e) => setFormData({ ...formData, id: e.target.value })}></TextField>
                             </Grid>
                             <Grid item xs={6} sm={4}>
                                 <FormControl fullWidth variant='outlined' required>

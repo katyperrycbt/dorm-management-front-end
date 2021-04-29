@@ -1,17 +1,11 @@
 import { useState } from 'react';
 import useStyles from './styles';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import PropTypes from 'prop-types';
-import SwipeableViews from 'react-swipeable-views';
-import AppBar from '@material-ui/core/AppBar';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import { Container, Tooltip } from '@material-ui/core';
-import { useTheme } from '@material-ui/core/styles';
-import Zoom from '@material-ui/core/Zoom';
 import Fab from '@material-ui/core/Fab';
 import EditIcon from '@material-ui/icons/Edit';
 

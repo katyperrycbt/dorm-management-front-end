@@ -5,7 +5,7 @@ import SwipeableViews from 'react-swipeable-views';
 
 import Fix from './Fix/Fix';
 import Return from './Return/Return';
-import { Switch, Route, useHistory, BrowserRouter } from 'react-router-dom';
+import { Switch, Route, useHistory } from 'react-router-dom';
 
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
