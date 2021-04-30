@@ -9,6 +9,7 @@ import SettingsApplicationsIcon from '@material-ui/icons/SettingsApplications';
 import AssignmentReturnIcon from '@material-ui/icons/AssignmentReturn';
 
 
+
 const Services = () => {
     const classes = useStyles();
 
@@ -18,16 +19,16 @@ const Services = () => {
                 <CustomButton content='Interactive' icon={<FlashOnIcon fontSize="large" />} />
             </Grid>
             <Grid key='resident2' item xs={6} sm={4} md={3} className={classes.centered}>
-                <CustomButton content='Resident' icon={<LocalHotelIcon fontSize="large" />} />
+                <CustomButton site='resident' content='Resident' icon={<LocalHotelIcon fontSize="large" />} />
             </Grid>
             <Grid key='bill2' item xs={6} sm={4} md={3} className={classes.centered}>
-                <CustomButton content='Bills' icon={<ReceiptIcon fontSize="large" />} />
+                <CustomButton site='bills' content='Bills' icon={<ReceiptIcon fontSize="large" />} />
             </Grid>
             <Grid key='fix2' item xs={6} sm={4} md={3} className={classes.centered}>
-                <CustomButton content='Repairs' icon={<SettingsApplicationsIcon fontSize="large" />} />
+                <CustomButton site='requests' content='Repairs' icon={<SettingsApplicationsIcon fontSize="large" />} />
             </Grid>
             <Grid key='checkout2' item xs={6} sm={4} md={3} className={classes.centered}>
-                <CustomButton content='Checkout' icon={<AssignmentReturnIcon fontSize="large" />} />
+                <CustomButton site='requests/return' content='Checkout' icon={<AssignmentReturnIcon fontSize="large" />} />
             </Grid>
         </Grid>
     )
