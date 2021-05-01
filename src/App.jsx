@@ -14,6 +14,7 @@ import Personal from './components/Personal/Personal';
 import Resident from './components/Resident/Resident';
 import Bills from './components/Bills/Bills';
 import Requests from './components/Request/Requests';
+import About from './components/About/About';
 
 const App = () => {
     const dispatch = useDispatch();
@@ -37,6 +38,7 @@ const App = () => {
                     <Route exact path='/resident' render={props => <Resident {...props} />} />
                     <Route exact path='/bills' render={props => <Bills {...props} />} />
                     <Route path='/requests' render={props => <Requests {...props} />} />
+                    <Route path='/about' render={props => <About {...props}/>} />
                 </Switch>
             </Container>
         </BrowserRouter>

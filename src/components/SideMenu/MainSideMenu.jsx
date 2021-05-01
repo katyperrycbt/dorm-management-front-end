@@ -80,6 +80,7 @@ export default function SwipeableTemporaryDrawer({ sideMenu, setSideMenu }) {
     const handleAction2 = (e) => () => {
         switch (e) {
             case 0:
+                history.push('/about');
                 break;    
             default:
                 break;
