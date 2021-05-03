@@ -1,6 +1,8 @@
 import React from "react";
 import useStyles from "./styles";
 import InforForm from "./InforForm/InforForm";
+import AboutContent from "./AboutContent/AboutContent";
+import Content from "./AboutContent/Content/Content";
 
 import Grid from "@material-ui/core/Grid";
 import { Typography } from "@material-ui/core";
@@ -9,6 +11,26 @@ export default function About() {
   const classes = useStyles();
   return (
     <Grid container className={classes.root} spacing={5} maxWidth="md">
+      <Grid container spacing={0}>
+        <Grid item xs={12}>
+          <AboutContent />
+        </Grid>
+        <Grid item xs={12}>
+          <Typography
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              marginTop: "100px",
+              color: "#dc143c",
+            }}
+            variant="h3"
+          >
+            ABOUT US
+          </Typography>
+          <Content />
+        </Grid>
+      </Grid>
       <Grid
         item
         xs={12}
@@ -29,7 +51,7 @@ export default function About() {
           }}
           variant="h3"
         >
-          ABOUT US
+          WHO ARE WE
         </Typography>
       </Grid>
       <Grid

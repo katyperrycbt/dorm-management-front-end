@@ -4,6 +4,7 @@ import useStyles from "./styles";
 import { Typography } from "@material-ui/core";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
+import { CircularProgress } from "@material-ui/core";
 
 export default function InforForm({
   image,
@@ -19,7 +20,11 @@ export default function InforForm({
       <Paper className={classes.paper} elevation={10}>
         <Grid container spacing={2}>
           <Grid item>
-            <img className={classes.img} alt="avatar" src={image} />
+            {image ? (
+              <img className={classes.img} alt="avatar" src={image} />
+            ) : (
+              <CircularProgress />
+            )}
           </Grid>
           <Grid item xs={12} sm container>
             <Grid item xs container direction="column" spacing={2}>

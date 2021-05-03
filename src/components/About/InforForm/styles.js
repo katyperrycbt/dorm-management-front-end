@@ -9,10 +9,6 @@ export default makeStyles((theme)=>({
         margin: 'auto',
         maxWidth: '100%',
     },
-    image:{
-        width: 128,
-        height: 128,
-    },
     img:{
         margin: 'auto',
         display: 'block',
