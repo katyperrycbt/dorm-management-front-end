@@ -3,14 +3,15 @@ import { makeStyles } from "@material-ui/core/styles";
 export default makeStyles((theme) => ({
   root: {
     flexGrow: 1,
-    height: 600
+    height: 600,
+    margin: 20
   },
   image: {
     width: "100%",
     height: "50%",
     objectFit: "cover",
     maskImage:
-      "linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.05))"
+      "linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.05))",
   },
   blur: {
     position: "absolute",
@@ -20,7 +21,7 @@ export default makeStyles((theme) => ({
     backgroundColor: "rgba(0,0,0,0.6)",
     fontWeight: "bold",
     border: "3px solid #f1f1f1",
-    top: "40%",
+    top: "70%",
     left: "50%",
     transform: "translate(-50%, -50%)",
     width: "40%",
