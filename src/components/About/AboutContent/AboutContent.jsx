@@ -14,7 +14,8 @@ export default function AboutContent() {
           </Typography>
         </div>
         <img
-          src="https://ss-images.saostar.vn/2019/02/21/4634692/49568775_1507851952680995_2534203577073664000_o-1.jpg"
+          // src="https://ss-images.saostar.vn/2019/02/21/4634692/49568775_1507851952680995_2534203577073664000_o-1.jpg"
+          src="AboutImage.jpg"
           alt=""
           className={classes.image}
         />
