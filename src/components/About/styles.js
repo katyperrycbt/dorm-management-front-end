@@ -9,6 +9,16 @@ export default makeStyles((theme) => ({
         width: '100%',
         height: '100%',
     },
+    roott: {
+        flexGrow: 1,
+        display: 'flex',
+        '& > *': {
+            marginTop: theme.spacing(10),
+        },
+        flexDirection: 'column',
+        alignItems: 'center',
+        padding: theme.spacing(2),
+    },
     paper:{
         height: '70%',
         width: 300,
