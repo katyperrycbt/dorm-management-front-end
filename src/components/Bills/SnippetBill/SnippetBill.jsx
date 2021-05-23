@@ -56,9 +56,9 @@ const SnippetBill = ({ residentList, color1, color2, color3 }) => {
 
             >
 
-                <Grid containter className={classes.common}>
+                <Grid container className={classes.common}>
                     <Grid item md={7} xs={12}>
-                        <Typography variant="title" color="textSecondary" style={{ color: color2 }}>
+                        <Typography variant="caption" color="textSecondary" style={{ color: color2 }}>
                             {header[0]}
                         </Typography>
                         <Typography variant="h5" color="textSecondary" style={{ color: color2}}>
@@ -66,12 +66,12 @@ const SnippetBill = ({ residentList, color1, color2, color3 }) => {
                         </Typography>
                     </Grid>
                     <Grid item md={3} xs={12}>
-                        <Typography variant="title" color="textSecondary" style={{ color: color2, display: 'flex', flexDirection: 'row', alignItems: 'flex-end' }}>
+                        <Typography variant="caption" color="textSecondary" style={{ color: color2, display: 'flex', flexDirection: 'row', alignItems: 'flex-end' }}>
                             {header[2]}
                         </Typography>
                     </Grid>
                     <Grid item md={2} xs={12} className={classes.paid} style={{backgroundColor: color3}}>
-                        <Typography variant="title">
+                        <Typography variant="caption">
                             {header[3]}
                         </Typography>
                     </Grid>

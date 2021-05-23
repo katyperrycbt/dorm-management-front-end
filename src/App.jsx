@@ -16,11 +16,38 @@ import Bills from "./components/Bills/Bills";
 import Requests from "./components/Request/Requests";
 import About from "./components/About/About";
 import Contact from "./components/Contact/Contact";
+import Dashboard from './components/Dashboard/Dashboard';
 
 const App = () => {
   const dispatch = useDispatch();
   const [linear, setLinear] = useState(false);
   const classes = useStyles();
+
+  const admin = window.location.href.indexOf('admin.iu-dormitory.fun') === 7;
+
+  if (!admin) {
+    return (
+      <BrowserRouter>
+        {linear && (
+          <div
+            className={classes.linearProgress}
+            style={{ position: "fixed", top: "0", zIndex: "1000", left: "0" }}
+          >
+            <LinearProgress color="secondary" />
+          </div>
+        )}
+        <Container maxWidth="lg">
+          <MainMenu />
+          <Switch>
+            <Route exact path="/" render={(props) => <Home {...props} />} />
+            <Route exact path="/login" render={(props) => <Auth {...props} />} />
+            <Route exact path="/info" render={(props) => <Personal {...props} />} />
+            <Route exact path="/dashboard" render={(props) => <Dashboard {...props} />} />
+          </Switch>
+        </Container>
+      </BrowserRouter>
+    );
+  }
 
   return (
     <BrowserRouter>
