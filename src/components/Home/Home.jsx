@@ -23,7 +23,7 @@ const Home = () => {
     } else {
         return (
             <Container maxWidth="lg">
-                <DoneTask />
+                {/* <DoneTask /> */}
                 <Grid className={classes.mainGrid} container justify="center" alignItems="center" spacing={3}>
                     <MyCarousel />
                     <ChipTab icon={<SettingsEthernetIcon />} content='SERVICES' />
