@@ -33,12 +33,8 @@ const Auth = (props) => {
     const [errors, setErrors] = useState(undefined);
     const [success, setSuccess] = useState(undefined);
     const { setLinear } = props;
-    // const noti = useSelector((state) => {
-    //     if (state.noti.noti.length) {
-    //         return state.noti.noti.filter((no) => no.link === '/auth')
-    //     }
-    //     return [];
-    // });
+
+    
 
     const handleSubmit = (e) => {
         e.preventDefault();

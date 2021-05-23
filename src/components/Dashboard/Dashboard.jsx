@@ -21,7 +21,7 @@ import Switch from '@material-ui/core/Switch';
 import DeleteIcon from '@material-ui/icons/Delete';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { getDashboard, editDashboard } from '../../actions/dashboard';
+import { getDashboard, editDashboard } from '../../actions/admin.dashboard';
 
 import useStyles from './styles';
 import { Button, TextField } from '@material-ui/core';
@@ -29,6 +29,8 @@ import AddCircleIcon from '@material-ui/icons/AddCircle';
 
 import Avatar from '@material-ui/core/Avatar';
 import Chip from '@material-ui/core/Chip';
+
+import { useHistory } from 'react-router-dom';
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -88,7 +90,8 @@ export default function Dashboard() {
   const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
   const [whatDatabase, setWhatDatabase] = React.useState('student-information');
-
+  const profile = JSON.parse(localStorage.getItem('iu-student'));
+  const history = useHistory();
   const [cell, setCell] = React.useState(null);
 
   const dispatch = useDispatch();
@@ -110,6 +113,11 @@ export default function Dashboard() {
   }, [dispatch]);
 
   let rows = useSelector((state) => state.dashboard);
+
+  if (!profile) {
+    history.push('/login');
+    return <></>;
+  }
 
   var myObject = rows[0] || {};
   var keyNames = Object.keys(myObject);
