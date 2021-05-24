@@ -18,7 +18,7 @@ import ExitToAppOutlinedIcon from "@material-ui/icons/ExitToAppOutlined";
 
 import InfoOutlinedIcon from "@material-ui/icons/InfoOutlined";
 import CallOutlinedIcon from "@material-ui/icons/CallOutlined";
-import DashboardIcon from '@material-ui/icons/Dashboard';
+import DashboardIcon from "@material-ui/icons/Dashboard";
 import Tooltip from "@material-ui/core/Tooltip";
 
 import useStyles from "./styles";
@@ -41,8 +41,8 @@ export default function SwipeableTemporaryDrawer({ sideMenu, setSideMenu }) {
   const classes = useStyles();
   const iOS = process.browser && /iPad|iPhone|iPod/.test(navigator.userAgent);
   const history = useHistory();
-  
-  const admin = window.location.href.indexOf('admin.iu-dormitory.fun') === 8;
+
+  const admin = !(window.location.href.indexOf("admin.iu-dormitory.fun") === 8);
 
   const handleClose = (e) => {
     setSideMenu(false);
@@ -58,13 +58,14 @@ export default function SwipeableTemporaryDrawer({ sideMenu, setSideMenu }) {
         history.push("/");
         break;
       case 1:
-        history.push("/info");
+        !admin ? history.push("/info") : history.push("/admins");
+
         break;
       case 2:
-        !admin ? history.push('/dashboard') : history.push("/resident");
+        !admin ? history.push("/resident") : history.push("/dashboard");
         break;
       case 3:
-        history.push("/bills");
+        !admin ? history.push("/bills") : history.push("/login");
         break;
       case 4:
         history.push("/requests");
@@ -179,28 +180,25 @@ export default function SwipeableTemporaryDrawer({ sideMenu, setSideMenu }) {
       </List>
       <Divider />
       <List>
-        {[
-          "Home page",
-          "Personal information",
-          "Dashboard",
-        ].map((text, index) => (
-          <ListItem button key={text} onClick={handleAction1(index)}>
-            <ListItemIcon>
-              {index === 0 && <HomeOutlinedIcon />}
-              {index === 1 && <PermIdentityOutlinedIcon />}
-              {index === 2 && <DashboardIcon />}
-            </ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
+        {["Home page", "Personal information", "Dashboard", "Log Out"].map(
+          (text, index) => (
+            <ListItem button key={text} onClick={handleAction1(index)}>
+              <ListItemIcon>
+                {index === 0 && <HomeOutlinedIcon />}
+                {index === 1 && <PermIdentityOutlinedIcon />}
+                {index === 2 && <DashboardIcon />}
+                {index === 3 && <ExitToAppOutlinedIcon />}
+              </ListItemIcon>
+              <ListItemText primary={text} />
+            </ListItem>
+          )
+        )}
       </List>
       <Divider />
       <List>
         {["About"].map((text, index) => (
           <ListItem button key={text} onClick={handleAction2(index)}>
-            <ListItemIcon>
-              {index === 0 && <InfoOutlinedIcon />}
-            </ListItemIcon>
+            <ListItemIcon>{index === 0 && <InfoOutlinedIcon />}</ListItemIcon>
             <ListItemText primary={text} />
           </ListItem>
         ))}
