@@ -114,8 +114,10 @@ export const getResidentInfo = () => API.get('/student/get/resident');
 export const getBill = () => API.get('/student/get/bill');
 
 // request fix
+export const getRequestFix = () => API.get('/student/get/request/fix');
 export const requestFix = (formData) => API.post('/student/request/fix', formData);
 // request return/leaving
+export const getRequestReturn = () => API.get('/student/get/request/return');
 export const requestReturn = (formData) => API.post('/student/request/return', formData);
 
 
