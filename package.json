@@ -14,12 +14,14 @@
     "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^11.2.5",
     "@testing-library/user-event": "^12.8.3",
+    "antd": "^4.15.6",
     "axios": "^0.21.1",
     "date-fns": "^2.21.1",
     "dotenv": "^8.2.0",
     "jwt-decode": "^3.1.2",
     "moment": "^2.29.1",
     "react": "^17.0.1",
+    "react-app-rewired": "^2.1.8",
     "react-dom": "^17.0.1",
     "react-file-base64": "^1.0.3",
     "react-redux": "^7.2.3",
@@ -30,7 +32,11 @@
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
     "string-to-react": "^1.0.2",
-    "web-vitals": "^1.1.1"
+    "web-vitals": "^1.1.1",
+    "classnames": "^2.2.6",
+    "lodash": "^4.17.21",
+    "node-sass": "^4.14.1",
+    "react-ga": "^2.7.0"
   },
   "scripts": {
     "start": "react-scripts start",

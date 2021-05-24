@@ -11,6 +11,9 @@ import adminAuth from './admin.auth';
 import studentAuth from './student.auth';
 import studentSee from './student.see';
 import studentRequest from './student.request';
+import adminSee from './admin.see';
+import snack from './snack';
+import linear from './linear';
 
 export default combineReducers({ 
     auth, 
@@ -25,7 +28,9 @@ export default combineReducers({
     adminAuth,
     studentAuth,
     studentSee,
-    studentRequest
+    studentRequest, 
+    adminSee,
+    snack, linear
 });
 
 

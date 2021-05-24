@@ -1,7 +1,7 @@
 import * as api from '../api/index';
 import {STUDENT_SIGN_IN, STUDENT_SIGN_OUT, STUDENT_EDIT_ACCOUNT} from '../constants/constants';
 
-export const studentSignIn = (formData) => async (dispatch) => {
+export const studentSignIn = (formData, remember) => async (dispatch) => {
     try {
         const { data } = await api.signIn(formData);
 

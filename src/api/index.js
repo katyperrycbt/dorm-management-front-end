@@ -23,7 +23,7 @@ export const requestResidence = (formData) => API.post('/student/request/newRequ
 // NOTE: see Database board for the API
 
 // Step 5: Student uses the account given from that email to login to the system.
-export const signIn = (formData) => API.post('/student/login', formData);
+export const signIn = (formData, remember) => API.post(`/student/login/${remember ? 'remember' : ''}`, formData);
 //     if forgot the account
 export const forgotAccount = (formData) => API.post('/student/forgot', formData);
 // Step 6: Logged in succesfully, automatically create new request to get 
@@ -34,7 +34,7 @@ export const getAnnouncementAndEMail = () => API.get('/student/get/announcementA
 // ADMINS
 // Step 1: Some accounts first created by the developers
 // Step 2: One admin uses the account to signin to the system
-export const adminSignIn = (formData) => API.post('/admin/login', formData);
+export const adminSignIn = (formData, remember) => API.post(`/admin/login/${remember ? 'remember' : ''}`, formData);
 //     if forgot the account
 export const adminForgotAccount = (formData) => API.post('/admin/forgot', formData);
 // Step 3: Also, automatically create new request to get announcements
