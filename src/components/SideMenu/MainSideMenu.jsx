@@ -239,7 +239,7 @@ export default function SwipeableTemporaryDrawer({ sideMenu, setSideMenu }) {
           disableBackdropTransition={!iOS}
           disableDiscovery={iOS}
         >
-          {!admin ? list2("top") : list("top")}
+          {admin ? list2("top") : list("top")}
         </SwipeableDrawer>
       </React.Fragment>
     </div>

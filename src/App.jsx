@@ -25,7 +25,7 @@ const App = () => {
 
   const admin = window.location.href.indexOf('admin.iu-dormitory.fun') === 8;
 
-  if (!admin) {
+  if (admin) {
     return (
       <BrowserRouter>
         {linear && (
