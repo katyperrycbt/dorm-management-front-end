@@ -24,6 +24,7 @@ import { useSelector } from 'react-redux';
 import { SET_SNACK } from './constants/constants';
 import Landing from './Landing';
 
+
 const App = () => {
   const dispatch = useDispatch();
 
@@ -35,6 +36,7 @@ const App = () => {
   const linear = useSelector((state) => state.linear);
 
   const admin = window.location.href.indexOf('admin.iu-dormitory.fun') === 8;
+
 
   const handleClose = () => {
     dispatch({ type: SET_SNACK, data: { open: false, msg: '' } });
@@ -56,6 +58,7 @@ const App = () => {
             <Route exact path="/login" render={(props) => <Login {...props} />} />
             <Route exact path="/info" render={(props) => <Personal {...props} />} />
             <Route exact path="/dashboard" render={(props) => <Dashboard {...props} />} />
+
           </Switch>
         </Container>
       </BrowserRouter>
