@@ -60,11 +60,11 @@ const Hero = ({
       <div className="container-sm">
         <div className={innerClasses}>
           <div className="hero-content">
-            <h1 className="mt-0 mb-16 reveal-from-bottom" data-reveal-delay="200">
+            <h1 className="mt-0 mb-16 reveal-from-bottom" data-reveal-delay="200" style={{color: '#f44036'}}>
               Welcome to <span className="text-color-primary">IU Dormitory</span>
             </h1>
             <div className="container-xs">
-              <p className="m-0 mb-32 reveal-from-bottom" data-reveal-delay="400">
+              <p className="m-0 mb-32 reveal-from-bottom text-color-primary" data-reveal-delay="400">
               This is the official website of the International University Dormitory - Vietnam National University Ho Chi Minh City. This website manages the registration of accommodation, monthly fees of students.                </p>
               <div className="reveal-from-bottom" data-reveal-delay="600">
                 <ButtonGroup>

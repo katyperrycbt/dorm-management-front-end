@@ -56,7 +56,7 @@ const FeaturesTiles = ({
     >
       <div className="container">
         <div className={innerClasses}>
-          <SectionHeader data={sectionHeader} className="center-content" />
+          <SectionHeader data={sectionHeader} className="center-content" style={{color: '#f44336'}}/>
           <div className={tilesClasses}>
 
             <div className="tiles-item reveal-from-bottom">
@@ -71,10 +71,10 @@ const FeaturesTiles = ({
                   </div>
                 </div>
                 <div className="features-tiles-item-content">
-                  <h4 className="mt-0 mb-8">
-                    Step 1: <a href='/form'>Form</a>
+                  <h4 className="mt-0 mb-8" style={{color: '#f44336'}}>
+                    Step 1: <u><a href='/form' style={{color: '#f44336'}}>Form</a></u>
                     </h4>
-                  <p className="m-0 text-sm">
+                  <p className="m-0 text-sm" style={{color: '#002984'}}>
                     Go to the above link to browse the registration form                    </p>
                 </div>
               </div>
@@ -92,10 +92,10 @@ const FeaturesTiles = ({
                   </div>
                 </div>
                 <div className="features-tiles-item-content">
-                  <h4 className="mt-0 mb-8">
+                  <h4 className="mt-0 mb-8" style={{color: '#f44336'}}>
                     Step 2: Fill Out The Form
                     </h4>
-                  <p className="m-0 text-sm">
+                  <p className="m-0 text-sm" style={{color: '#002984'}}>
                   You will need some personal information such as: ID number, copy of birth certificate, matriculation certificate... In addition, you need to fill in other basic information.
                     </p>
                 </div>
@@ -114,10 +114,10 @@ const FeaturesTiles = ({
                   </div>
                 </div>
                 <div className="features-tiles-item-content">
-                  <h4 className="mt-0 mb-8">
+                  <h4 className="mt-0 mb-8" style={{color: '#f44336'}}>
                     Step 3: Pay The Deposit Fee
                     </h4>
-                  <p className="m-0 text-sm">
+                  <p className="m-0 text-sm" style={{color: '#002984'}}>
                   Every valid registration form requires a deposit to avoid harassment. Fee payment information will appear as soon as you complete the registration form
                     </p>
                 </div>
@@ -136,10 +136,10 @@ const FeaturesTiles = ({
                   </div>
                 </div>
                 <div className="features-tiles-item-content">
-                  <h4 className="mt-0 mb-8">
+                  <h4 className="mt-0 mb-8" style={{color: '#f44336'}}>
                     Step 4: Waiting For Approval
                     </h4>
-                  <p className="m-0 text-sm">
+                  <p className="m-0 text-sm" style={{color: '#002984'}}>
                   Processing time is 1 week from the time you complete the deposit, we will contact you by email
                     </p>
                 </div>
@@ -158,10 +158,10 @@ const FeaturesTiles = ({
                   </div>
                 </div>
                 <div className="features-tiles-item-content">
-                  <h4 className="mt-0 mb-8">
+                  <h4 className="mt-0 mb-8" style={{color: '#f44336'}}>
                     Step 5: Move Into The Dorm
                     </h4>
-                  <p className="m-0 text-sm">
+                  <p className="m-0 text-sm" style={{color: '#002984'}}>
                   In the email, you have the consent form, please bring it on the day you move into the dormitory
                     </p>
                 </div>
@@ -180,10 +180,10 @@ const FeaturesTiles = ({
                   </div>
                 </div>
                 <div className="features-tiles-item-content">
-                  <h4 className="mt-0 mb-8">
+                  <h4 className="mt-0 mb-8" style={{color: '#f44336'}}>
                     Step 6: Get Refund
                     </h4>
-                  <p className="m-0 text-sm">
+                  <p className="m-0 text-sm" style={{color: '#002984'}}>
                     Receive deposit refund, make contract and ... done!
                     </p>
                 </div>

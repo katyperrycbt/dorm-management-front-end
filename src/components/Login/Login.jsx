@@ -21,9 +21,9 @@ import { SET_SNACK, SET_LINEAR } from '../../constants/constants';
 
 function Copyright() {
     return (
-        <Typography variant="body2" color="textSecondary" align="center">
+        <Typography variant="body2" color="textSecondary" align="center" style={{color: '#3f51b5'}}>
             {'Copyright © '}
-            <Link color="inherit" href="https://iu-dormitory.fun/">
+            <Link color="inherit" href="https://iu-dormitory.fun/" style={{color: '#f44036'}}>
                 IU Dormitory
       </Link>{' '}
             {new Date().getFullYear()}
@@ -103,7 +103,7 @@ export default function Login() {
                     <Avatar className={classes.avatar}>
                         <LockOutlinedIcon />
                     </Avatar>
-                    <Typography component="h1" variant="h5">
+                    <Typography component="h1" variant="h5" style={{color: '#3f51b5'}}>
                         Sign in
                     </Typography>
                     <form className={classes.form} onSubmit={handleLogin}>
@@ -146,12 +146,12 @@ export default function Login() {
                         </Button>
                         <Grid container>
                             <Grid item xs>
-                                <Link href="#" variant="body2">
+                                <Link href="#" variant="body2" style={{color: '#3f51b5'}}>
                                     Forgot password?
                                 </Link>
                             </Grid>
                             <Grid item>
-                                <Link href="#" variant="body2">
+                                <Link href="#" variant="body2" style={{color: '#3f51b5'}}>
                                     {"Don't have an account? Sign Up"}
                                 </Link>
                             </Grid>

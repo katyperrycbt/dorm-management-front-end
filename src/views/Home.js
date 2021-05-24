@@ -9,7 +9,7 @@ import Cta from '../componentsLanding/sections/Cta';
 const Home = () => {
 
   return (
-    <div style={{background: '#000000'}}>
+    <div >
       <Hero className="illustration-section-01" />
       <FeaturesTiles />
       <FeaturesSplit invertMobile topDivider imageFill className="illustration-section-02" />

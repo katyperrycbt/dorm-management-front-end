@@ -61,7 +61,7 @@ const FeaturesSplit = ({
     >
       <div className="container">
         <div className={innerClasses}>
-          <SectionHeader data={sectionHeader} className="center-content" />
+          <SectionHeader data={sectionHeader} className="center-content" style={{color: '#f44336'}}/>
           <div className={splitClasses}>
 
             <div className="split-item">
@@ -69,10 +69,10 @@ const FeaturesSplit = ({
                 <div className="text-xxs text-color-primary fw-600 tt-u mb-8">
                   Inside a dorm room
                   </div>
-                <h3 className="mt-0 mb-12">
+                <h3 className="mt-0 mb-12" style={{color: '#00695c'}}>
                 Airy, modern space
                   </h3>
-                <p className="m-0">
+                <p className="m-0" style={{color: '#e91e63'}}>
                   The size of each room ranges from 50 to 150 square meters, harmonious layout, friendly with modern facilities.
                   </p>
               </div>
@@ -95,9 +95,9 @@ const FeaturesSplit = ({
                 <div className="text-xxs text-color-primary fw-600 tt-u mb-8">
                   Common room in the dormitory
                   </div>
-                <h3 className="mt-0 mb-12">
+                <h3 className="mt-0 mb-12" style={{color: '#00695c'}}>
                   Promote the spirit of learning, especially teamwork                  </h3>
-                <p className="m-0">
+                <p className="m-0" style={{color: '#e91e63'}}>
                   We have the motto of motivating students is "better self-study", so the living environment is designed for self-study.                  </p>
               </div>
               <div className={
@@ -119,10 +119,10 @@ const FeaturesSplit = ({
                 <div className="text-xxs text-color-primary fw-600 tt-u mb-8">
                 a corner outside the dormitory
                   </div>
-                <h3 className="mt-0 mb-12">
+                <h3 className="mt-0 mb-12" style={{color: '#00695c'}}>
                 Safety first
                   </h3>
-                <p className="m-0">
+                <p className="m-0" style={{color: '#e91e63'}}>
                 Above all, ensuring the safety of our students is what we care about above all else. With a professional security team, a modern fire protection system, and a strict access system, we confidently say that you are safe in the dormitory.
                   </p>
               </div>

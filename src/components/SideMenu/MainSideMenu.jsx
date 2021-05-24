@@ -103,8 +103,8 @@ export default function SwipeableTemporaryDrawer({ sideMenu, setSideMenu }) {
       role="presentation"
     >
       <List style={{ padding: "10px 20px 10px 20px" }}>
-        <Typography variant="h4">IU's Dormitory</Typography>
-        <Typography variant="subtitle1">v4.16.2021</Typography>
+        <Typography variant="h4" style={{color: '#3f51b5'}}>IU's Dormitory</Typography>
+        <Typography variant="subtitle1" style={{color: '#f44336'}}>v4.16.2021</Typography>
         <img src="bunk-bed512.png" alt="img" width={100} height={100} />
       </List>
       <Divider />
@@ -146,7 +146,7 @@ export default function SwipeableTemporaryDrawer({ sideMenu, setSideMenu }) {
       </List>
       <Divider />
       <List style={{ padding: "5px 10px 5px 10px" }}>
-        <Typography variant="h6">IU Dormitory</Typography>
+        <Typography variant="h6" style={{color: '#f44336'}}>IU Dormitory</Typography>
         <HtmlTooltip
           title={
             <React.Fragment>
@@ -158,7 +158,7 @@ export default function SwipeableTemporaryDrawer({ sideMenu, setSideMenu }) {
             </React.Fragment>
           }
         >
-          <Typography variant="body1">
+          <Typography variant="body1" style={{color: '#3f51b5'}}>
             Copyright &copy; 2021 Team PASS of the International University Ho
             Chi Minh City. All rights reserved.
           </Typography>
