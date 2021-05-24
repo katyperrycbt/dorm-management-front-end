@@ -24,7 +24,7 @@ const App = () => {
   const [linear, setLinear] = useState(false);
   const classes = useStyles();
 
-  const admin = !(window.location.href.indexOf("admin.iu-dormitory.fun") === 8);
+  const admin = window.location.href.indexOf("admin.iu-dormitory.fun") === 8;
 
   if (admin) {
     return (

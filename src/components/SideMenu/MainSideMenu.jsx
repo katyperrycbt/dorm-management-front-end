@@ -42,7 +42,7 @@ export default function SwipeableTemporaryDrawer({ sideMenu, setSideMenu }) {
   const iOS = process.browser && /iPad|iPhone|iPod/.test(navigator.userAgent);
   const history = useHistory();
 
-  const admin = !(window.location.href.indexOf("admin.iu-dormitory.fun") === 8);
+  const admin = window.location.href.indexOf("admin.iu-dormitory.fun") === 8;
 
   const handleClose = (e) => {
     setSideMenu(false);
