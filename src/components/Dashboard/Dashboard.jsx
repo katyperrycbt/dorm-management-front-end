@@ -90,7 +90,7 @@ export default function Dashboard() {
   const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
   const [whatDatabase, setWhatDatabase] = React.useState('student-information');
-  const profile = JSON.parse(localStorage.getItem('iu-student'));
+  const profile = JSON.parse(localStorage.getItem('user'));
   const history = useHistory();
   const [cell, setCell] = React.useState(null);
 

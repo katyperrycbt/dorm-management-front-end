@@ -2,14 +2,25 @@ import * as api from '../api';
 
 import {ADMIN_SIGN_IN, ADMIN_SIGN_OUT, ADMIN_EDIT_ACCOUNT} from '../constants/constants';
 
-export const adminSignIn = (formData) => async (dispatch) => {
+export const adminSignIn = (formData, remember) => async (dispatch) => {
     try {
         
-        const {data} = await api.adminSignIn(formData);
+        const {data} = await api.adminSignIn(formData, remember);
 
-        return dispatch({type: ADMIN_SIGN_IN, data});
+        const fakeData = {
+            token: 'dwdsadwszdqwsz',
+            user: {
+                email: 'abc@gmail.com',
+                password: 'thisishashedpassword',
+                name: 'abc',
+                age: '20'
+            }
+        }
+
+        return dispatch({type: ADMIN_SIGN_IN, data: data || fakeData});
 
     } catch (error) {
+        console.log(error);
         return {message: error.response.data.message}
     }
 }

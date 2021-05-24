@@ -15,7 +15,7 @@ import useStyles from './styles';
 const Home = () => {
     const classes = useStyles();
     const history = useHistory();
-    const profile = JSON.parse(localStorage.getItem('iu-student'));
+    const profile = JSON.parse(localStorage.getItem('user'));
 
     if (!profile) {
         history.push('/login');

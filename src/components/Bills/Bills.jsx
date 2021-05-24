@@ -11,13 +11,13 @@ import UtilityBill from './UtilityBill/UtilityBill';
 
 const Bills = () => {
     const history = useHistory();
-    const profile = JSON.parse(localStorage.getItem('iu-student'));
+    const profile = JSON.parse(localStorage.getItem('user'));
     const classes = useStyles();
 
     const [activeTab, setActiveTab] = useState(0);
 
     if (!profile) {
-        history.push('/login');
+        history.push('/');
         return <></>;
     }
 

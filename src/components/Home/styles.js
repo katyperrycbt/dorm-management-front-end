@@ -7,5 +7,9 @@ export default makeStyles((theme) => ({
         flexDirection: 'column',
         alignItems: 'center',
         padding: theme.spacing(2),
-    }
+    },
+    custom: {
+        backgroundColor: 'yellow',
+        color: '#3f51b5'
+      }
 }));

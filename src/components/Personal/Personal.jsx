@@ -28,7 +28,7 @@ const Personal = () => {
     const history = useHistory();
     const [toggle, setToggle] = useState(0);
 
-    const profile = JSON.parse(localStorage.getItem('iu-student'));
+    const profile = JSON.parse(localStorage.getItem('user'));
 
     if (!profile) {
         history.push('/');

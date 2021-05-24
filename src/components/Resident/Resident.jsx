@@ -5,7 +5,7 @@ import { useHistory } from 'react-router-dom';
 
 const Resident = () => {
     const history = useHistory();
-    const profile = JSON.parse(localStorage.getItem('iu-student'));
+    const profile = JSON.parse(localStorage.getItem('user'));
     const classes = useStyles();
 
     if (!profile) {

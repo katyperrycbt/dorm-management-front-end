@@ -17,9 +17,17 @@ export default makeStyles((theme) => ({
   },
   linearProgress: {
     width: '100%',
-    // '& > * + *': {
-    //   marginTop: theme.spacing(2),
-    // },
+    padding: 0,
+    // margin: '-5px'
+    '& > * + *': {
+      marginTop: theme.spacing(0),
+    },
+  },
+  customColor: {
+    backgroundColor: '#4527a0'
+  },
+  customColor2: {
+    backgroundColor: '#b39ddb'
   },
   [theme.breakpoints.down('xs')]: {
     mainGrid: {

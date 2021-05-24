@@ -19,7 +19,7 @@ import { useHistory } from 'react-router-dom';
 const InfoInfo = () => {
     const classes = useStyles();
     const history = useHistory();
-    const user = JSON.parse(localStorage.getItem('iu-student'));
+    const user = JSON.parse(localStorage.getItem('user'));
     
     if (!user) {
         history.push('/');

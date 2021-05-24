@@ -62,7 +62,8 @@ export default function SwipeableTemporaryDrawer({ sideMenu, setSideMenu }) {
 
         break;
       case 2:
-        !admin ? history.push("/resident") : history.push("/dashboard");
+        admin ? history.push('/dashboard') : history.push("/resident");
+
         break;
       case 3:
         !admin ? history.push("/bills") : history.push("/login");
@@ -71,7 +72,7 @@ export default function SwipeableTemporaryDrawer({ sideMenu, setSideMenu }) {
         history.push("/requests");
         break;
       default:
-        localStorage.removeItem("iu-student");
+        localStorage.clear();
         history.push("/");
         break;
     }
