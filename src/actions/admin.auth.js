@@ -5,8 +5,8 @@ import {ADMIN_SIGN_IN, ADMIN_SIGN_OUT, ADMIN_EDIT_ACCOUNT} from '../constants/co
 export const adminSignIn = (formData, remember) => async (dispatch) => {
     try {
         
-        const {data} = await api.adminSignIn(formData, remember);
-
+        // const {data} = await api.adminSignIn(formData, remember);
+        const data = undefined;
         const fakeData = {
             token: 'dwdsadwszdqwsz',
             user: {

@@ -1,5 +1,4 @@
-import { useState, useEffect } from "react";
-import { Container, Typography } from "@material-ui/core";
+import { Container } from "@material-ui/core";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import LinearProgress from "@material-ui/core/LinearProgress";
 
@@ -9,7 +8,6 @@ import useStyles from "./styles";
 import './App.css';
 
 import MainMenu from "./components/Menu/MainMenu";
-import Home from "./components/Home/Home";
 
 import Personal from "./components/Personal/Personal";
 import Resident from "./components/Resident/Resident";
@@ -52,7 +50,10 @@ const App = () => {
           </div>
         }
         <Container maxWidth="lg">
-          <Route exact path="/" render={(props) => <Dashboard {...props} />} />
+          <Switch>
+            <Route exact path="/" render={(props) => <Dashboard {...props} />} />
+            <Route exact path="/login" render={(props) => <Login {...props} />} />
+          </Switch>
         </Container>
       </BrowserRouter>
     );

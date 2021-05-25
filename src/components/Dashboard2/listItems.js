@@ -5,14 +5,18 @@ import ListItemText from '@material-ui/core/ListItemText';
 import ListSubheader from '@material-ui/core/ListSubheader';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import LayersIcon from '@material-ui/icons/Layers';
-import AssignmentIcon from '@material-ui/icons/Assignment';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import DescriptionIcon from '@material-ui/icons/Description';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import SubscriptionsIcon from '@material-ui/icons/Subscriptions';
 import EmailIcon from '@material-ui/icons/Email';
-export const mainListItems = (
-  <div>
+
+import { useHistory } from 'react-router-dom';
+
+export const MainListItems = () => {
+  const history = useHistory();
+  return (<div>
     <ListItem button>
       <ListItemIcon>
         <DashboardIcon />
@@ -43,10 +47,21 @@ export const mainListItems = (
       </ListItemIcon>
       <ListItemText primary="New Account" />
     </ListItem>
-  </div>
-);
+    <ListItem button onClick={() => {
+      localStorage.clear();
+      history.push('/');
+    }}>
+      <ListItemIcon>
+        <ExitToAppIcon />
+      </ListItemIcon>
+      <ListItemText primary="Log out" />
+    </ListItem>
+  </div>)
+};
 
-export const secondaryListItems = (
+
+export const SecondaryListItems = () => {
+  return (
   <div>
     <ListSubheader inset>Other tools</ListSubheader>
     <ListItem button>
@@ -61,5 +76,5 @@ export const secondaryListItems = (
       </ListItemIcon>
       <ListItemText primary="Email Subcriptions" />
     </ListItem>
-  </div>
-);
+  </div>)
+};
