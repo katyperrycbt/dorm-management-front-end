@@ -18,7 +18,7 @@ const useStyles = makeStyles({
 export default function Deposits() {
   const classes = useStyles();
   const [cal, setCal] = React.useState(0);
-  axios.get('http://data.fixer.io/api/latest?access_key=04f21c7d49441fbd0ad93c741dbeacfe').then((rs) => {
+  axios.get(`http://data.fixer.io/api/latest?access_key=${process.env.REACT_APP_CURRENCY}`).then((rs) => {
     setCal((rs.data.rates.VND / rs.data.rates.USD).toFixed(2));
   })
 
