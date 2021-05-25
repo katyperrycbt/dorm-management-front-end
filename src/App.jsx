@@ -17,7 +17,7 @@ import Bills from "./components/Bills/Bills";
 import Requests from "./components/Request/Requests";
 import About from "./components/About/About";
 import Contact from "./components/Contact/Contact";
-import Dashboard from './components/Dashboard/Dashboard';
+import Dashboard from './components/Dashboard2/Dashboard';
 import Login from './components/Login/Login';
 import { Snackbar } from '@material-ui/core';
 import { useSelector } from 'react-redux';
@@ -42,7 +42,7 @@ const App = () => {
     dispatch({ type: SET_SNACK, data: { open: false, msg: '' } });
   }
 
-  if (admin) {
+  if (!admin) {
     return (
       <BrowserRouter>
         <Snackbar anchorOrigin={{ vertical: 'top', horizontal: 'right' }} open={snack} onClose={handleClose} message={snackMSG} />
@@ -52,14 +52,7 @@ const App = () => {
           </div>
         }
         <Container maxWidth="lg">
-          <MainMenu />
-          <Switch>
-            <Route exact path="/" render={(props) => <Landing {...props} />} />
-            <Route exact path="/login" render={(props) => <Login {...props} />} />
-            <Route exact path="/info" render={(props) => <Personal {...props} />} />
-            <Route exact path="/dashboard" render={(props) => <Dashboard {...props} />} />
-
-          </Switch>
+          <Route exact path="/" render={(props) => <Dashboard {...props} />} />
         </Container>
       </BrowserRouter>
     );
@@ -68,11 +61,11 @@ const App = () => {
   return (
     <BrowserRouter>
       <Snackbar anchorOrigin={{ vertical: 'top', horizontal: 'right' }} open={snack} onClose={handleClose} message={snackMSG} />
-        {
-          linear && <div className={classes.linearProgress} style={{ position: 'fixed', top: 0, zIndex: 10000000 }}>
-            <LinearProgress color="secondary" classes={{ colorSecondary: classes.customColor, barColorSecondary: classes.customColor2 }} />
-          </div>
-        }
+      {
+        linear && <div className={classes.linearProgress} style={{ position: 'fixed', top: 0, zIndex: 10000000 }}>
+          <LinearProgress color="secondary" classes={{ colorSecondary: classes.customColor, barColorSecondary: classes.customColor2 }} />
+        </div>
+      }
       <Container maxWidth="lg">
         <MainMenu />
         <Switch>
