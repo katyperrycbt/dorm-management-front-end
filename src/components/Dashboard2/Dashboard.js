@@ -3,7 +3,6 @@ import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Drawer from '@material-ui/core/Drawer';
-import Box from '@material-ui/core/Box';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import List from '@material-ui/core/List';
@@ -11,31 +10,13 @@ import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import Badge from '@material-ui/core/Badge';
-import Container from '@material-ui/core/Container';
-import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
-import Link from '@material-ui/core/Link';
+import { Switch, Route } from "react-router-dom";
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import { MainListItems, SecondaryListItems } from './listItems';
-import Chart from './Chart';
-import Deposits from './Deposits';
-import Orders from './Orders';
-import TableDashboard from '../Dashboard/Dashboard';
-
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center" style={{color: '#3f51b5'}}>
-      {'Copyright © '}
-      <Link color="inherit" href="https://www.facebook.com/thuc.katy" style={{color: '#f44336'}}>
-        IU Dormitory
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
+import Item1 from './1/Dashboard';
+import Item2 from './2/Profile';
 
 const drawerWidth = 240;
 
@@ -44,7 +25,8 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     position: 'absolute',
     left: 0,
-    width: '100%'
+    width: '100%',
+    height: '100%'
   },
   toolbar: {
     paddingRight: 24, // keep right padding when drawer closed
@@ -150,7 +132,6 @@ export default function Dashboard() {
   const handleDrawerClose = () => {
     setOpen(false);
   };
-  const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
   return (
     <div className={classes.root}>
@@ -193,36 +174,10 @@ export default function Dashboard() {
         <Divider />
         <List><SecondaryListItems/></List>
       </Drawer>
-      <main className={clsx(classes.content, {
-        [classes.contentShift]: open,
-      })}>
-        <div className={classes.appBarSpacer} />
-        <Container maxWidth={false} className={classes.container}>
-          <Grid container spacing={3}>
-            {/* Chart */}
-            <Grid item xs={12} md={8} lg={9}>
-              <Paper className={fixedHeightPaper}>
-                <Chart />
-              </Paper>
-            </Grid>
-            {/* Recent Deposits */}
-            <Grid item xs={12} md={4} lg={3}>
-              <Paper className={fixedHeightPaper}>
-                <Deposits />
-              </Paper>
-            </Grid>
-            {/* Recent Orders */}
-            <Grid item xs={12}>
-              <Paper className={classes.paper}>
-                <TableDashboard />
-              </Paper>
-            </Grid>
-          </Grid>
-          <Box pt={4}>
-            <Copyright />
-          </Box>
-        </Container>
-      </main>
+      <Switch>
+        <Route exact path='/' render={(props) => <Item1 {...props} open={open}/>}/>
+        <Route exact path='/me/profile' render={(props) => <Item2 {...props} open={open}/>}/>
+      </Switch>
     </div>
   );
 }

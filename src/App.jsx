@@ -22,7 +22,6 @@ import { useSelector } from 'react-redux';
 import { SET_SNACK } from './constants/constants';
 import Landing from './Landing';
 
-
 const App = () => {
   const dispatch = useDispatch();
 
@@ -51,7 +50,7 @@ const App = () => {
         }
         <Container maxWidth="lg">
           <Switch>
-            <Route exact path="/" render={(props) => <Dashboard {...props} />} />
+            <Route path="/" render={(props) => <Dashboard {...props} />} />
             <Route exact path="/login" render={(props) => <Login {...props} />} />
           </Switch>
         </Container>

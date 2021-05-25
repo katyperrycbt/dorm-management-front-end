@@ -17,31 +17,41 @@ import { useHistory } from 'react-router-dom';
 export const MainListItems = () => {
   const history = useHistory();
   return (<div>
-    <ListItem button>
+    <ListItem button onClick={() => {
+      history.push('/');
+    }}>
       <ListItemIcon>
         <DashboardIcon />
       </ListItemIcon>
       <ListItemText primary="Dashboard" />
     </ListItem>
-    <ListItem button>
-      <ListItemIcon>
-        <AccountBoxIcon />
-      </ListItemIcon>
-      <ListItemText primary="My Profile" />
-    </ListItem>
-    <ListItem button>
+    <ListItem button onClick={() => {
+      history.push('/me/profile');
+    }}>
       <ListItemIcon>
         <AccountCircleIcon />
       </ListItemIcon>
       <ListItemText primary="My Account" />
     </ListItem>
-    <ListItem button>
+    <ListItem button onClick={() => {
+      history.push('/me/account');
+    }}>
+      <ListItemIcon>
+        <AccountBoxIcon />
+      </ListItemIcon>
+      <ListItemText primary="My Profile" />
+    </ListItem>
+    <ListItem button onClick={() => {
+      history.push('/forms');
+    }}>
       <ListItemIcon>
         <DescriptionIcon />
       </ListItemIcon>
       <ListItemText primary="Forms" />
     </ListItem>
-    <ListItem button>
+    <ListItem button onClick={() => {
+      history.push('/new/account');
+    }}>
       <ListItemIcon>
         <LayersIcon />
       </ListItemIcon>
@@ -61,20 +71,26 @@ export const MainListItems = () => {
 
 
 export const SecondaryListItems = () => {
+  const history = useHistory();
+
   return (
-  <div>
-    <ListSubheader inset>Other tools</ListSubheader>
-    <ListItem button>
-      <ListItemIcon>
-        <EmailIcon />
-      </ListItemIcon>
-      <ListItemText primary="HTML Email" />
-    </ListItem>
-    <ListItem button>
-      <ListItemIcon>
-        <SubscriptionsIcon />
-      </ListItemIcon>
-      <ListItemText primary="Email Subcriptions" />
-    </ListItem>
-  </div>)
+    <div>
+      <ListSubheader inset>Other tools</ListSubheader>
+      <ListItem button onClick={() => {
+        history.push('/email/html');
+      }}>
+        <ListItemIcon>
+          <EmailIcon />
+        </ListItemIcon>
+        <ListItemText primary="HTML Email" />
+      </ListItem>
+      <ListItem button onClick={() => {
+        history.push('/email/subcriptions');
+      }}>
+        <ListItemIcon>
+          <SubscriptionsIcon />
+        </ListItemIcon>
+        <ListItemText primary="Email Subcriptions" />
+      </ListItem>
+    </div>)
 };
