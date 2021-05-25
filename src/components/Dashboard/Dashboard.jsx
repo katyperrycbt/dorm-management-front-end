@@ -24,7 +24,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getDashboard, editDashboard } from '../../actions/admin.dashboard';
 
 import useStyles from './styles';
-import { Button, TextField } from '@material-ui/core';
+import { TextField } from '@material-ui/core';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 
 import Avatar from '@material-ui/core/Avatar';

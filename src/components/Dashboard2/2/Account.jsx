@@ -27,7 +27,7 @@ function Copyright() {
 
 const initForm = { oldPassword: '', newPassword: '', reEnterNewPassword: '' };
 
-const Profile = ({ open }) => {
+const Account = ({ open }) => {
     const classes = useStyles();
     const [expanded, setExpanded] = useState(false);
     const [changePassword, setChangePassword] = useState(false);
@@ -70,11 +70,8 @@ const Profile = ({ open }) => {
     const handleSubmit = (e) => {
         e.preventDefault();
         setError(null);
-        const decodedPassword = 'abc';
 
-        if (formData.oldPassword !== decodedPassword) {
-            return setError(1);
-        } else if (formData.newPassword !== formData.reEnterNewPassword) {
+        if (formData.newPassword !== formData.reEnterNewPassword) {
             return setError(3);
         } else {
             dispatch({ type: SET_LINEAR, data: true });
@@ -94,7 +91,7 @@ const Profile = ({ open }) => {
                         msg: err.message
                     }
                 })
-            })
+            });
         }
     }
 
@@ -242,4 +239,4 @@ const Profile = ({ open }) => {
     </main>
 }
 
-export default Profile;
+export default Account;

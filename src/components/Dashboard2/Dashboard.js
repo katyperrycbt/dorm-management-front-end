@@ -16,7 +16,9 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import { MainListItems, SecondaryListItems } from './listItems';
 import Item1 from './1/Dashboard';
-import Item2 from './2/Profile';
+import Item2 from './2/Account';
+import Item3 from './3/Profile';
+import Item4 from './4/New.Student';
 
 const drawerWidth = 240;
 
@@ -176,7 +178,9 @@ export default function Dashboard() {
       </Drawer>
       <Switch>
         <Route exact path='/' render={(props) => <Item1 {...props} open={open}/>}/>
-        <Route exact path='/me/profile' render={(props) => <Item2 {...props} open={open}/>}/>
+        <Route exact path='/me/account' render={(props) => <Item2 {...props} open={open}/>}/>
+        <Route exact path='/me/profile' render={(props) => <Item3 {...props} open={open}/>}/>
+        <Route exact path='/new/student/account' render={(props) => <Item4 {...props} open={open}/>}/>
       </Switch>
     </div>
   );

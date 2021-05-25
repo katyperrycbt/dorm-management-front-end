@@ -26,7 +26,7 @@ export const MainListItems = () => {
       <ListItemText primary="Dashboard" />
     </ListItem>
     <ListItem button onClick={() => {
-      history.push('/me/profile');
+      history.push('/me/account');
     }}>
       <ListItemIcon>
         <AccountCircleIcon />
@@ -34,7 +34,7 @@ export const MainListItems = () => {
       <ListItemText primary="My Account" />
     </ListItem>
     <ListItem button onClick={() => {
-      history.push('/me/account');
+      history.push('/me/profile');
     }}>
       <ListItemIcon>
         <AccountBoxIcon />
@@ -42,7 +42,7 @@ export const MainListItems = () => {
       <ListItemText primary="My Profile" />
     </ListItem>
     <ListItem button onClick={() => {
-      history.push('/forms');
+      history.push('/new/student/account');
     }}>
       <ListItemIcon>
         <DescriptionIcon />
@@ -50,7 +50,7 @@ export const MainListItems = () => {
       <ListItemText primary="Forms" />
     </ListItem>
     <ListItem button onClick={() => {
-      history.push('/new/account');
+      history.push('/new/admin/account');
     }}>
       <ListItemIcon>
         <LayersIcon />
