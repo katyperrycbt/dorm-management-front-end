@@ -33,7 +33,7 @@ const InfoInfo = () => {
         'Citizen Identification Number': user.info?.name ? user.info.name : 'Tran Trong Thuc',
         'Date of Birth': user.info?.dob ? user.info.dob : 'September 1st, 2000',
         'Gender': user.info?.sex ? user.info.sex : 'Male',
-        'Being in n\'th year': user.info?.grade ? user.info.grade : '3',
+        'Academic year': user.info?.grade ? user.info.grade : '3',
         'Field of Major': user.info?.field ? user.info.field : 'Computer Science',
         'Folk': user.info?.folk ? user.info.folk : 'Kinh',
         'Religion': user.info?.religion ? user.info.religion : 'None',

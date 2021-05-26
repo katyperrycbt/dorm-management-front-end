@@ -50,7 +50,7 @@ const App = () => {
         }
         <Container maxWidth="lg">
           <Switch>
-            <Route path="/" render={(props) => <Dashboard {...props} />} />
+            <Route path="/:any(me|new|email|)" render={(props) => <Dashboard {...props} />} />
             <Route exact path="/login" render={(props) => <Login {...props} />} />
           </Switch>
         </Container>
