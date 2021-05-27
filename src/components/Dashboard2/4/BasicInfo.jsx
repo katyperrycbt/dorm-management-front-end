@@ -1,9 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
 import Select from '@material-ui/core/Select';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -20,41 +18,7 @@ import {
   KeyboardDatePicker,
 } from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
-import axios from 'axios';
 import { Button } from '@material-ui/core';
-
-const init = {
-  folk: '',
-  photo: '',
-  religion: '',
-  stayindorm: [],
-  email: '',
-  password: '',
-  full_name: '',
-  gender: '',
-  residentinfo: {
-    telephone: '',
-    city: '',
-    district: '',
-    ward: ''
-  },
-  parentinfo: {
-    name: '',
-    address: '',
-    tel: ''
-  },
-  academic_year: parseInt(new Date().getFullYear()),
-  dob: `01/01/${parseInt(new Date().getFullYear()) - 18}`,
-  identity_card: '',
-  field_of_major: '',
-  country: '',
-  insurance: {
-    brand: ''
-  },
-  room: '',
-  from: '',
-  to: ''
-}
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -63,24 +27,24 @@ const useStyles = makeStyles((theme) => ({
   selectEmpty: {
     marginTop: theme.spacing(2),
   },
+  blue: {
+    color: '#3f51b5'
+  },
+  black: {
+    color: '#000'
+  },
+  pre: { outline: '1px solid #ccc', padding: '5px', margin: '5px', backgroundColor: 'white !important' },
 }));
 
-function generatePassword() {
-  var length = 8,
-    charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789",
-    retVal = "";
-  for (var i = 0, n = charset.length; i < length; ++i) {
-    retVal += charset.charAt(Math.floor(Math.random() * n));
-  }
-  return retVal;
-}
-
-export default function AddressForm() {
-  const [formData, setFormData] = useState(init);
+export default function AddressForm({ init, formData, setFormData }) {
   const [idcheck, setidcheck] = useState(false);
   const [idcheckPhone, setidcheckPhone] = useState(false);
   const [idcheckPhone2, setidcheckPhone2] = useState(false);
   const [wrongEmail, setWrongEmail] = useState(false);
+  const [checkInsurance, setCheckInsurance] = useState(false);
+  const [show, setShow] = useState(JSON.stringify(init, null, 50));
+  const [open, setOpen] = useState(false);
+
   const classes = useStyles();
 
   const handleFileRead = async (event) => {
@@ -110,7 +74,7 @@ export default function AddressForm() {
       <Grid container spacing={3}>
         <Grid item xs={12}>
           <Typography variant="h6" style={{ color: '#3f51b5' }} align='center'>
-            Basic information
+            Student information
         </Typography>
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -121,6 +85,8 @@ export default function AddressForm() {
             label="Full name"
             fullWidth
             type='text'
+            value={formData.full_name ? formData.full_name : null}
+            shrink={formData.full_name ? true : false}
             onChange={(e) => setFormData({ ...formData, full_name: e.target.value })}
           />
         </Grid>
@@ -134,9 +100,22 @@ export default function AddressForm() {
               label={`Date of birth [01/01/${parseInt(new Date().getFullYear()) - 24} - 31/12/${parseInt(new Date().getFullYear()) - 18}]`}
               required
               fullWidth
-              value={formData.dob}
-              maxDate={`31/12/${parseInt(new Date().getFullYear()) - 18}`}
-              minDate={`01/01/${parseInt(new Date().getFullYear()) - 24}`}
+              InputLabelProps={{
+                shrink: true,
+                classes: {
+                  root: classes.blue
+                }
+              }}
+              InputProps={{
+                disabled: true,
+                classes: {
+                  input: classes.black
+                }
+              }}
+              placeholder="Choose by click on the side button"
+              value={formData.dob ? formData.dob : null}
+              maxDate={(new Date().getFullYear() - (17 + 1970)) * 31556926000}
+              minDate={(new Date().getFullYear() - (24 + 1970)) * 31556926000}
               onChange={(e) => setFormData({ ...formData, dob: e })}
               KeyboardButtonProps={{
                 'aria-label': 'change date',
@@ -150,7 +129,8 @@ export default function AddressForm() {
             <Select
               labelId="demo-simple-select-label"
               id="demo-simple-select"
-              value={formData.gender}
+              value={formData.gender ? formData.gender : null}
+              shrink={formData.gender ? true : false}
               onChange={(e) => setFormData({ ...formData, gender: e.target.value })}
             >
               <MenuItem value={'male'}>Male</MenuItem>
@@ -165,7 +145,8 @@ export default function AddressForm() {
             <Select
               labelId="demo-simple-select-label"
               id="demo-simple-select"
-              value={formData.academic_year}
+              value={formData.academic_year ? formData.academic_year : null}
+              shrink={formData.academic_year ? true : false}
               onChange={(e) => setFormData({ ...formData, academic_year: e.target.value })}
             >
               <MenuItem value={parseInt(new Date().getFullYear()) - 3}>
@@ -193,10 +174,12 @@ export default function AddressForm() {
             type='number'
             error={idcheck}
             helperText={idcheck ? 'Invalid identity number' : ''}
+            value={formData.identity_card ? formData.identity_card : null}
+            shrink={formData.identity_card ? true : false}
             onChange={(e) => {
+              setFormData({ ...formData, identity_card: e.target.value })
               if (/^\d{9}(?:\d{3})?$/.test(parseInt(e.target.value))) {
                 setidcheck(false);
-                setFormData({ ...formData, identity_card: e.target.value })
               } else {
                 if (e.target.value.length > 0) {
                   setidcheck(true);
@@ -217,6 +200,8 @@ export default function AddressForm() {
             required
             error={wrongEmail}
             helperText={wrongEmail ? 'Invalid email' : ''}
+            value={formData.email ? formData.email : null}
+            shrink={formData.email ? true : false}
             onChange={(e) => {
               setFormData({ ...formData, email: e.target.value });
               if (/^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i
@@ -240,6 +225,8 @@ export default function AddressForm() {
             label="Field of major"
             fullWidth
             type='text'
+            value={formData.field_of_major ? formData.field_of_major : null}
+            shrink={formData.field_of_major ? true : false}
             onChange={(e) => setFormData({ ...formData, field_of_major: e.target.value })}
           />
         </Grid>
@@ -263,7 +250,6 @@ export default function AddressForm() {
             onChange={handleFileRead}
             required
             fullWidth
-
           />
         </Grid>
         {/* resident info here */}
@@ -277,15 +263,17 @@ export default function AddressForm() {
             type='number'
             error={idcheckPhone}
             helperText={idcheckPhone ? 'Invalid mobile number' : ''}
+            value={formData?.residentinfo?.telephone ? formData.residentinfo.telephone : null}
+            shrink={formData?.residentinfo?.telephone ? true : false}
             onChange={(e) => {
+              setFormData({
+                ...formData, residentinfo: {
+                  ...formData.residentinfo,
+                  telephone: e.target.value
+                }
+              })
               if (/^0(86|96|97|98|32|33|34|35|36|37|38|39|88|91|94|83|84|85|81|82|89|90|93|70|79|77|76|78|92|56|58|99|59|87)\d{7}$/.test(e.target.value)) {
                 setidcheckPhone(false);
-                setFormData({
-                  ...formData, residentinfo: {
-                    ...formData.residentinfo,
-                    telephone: e.target.value
-                  }
-                })
               } else {
                 if (e.target.value.length > 0) {
                   setidcheckPhone(true);
@@ -313,6 +301,8 @@ export default function AddressForm() {
             name='parent_name'
             label='Parent name'
             fullWidth
+            value={formData?.parentinfo?.name ? formData.parentinfo.name : null}
+            shrink={formData?.parentinfo?.name ? true : false}
             onChange={(e) => setFormData({ ...formData, parentinfo: { ...formData.parentinfo, name: e.target.value } })}
           />
         </Grid>
@@ -329,15 +319,17 @@ export default function AddressForm() {
             type='number'
             error={idcheckPhone2}
             helperText={idcheckPhone2 ? 'Invalid mobile number' : ''}
+            value={formData?.parentinfo?.tel ? formData.parentinfo.tel : null}
+            shrink={formData?.parentinfo?.tel ? true : false}
             onChange={(e) => {
+              setFormData({
+                ...formData, parentinfo: {
+                  ...formData.parentinfo,
+                  tel: e.target.value
+                }
+              })
               if (/^0(86|96|97|98|32|33|34|35|36|37|38|39|88|91|94|83|84|85|81|82|89|90|93|70|79|77|76|78|92|56|58|99|59|87)\d{7}$/.test(e.target.value)) {
                 setidcheckPhone2(false);
-                setFormData({
-                  ...formData, parentinfo: {
-                    ...formData.parentinfo,
-                    tel: e.target.value
-                  }
-                })
               } else {
                 if (e.target.value.length > 0) {
                   setidcheckPhone2(true);
@@ -348,9 +340,168 @@ export default function AddressForm() {
             }}
           />
         </Grid>
-        <Grid item xs={12} sm={6} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-          <Button onClick={() => console.log(formData)} color="secondary" variant='outlined'>test</Button>
+        {/* Insurance information */}
+        <Grid item xs={12}>
+          <Typography variant="h6" style={{ color: '#3f51b5' }} align='center'>
+            Insurance information
+          </Typography>
         </Grid>
+        <Grid item xs={12} sm={6}>
+          <TextField
+            id='dssss'
+            name='psarent_name'
+            label="Insurance number"
+            fullWidth
+            type='text'
+            required
+            error={checkInsurance}
+            helperText={checkInsurance ? 'Invalid insurance number' : ''}
+            value={formData?.insurance?.id ? formData.insurance.id : null}
+            shrink={formData?.insurance?.id ? true : false}
+            onChange={(e) => {
+              setFormData({
+                ...formData, insurance: {
+                  ...formData.insurance,
+                  id: e.target.value
+                }
+              })
+              if (/^SV\d{13}$/.test(e.target.value)) {
+                setCheckInsurance(false);
+              } else {
+                if (e.target.value.length > 0) {
+                  setCheckInsurance(true);
+                } else {
+                  setCheckInsurance(false);
+                }
+              }
+            }}
+          />
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          <MuiPickersUtilsProvider utils={DateFnsUtils}>
+            <KeyboardDatePicker
+              disableToolbar
+              variant="inline"
+              format="MM/dd/yyyy"
+              id="date-pickaer-inline"
+              label={`Date of issue`}
+              required
+              fullWidth
+              value={formData.insurance.date_of_issue ? formData.insurance.date_of_issue : null}
+            
+              maxDate={Date.now()}
+              onChange={(e) => setFormData({
+                ...formData, insurance: {
+                  ...formData.insurance,
+                  date_of_issue: e
+                }
+              })}
+              InputLabelProps={{
+                shrink: true,
+                classes: {
+                  root: classes.blue
+                }
+              }}
+              InputProps={{
+                disabled: true,
+                classes: {
+                  input: classes.black
+                }
+              }}
+              placeholder="Choose by click on the side button"
+              KeyboardButtonProps={{
+                'aria-label': 'change date',
+              }}
+            />
+          </MuiPickersUtilsProvider>
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          <MuiPickersUtilsProvider utils={DateFnsUtils}>
+            <KeyboardDatePicker
+              disableToolbar
+              variant="inline"
+              format="MM/dd/yyyy"
+              id="date-picktoaer-inline"
+              label={`Valid from`}
+              required
+              fullWidth
+              value={formData.insurance.from ? formData.insurance.from : null}
+              maxDate={Date.now()}
+              onChange={(e) => setFormData({
+                ...formData, insurance: {
+                  ...formData.insurance,
+                  from: e
+                }
+              })}
+              placeholder="Choose by click on the side button"
+              InputLabelProps={{
+                shrink: true,
+                classes: {
+                  root: classes.blue
+                }
+              }}
+              InputProps={{
+                disabled: true,
+                classes: {
+                  input: classes.black
+                }
+              }}
+              KeyboardButtonProps={{
+                'aria-label': 'change date',
+              }}
+            />
+          </MuiPickersUtilsProvider>
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          <MuiPickersUtilsProvider utils={DateFnsUtils}>
+            <KeyboardDatePicker
+              disableToolbar
+              variant="inline"
+              format="MM/dd/yyyy"
+              id="date-pickafromer-inline"
+              label={`Valid to`}
+              required
+              fullWidth
+              value={formData.insurance.to ? formData.insurance.to : null}
+              maxDate={Date.now() + 31556926000}
+              onChange={(e) => setFormData({
+                ...formData, insurance: {
+                  ...formData.insurance,
+                  to: e
+                }
+              })}
+              InputLabelProps={{
+                shrink: true,
+                classes: {
+                  root: classes.blue
+                }
+              }}
+              InputProps={{
+                disabled: true,
+                classes: {
+                  input: classes.black
+                }
+              }}
+              placeholder="Choose by click on the side button"
+              KeyboardButtonProps={{
+                'aria-label': 'change date',
+              }}
+            />
+          </MuiPickersUtilsProvider>
+        </Grid>
+        <Grid item xs={12} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <Button onClick={() => {
+            setOpen((old) => !old);
+            setShow(JSON.stringify(formData, null, 50));
+          }} color="secondary" variant='outlined'>{!open ? `Check form's result` : `Close form's result`}</Button>
+        </Grid>
+        {
+          open && <Grid item xs={12}>
+            <pre className={classes.pre}>
+              {show}
+            </pre>
+          </Grid>
+        }
       </Grid>
     </React.Fragment>
   );

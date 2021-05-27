@@ -121,3 +121,7 @@ export const getRequestReturn = () => API.get('/student/get/request/return');
 export const requestReturn = (formData) => API.post('/student/request/return', formData);
 
 
+// get suitable room
+export const getAvaiRoom = (type) => API.get(`/admin/get/availableRoom?type=${type}`);
+// get room bill
+export const getRoomBill = (type, howLong) => API.get(`/admin/get/roomBill?type=${type}&howLong=${howLong}`);

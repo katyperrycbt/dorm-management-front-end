@@ -19,9 +19,7 @@ const useStyles = makeStyles({
 
 export default function CountrySelect({ formData, setFormData }) {
     const classes = useStyles();
-    const data = cdw;
-    const [select, setSelect] = React.useState(null);
-    
+    const data = cdw;    
 
     return (
         <Autocomplete
@@ -38,10 +36,9 @@ export default function CountrySelect({ formData, setFormData }) {
                     {option.full_name}
                 </React.Fragment>
             )}
-            value={select}
+            value={formData.residentinfo.ward ? data.find(x => x.full_name === (formData.residentinfo.ward + ", " + formData.residentinfo.district + ", " + formData.residentinfo.city)) : null}
             onChange={(e, value) => {
                 if (value?.full_name) {
-                    setSelect(value);
                     const temp = value.full_name.split(", ");
                     if (temp) {
                         setFormData((old) => {

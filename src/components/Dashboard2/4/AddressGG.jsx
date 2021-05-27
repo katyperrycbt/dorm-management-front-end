@@ -3,12 +3,8 @@ import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import { makeStyles } from '@material-ui/core/styles';
-import InputAdornment from '@material-ui/core/InputAdornment';
-import Avatar from '@material-ui/core/Avatar';
-import FormControl from '@material-ui/core/FormControl';
-import Input from '@material-ui/core/Input';
-import InputLabel from '@material-ui/core/InputLabel';
 import { Grid } from '@material-ui/core';
+import LinearProgress from '@material-ui/core/LinearProgress';
 
 import PlacesAutocomplete from 'react-places-autocomplete';
 
@@ -21,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
         },
     },
     margin: {
-        margin: theme.spacing(1),
+        // margin: theme.spacing(1),
     },
 }));
 
@@ -38,7 +34,7 @@ export default function CountrySelect({ formData, setFormData }) {
                     setData(suggestions);
                     return (<div>
                         <Autocomplete
-                            id="country-ss-dasdemo"
+                            id="country-ss-dasaqdemo"
                             options={data}
                             classes={{
                                 option: classes.option,
@@ -63,6 +59,7 @@ export default function CountrySelect({ formData, setFormData }) {
                                     });
                                 }
                             }}
+                            //
                             renderInput={(params) => (
                                 <div>
                                     <div className={classes.margin}>
@@ -73,18 +70,16 @@ export default function CountrySelect({ formData, setFormData }) {
                                                     {...params}
                                                     label="Address"
                                                     required
+                                                    value={formData?.parentinfo?.address ? formData.parentinfo.address : null}
+                                                    shrink={formData?.parentinfo?.address ? true : false}
                                                     inputProps={{
                                                         ...params.inputProps,
                                                     }}
-                                                    startAdornment={
-                                                        <InputAdornment position="start">
-                                                            <Avatar src='/place.google.png' alt='gg places autocomplete' />
-                                                        </InputAdornment>
-                                                    }
                                                 />
                                             </Grid>
                                             <Grid item xs={3}>
                                                 <img src='/place.google.png' alt='gg places autocomplete' width='auto' height='auto' />
+                                                <LinearProgress color="secondary" style={{ opacity: !loading ? 0.0 : 1.0 }} />
                                             </Grid>
                                         </Grid>
                                     </div>

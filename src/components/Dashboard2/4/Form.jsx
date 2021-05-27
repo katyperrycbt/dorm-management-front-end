@@ -10,6 +10,8 @@ import Typography from '@material-ui/core/Typography';
 import AddressForm from './BasicInfo';
 import PaymentForm from './Room';
 import Review from './Review';
+import { SET_SNACK, SET_LINEAR } from '../../../constants/constants';
+import { useDispatch } from 'react-redux';
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
@@ -48,38 +50,131 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const steps = ['Basic information', 'Room', 'Review'];
-
-function getStepContent(step) {
-  switch (step) {
-    case 0:
-      return <AddressForm />;
-    case 1:
-      return <PaymentForm />;
-    case 2:
-      return <Review />;
-    default:
-      throw new Error('Unknown step');
+function generatePassword() {
+  var length = 8,
+    charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789",
+    retVal = "";
+  for (var i = 0, n = charset.length; i < length; ++i) {
+    retVal += charset.charAt(Math.floor(Math.random() * n));
   }
+  return retVal;
 }
+const init = {
+  folk: '',
+  photo: '',
+  religion: '',
+  stayindorm: [],
+  email: '',
+  password: generatePassword(),
+  full_name: '',
+  gender: '',
+  residentinfo: {
+    telephone: '',
+    city: '',
+    district: '',
+    ward: ''
+  },
+  parentinfo: {
+    name: '',
+    address: '',
+    tel: ''
+  },
+  academic_year: parseInt(new Date().getFullYear()),
+  dob: '',
+  identity_card: '',
+  field_of_major: '',
+  country: '',
+  insurance: {
+    id: '',
+    date_of_issue: '',
+    from: '',
+    to: ''
+  },
+  room: '',
+  from: '',
+  to: new Date(31556926000 * (new Date().getFullYear() - 1970 + 1))
+}
+
+
+const keyify = (obj, prefix = '') =>
+  Object.keys(obj).reduce((res, el) => {
+    if (Array.isArray(obj[el])) {
+      return res;
+    } else if (typeof obj[el] === 'object' && obj[el] !== null) {
+      return [...res, ...keyify(obj[el], prefix + el + '.')];
+    }
+    return [...res, prefix + el];
+  }, []);
 
 export default function Checkout() {
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
+  const [formData, setFormData] = React.useState(init);
+  const dispatch = useDispatch();
 
   const handleNext = () => {
     setActiveStep(activeStep + 1);
   };
 
+  function getStepContent(step) {
+    switch (step) {
+      case 0:
+        return <AddressForm init={init} formData={formData} setFormData={setFormData} />;
+      case 1:
+        return <PaymentForm init={init} formData={formData} setFormData={setFormData} />;
+      case 2:
+        return <Review formData={formData} setFormData={setFormData} />;
+      default:
+        throw new Error('Unknown step');
+    }
+  }
+
   const handleBack = () => {
     setActiveStep(activeStep - 1);
   };
 
+  const handleSubmitForm = (e) => {
+    e.preventDefault();
+    const keys = keyify(formData);
+    let temp = [];
+    for (let i = 0; i < keys.length; i++) {
+      let splitt = [];
+      if (keys[i].indexOf('.') > -1) {
+        splitt = keys[i].split(".");
+      }
+      if (splitt.length > 0) {
+        let current = formData[splitt[0]];
+        for (let k = 1; k < splitt.length; k++) {
+          current = current[splitt[k]];
+        }
+        if (current === null || current === undefined || current === '') {
+          temp.push(keys[i])
+        }
+      } else {
+        if (formData[keys[i]] === null || formData[keys[i]] === undefined || formData[keys[i]] === '') {
+          temp.push(keys[i])
+        }
+
+      }
+    }
+    if (temp.length > 0 && activeStep >= steps.length - 2) {
+      dispatch({
+        type: SET_SNACK, data: {
+          open: true,
+          msg: `These fields are empty! (${temp}) Fill them out!`
+        }
+      });
+      return;
+    }
+    return handleNext();
+  }
+
   return (
     <React.Fragment >
       <CssBaseline />
-      <main className={classes.layout} style={{width: '100%'}}>
+      <main className={classes.layout} style={{ width: '100%' }}>
         <Paper className={classes.paper}>
-          <Typography component="h1" variant="h2" align="center" style={{color: '#3f51b5'}}>
+          <Typography component="h1" variant="h2" align="center" style={{ color: '#3f51b5' }}>
             New Student
           </Typography>
           <Stepper activeStep={activeStep} className={classes.stepper}>
@@ -102,22 +197,24 @@ export default function Checkout() {
               </React.Fragment>
             ) : (
               <React.Fragment>
-                {getStepContent(activeStep)}
-                <div className={classes.buttons}>
-                  {activeStep !== 0 && (
-                    <Button onClick={handleBack} className={classes.button}>
-                      Back
+                <form onSubmit={handleSubmitForm}>
+                  {getStepContent(activeStep)}
+                  <div className={classes.buttons}>
+                    {activeStep !== 0 && (
+                      <Button onClick={handleBack} className={classes.button}>
+                        Back
+                      </Button>
+                    )}
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      className={classes.button}
+                      type='submit'
+                    >
+                      {activeStep === steps.length - 1 ? 'Submit' : 'Next'}
                     </Button>
-                  )}
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    onClick={handleNext}
-                    className={classes.button}
-                  >
-                    {activeStep === steps.length - 1 ? 'Place order' : 'Next'}
-                  </Button>
-                </div>
+                  </div>
+                </form>
               </React.Fragment>
             )}
           </React.Fragment>

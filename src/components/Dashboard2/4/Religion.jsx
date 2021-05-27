@@ -26,8 +26,7 @@ const useStyles = makeStyles({
 
 export default function CountrySelect({ formData, setFormData }) {
     const classes = useStyles();
-    const [value, setValue] = React.useState(null);
-    
+
     return (
         <Autocomplete
             id="country-seledasct-demo"
@@ -44,10 +43,9 @@ export default function CountrySelect({ formData, setFormData }) {
                     {option.label} ({option.code}) {option.alias}
                 </React.Fragment>
             )}
-            value={value}
+            value={formData.country ? countries.find(x => x.label === formData.religion) : null}
             onChange={(e, value) => {
                 if (value?.label) {
-                    setValue(value);
                     setFormData({ ...formData, religion: value.label });
                 }
             }}
@@ -56,6 +54,8 @@ export default function CountrySelect({ formData, setFormData }) {
                     {...params}
                     label="Religion"
                     required
+                    value={formData.religion ? formData.religion : null}
+                    shrink={formData.religion ? true : false}
                     inputProps={{
                         ...params.inputProps,
                     }}
