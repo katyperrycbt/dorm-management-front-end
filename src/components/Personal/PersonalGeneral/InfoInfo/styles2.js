@@ -74,7 +74,6 @@ export default makeStyles((theme) => ({
             duration: theme.transitions.duration.leavingScreen,
         }),
         overflow: 'hidden',
-        zIndex: -100,
         marginTop: theme.spacing(1),
         [theme.breakpoints.down('sm')]: {
             // padding: theme.spacing(1),

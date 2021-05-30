@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Avatar, Grid } from "@material-ui/core";
 
 import PersonalGeneral from './PersonalGeneral/PersonalGeneral';
@@ -22,45 +22,71 @@ import SecurityIcon from '@material-ui/icons/Security';
 import CalendarTodayIcon from '@material-ui/icons/CalendarToday';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
+import { getStudentInfo } from '../../actions/student.info'
+import { SET_SNACK, SET_LINEAR } from '../../constants/constants';
+import {useDispatch, useSelector} from 'react-redux';
 
 const Personal = () => {
     const classes = useStyles();
-    const history = useHistory();
     const [toggle, setToggle] = useState(0);
+    const dispatch = useDispatch();
+    const [profile, setProfile] = useState(useSelector((state) => state.studentInfo))
 
-    const profile = JSON.parse(localStorage.getItem('user'));
-
-    if (!profile) {
-        history.push('/');
-        return <></>;
-    }
-
-    // if (!profile.info) {
-    //     profile.info = {};
-    // }
+    useEffect(() => {
+        dispatch({ type: SET_LINEAR, data: true });
+        dispatch(getStudentInfo()).then((rs) => {
+            dispatch({ type: SET_LINEAR, data: false });
+            dispatch({
+                type: SET_SNACK, data: {
+                    open: true,
+                    msg: 'Done!'
+                }
+            });
+            setProfile(rs);
+        }).catch((err) => {
+            dispatch({ type: SET_LINEAR, data: false });
+            dispatch({
+                type: SET_SNACK, data: {
+                    open: true,
+                    msg: err.message
+                }
+            })
+        })
+    }, [dispatch]);
 
     const icon1 = [LocationOnIcon, LocationOnIcon, LocationOnIcon, EmailIcon, PhoneIcon];
     const content1 = {
-        'Province/City': profile.info?.city ? profile.info?.city : 'Ho Chi Minh City',
-        'District': profile.info?.district ? profile.info?.district : 'Thu Duc',
-        'Ward': profile.info?.ward ? profile.info?.ward : 'Linh Trung',
-        'Email': profile.info?.email ? profile.info?.email : 'katyperrycbt@gmail.com',
-        'Tel': profile.info?.phone ? profile.info?.phone : '0123456789'
+        'Province/City': profile?.city ? profile.city : 'Ho Chi Minh City',
+        'District': profile?.district ? profile.district : 'Thu Duc',
+        'Ward': profile?.ward ? profile.ward : 'Linh Trung',
+        'Email': profile?.email ? profile.email : 'katyperrycbt@gmail.com',
+        'Tel': profile?.phone ? profile.phone : '0123456789'
     }
 
     const icon2 = [ContactPhoneIcon, HomeIcon, PhoneIcon];
     const content2 = {
-        'Contact Name': profile.info?.parentName ? profile.info?.parentName : 'Mr. A',
-        'Address': profile.info?.parentAddr ? profile.info?.parentAddr : 'Thu Duc',
-        'Contact Phone Number': profile.info?.parentTel ? profile.info?.parentTel : '0987654321',
+        'Contact Name': profile?.parentName ? profile.parentName : 'Mr. A',
+        'Address': profile?.parentAddr ? profile.parentAddr : 'Thu Duc',
+        'Contact Phone Number': profile?.parentTel ? profile.parentTel : '0987654321',
     }
 
     const icon3 = [SecurityIcon, CalendarTodayIcon, ArrowForwardIosIcon, ArrowBackIosIcon];
     const content3 = {
-        'Health Insurance Number': profile.info?.insuranceNum ? profile.info?.insuranceNum : 'SV15486645648654654',
-        'Date of Issue':profile.info?.insuranceIssue ? profile.info?.insuranceIssue : '05/05/2020',
-        'Valid from': profile.info?.insuranceFrom ? profile.info?.insuranceFrom : '05/08/2020',
-        'Valid to': profile.info?.insuranceTo ? profile.info?.insuranceTo : '05/08/2021'
+        'Health Insurance Number': profile?.insuranceNum ? profile.insuranceNum : 'SV15486645648654654',
+        'Date of Issue':profile?.insuranceIssue ? profile.insuranceIssue : '05/05/2020',
+        'Valid from': profile?.insuranceFrom ? profile.insuranceFrom : '05/08/2020',
+        'Valid to': profile?.insuranceTo ? profile.insuranceTo : '05/08/2021'
+    }
+
+    const iter = {
+        'Identity': profile?.name ? profile.name : '321744444',
+        'Date of Birth': profile?.dob ? profile.dob : 'September 1st, 2000',
+        'Gender': profile?.sex ? profile.sex : 'Male',
+        'Academic year': profile?.grade ? profile.grade : '3',
+        'Field of Major': profile?.field ? profile.field : 'Computer Science',
+        'Folk': profile?.folk ? profile.folk : 'Kinh',
+        'Religion': profile?.religion ? profile.religion : 'None',
+        'Country': profile?.country ? profile.country : 'Vietnam'
     }
 
     return (
@@ -83,7 +109,7 @@ const Personal = () => {
                 <Grid item md={4} sm={1} xs={false} />
                 {
                     toggle === 0 && <Grid item xs={12} style={{ margin: 0, padding: 0 }}>
-                        <InfoInfo />
+                        <InfoInfo iter={iter}/>
                     </Grid>
                 }
                 {

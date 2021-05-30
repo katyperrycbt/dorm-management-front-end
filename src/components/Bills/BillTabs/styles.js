@@ -13,7 +13,8 @@ export default makeStyles((theme) => ({
             width: '100%',
             height: '100%',
         },
-        marginBottom: theme.spacing(3)
+        marginBottom: theme.spacing(3),
+        zIndex: 1
     },
     root2: {
         backgroundColor: theme.palette.background.paper,

@@ -145,11 +145,11 @@ export default function SwipeableTemporaryDrawer({ sideMenu, setSideMenu }) {
         <HtmlTooltip
           title={
             <React.Fragment>
-              <Typography color="inherit">Property of IU</Typography>
+              <Typography color="inherit">Property of PASS</Typography>
               {
-                "This website is owned by team PASS (International University), designed by a team called"
+                "This website is owned by team PASS (International University), designed by"
               }{" "}
-              <b>KATYPERRYCBT</b>
+              <b>PASS</b>
             </React.Fragment>
           }
         >

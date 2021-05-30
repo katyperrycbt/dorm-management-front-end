@@ -1,19 +1,41 @@
-import SnippetPaper from './SnippetPaper/SnippetPaper';
+import { useEffect, useState } from 'react';
+// import SnippetPaper from './SnippetPaper/SnippetPaper';
 import { Container } from '@material-ui/core';
 import useStyles from './styles';
 import { useHistory } from 'react-router-dom';
-
+// import EachResident from './EachResident/EachResident';
+import Alternative from './SnippetPaper/Alternative';
+import { useDispatch, useSelector } from 'react-redux';
+import { STUDENT_SEE_RESIDENT } from '../../constants/constants';
+import { SET_SNACK, SET_LINEAR } from '../../constants/constants';
+import { see } from '../../actions/student.see';
 const Resident = () => {
-    const history = useHistory();
-    const profile = JSON.parse(localStorage.getItem('user'));
     const classes = useStyles();
+    const dispatch = useDispatch();
+    const [resident, setResident] = useState(useSelector((state) => state.studentSee));
+    useEffect(() => {
+        dispatch({ type: SET_LINEAR, data: true });
+        dispatch(see(STUDENT_SEE_RESIDENT)).then((rs) => {
+            dispatch({ type: SET_LINEAR, data: false });
+            dispatch({
+                type: SET_SNACK, data: {
+                    open: true,
+                    msg: 'Done!'
+                }
+            });
+            setResident(rs);
+        }).catch((err) => {
+            dispatch({ type: SET_LINEAR, data: false });
+            dispatch({
+                type: SET_SNACK, data: {
+                    open: true,
+                    msg: err.message
+                }
+            })
+        })
+    }, [dispatch])
 
-    if (!profile) {
-        history.push('/');
-        return <></>;
-    }
-
-    const residentSample = profile.info?.residentList ? profile.info?.residentList : {
+    const residentSample = resident.residentList ? resident.residentList : {
         'Dorm': 'A',
         'Block': 'B',
         'Room': '3212',
@@ -25,12 +47,14 @@ const Resident = () => {
         'To': '04/16/2022',
         'Note': ''
     }
-    
-    const sampleHeader = `Dorm ${residentSample['Dorm']} - Block ${residentSample['Block']} - Room ${residentSample['Room']}. ${residentSample['Semester']}`;
-    const residentList = [{'header': sampleHeader, 'details': residentSample}];
 
-    return <Container maxWidth='md' className={classes.root}>
-        <SnippetPaper residentList={residentList} />
+    const sampleHeader = `Dorm ${residentSample['Dorm']} - Block ${residentSample['Block']} - Room ${residentSample['Room']}. ${residentSample['Semester']}`;
+    const residentList = [{ 'header': sampleHeader, 'details': residentSample }];
+
+    return <Container maxWidth='lg' className={classes.root}>
+        {/* <SnippetPaper residentList={residentList} /> */}
+        <Alternative residentList={residentList} />
+        {/* <EachResident header={sampleHeader} data={residentSample} /> */}
     </Container>
 }
 

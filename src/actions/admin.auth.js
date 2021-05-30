@@ -13,7 +13,8 @@ export const adminSignIn = (formData, remember) => async (dispatch) => {
                 email: 'abc@gmail.com',
                 password: 'thisishashedpassword',
                 name: 'abc',
-                age: '20'
+                age: '20',
+                role: 'admin'
             }
         }
 

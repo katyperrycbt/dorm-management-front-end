@@ -42,7 +42,7 @@ const BillTabs = ({ activeTab, setActiveTab }) => {
     }
 
     return <div className={classes.root}>
-        <AppBar position="static" color="default">
+        <AppBar position="static" color="default" style={{borderRadius: '10px'}}>
             <Tabs
                 value={activeTab}
                 onChange={handleChange}

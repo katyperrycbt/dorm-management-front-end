@@ -76,7 +76,6 @@ export default makeStyles((theme) => ({
         overflow: 'hidden',
         zIndex: 100,
         padding: 0,
-        marginBottom: theme.spacing(3),
         [theme.breakpoints.down('sm')]: {
             // padding: theme.spacing(1),
         },
@@ -97,9 +96,7 @@ export default makeStyles((theme) => ({
         borderRadius: '10px',
         // paddingLeft: theme.spacing(1),
         // paddingRight: theme.spacing(1),
-        margin: 0,
-        paddingBottom: theme.spacing(3),
-
+        margin: 0
     },
     paper: {
         padding: theme.spacing(2),

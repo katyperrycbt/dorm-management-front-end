@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import {
     Typography, Container, Grid, Box, Link, Paper,
-    Accordion, AccordionSummary,
 } from '@material-ui/core';
 
 import clsx from 'clsx';
-import useStyles from './styles2';
+import useStyles from './styles';
 import { useSelector } from 'react-redux';
+import EachResident from '../EachResident/EachResident'
 
 function Copyright() {
     return (
@@ -21,7 +21,7 @@ function Copyright() {
     );
 }
 
-const Account = ({ open, data }) => {
+const Account = ({ residentList, open }) => {
     const classes = useStyles();
 
     const [user, setUser] = useState(useSelector((state) => state.studentAccount));
@@ -38,24 +38,14 @@ const Account = ({ open, data }) => {
         <Container maxWidth={'lg'} className={classes.container} style={{ margin: 0 }}>
             <Grid container spacing={3} style={{ padding: '5px' }}>
                 <Grid item xs={12}>
-                    <Typography align="center" variant='h2' style={{ color: '#3f51b5' }}>Basic information</Typography>
-                    <Typography align="center" variant='h5' style={{ color: '#f44336' }}>Here is the information you have provided to us and you are responsible for such disclosure.</Typography>
+                    <Typography align="center" variant='h2' style={{ color: '#3f51b5' }}>Resident Information</Typography>
+                    <Typography align="center" variant='h5' style={{ color: '#f44336' }}>Here is your accommodation information.</Typography>
                 </Grid>
                 <Grid item xs={12} sm={8}>
                     <Paper>
                         {
-                            Object.keys(data).map((key, index) => {
-                                return (
-                                    <Accordion key={`dwjiossccccc${Date.now()}${Math.random()}`}>
-                                        <AccordionSummary
-                                            aria-controls="panel1bh-content"
-                                            id="panel1bh-header"
-                                        >
-                                            <Typography className={classes.heading}>{key}</Typography>
-                                            <Typography className={classes.secondaryHeading}>{data[key]}</Typography>
-                                        </AccordionSummary>
-                                    </Accordion>
-                                )
+                            residentList.map((key, index) => {
+                                return <EachResident key={`reoqsccncdd${index}${Date.now()}`} rawData={key} />
                             })
                         }
                     </Paper>
@@ -63,14 +53,16 @@ const Account = ({ open, data }) => {
                 <Grid item xs={12} sm={4}>
                     <Paper elevation={0} style={{ border: '1px solid #f44336', borderRadius: '5px', padding: '5px' }}>
                         <Typography variant='h6' style={{ color: '#3f51b5' }}>
-                            Can I edit my personal information?
+                            What time do you need to pay the dormitory fee?
                         </Typography>
                         <Typography>
-                            The answer is no, you can't. This information is fixed and provided by you before you join the dormitory.                        </Typography>
+                            Usually around June and December every year. We will notify you 1 month in advance for you to prepare.                             </Typography>
                         <Typography variant='h6' style={{ color: '#3f51b5' }}>
-                            I declared it right, but the information displayed is wrong, can I make a complaint?                        </Typography>
+                            Are there errors in this data?
+                             </Typography>
                         <Typography>
-                            Please mails us with specific content and clearly capture the receipt for verification. Your request will be processed within 1 week.                         </Typography>
+                            Let us know at iu-dormitory@gmail.com
+                        </Typography>
                     </Paper>
                 </Grid>
             </Grid>

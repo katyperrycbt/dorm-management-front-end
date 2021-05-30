@@ -38,6 +38,7 @@ const Account = ({ open }) => {
 
     useEffect(() => {
         dispatch({ type: SET_LINEAR, data: true });
+        //get update 
         dispatch(getAdminAccount()).then(() => {
             dispatch({ type: SET_LINEAR, data: false });
             dispatch({
