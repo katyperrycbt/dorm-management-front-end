@@ -10,13 +10,13 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 import useStyles from './styles';
 
-const Contact = ({ header, content }) => {
+const Contact = ({ header, content, icon }) => {
     const classes = useStyles();
     const IterDraw = () => {
         return <>
             {
                 Object.keys(content).map((key, index) => {
-                    const NowIcon = content[key][0];
+                    const NowIcon = icon[index];
                     return (
                         <Grid container key={`g${index}`} style={{ borderBottom: '1px solid gray' }}>
                             <Grid item xs={12} className={classes.space} >' '</Grid>
@@ -33,7 +33,7 @@ const Contact = ({ header, content }) => {
                             <Grid item md={6} sm={4} />
                             <Grid item md={3} sm={4} xs={12} className={classes.root3}>
                                 <ListItem className={classes.root6}>
-                                    <ListItemText primary={content[key][1]} />
+                                    <ListItemText primary={content[key]} />
                                 </ListItem>
                             </Grid>
                             <Grid item md={6} sm={4} />

@@ -32,14 +32,15 @@ const App = () => {
 
   const linear = useSelector((state) => state.linear);
 
-  const admin = window.location.href.indexOf('admin.iu-dormitory.fun') === 8;
+  const getIndex = window.location.href.indexOf('admin');
+  const admin = getIndex === 8 || getIndex === 7;
 
 
   const handleClose = () => {
     dispatch({ type: SET_SNACK, data: { open: false, msg: '' } });
   }
 
-  if (!admin) {
+  if (admin) {
     return (
       <BrowserRouter>
         <Snackbar anchorOrigin={{ vertical: 'top', horizontal: 'right' }} open={snack} onClose={handleClose} message={snackMSG} />

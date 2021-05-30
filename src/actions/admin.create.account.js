@@ -1,6 +1,6 @@
 import * as api from '../api';
 
-import {ADMIN_SIGN_UP_ADMIN} from '../constants/constants';
+import {ADMIN_SIGN_UP_ADMIN, ADMIN_SIGN_UP_STUDENT} from '../constants/constants';
 
 export const adminSignUpAdmin = (formData) => async (dispatch) => {
     try {
@@ -9,5 +9,18 @@ export const adminSignUpAdmin = (formData) => async (dispatch) => {
         return dispatch({type: ADMIN_SIGN_UP_ADMIN, data});
     } catch (error) {
         return {message: error.response.data.message}
+    }
+}
+
+export const adminSignUpStudent = async (formData) => {
+    try {
+        // const  {data} = await api.adminCreateStudentAccount(formData);
+        console.log(formData);
+        const data = 'Create successfully!';
+        return data;
+        // return dispatch({type: ADMIN_SIGN_UP_ADMIN, data});
+    } catch (error) {
+        return {message: error.response.data.message}
+
     }
 }

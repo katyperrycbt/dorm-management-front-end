@@ -1,36 +1,20 @@
-import FingerprintIcon from '@material-ui/icons/Fingerprint';
-import CakeIcon from '@material-ui/icons/Cake';
-import WcIcon from '@material-ui/icons/Wc';
-import GradeIcon from '@material-ui/icons/Grade';
-import BusinessCenterIcon from '@material-ui/icons/BusinessCenter';
-import ExploreIcon from '@material-ui/icons/Explore';
-import FilterVintageIcon from '@material-ui/icons/FilterVintage';
-import LanguageIcon from '@material-ui/icons/Language';
-
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import ListItemAvatar from '@material-ui/core/ListItemAvatar';
-import Avatar from '@material-ui/core/Avatar';
-
 import { Grid } from '@material-ui/core';
 import useStyles from './styles';
 import { useHistory } from 'react-router-dom';
+import Info from './Info';
 
 const InfoInfo = () => {
     const classes = useStyles();
     const history = useHistory();
     const user = JSON.parse(localStorage.getItem('user'));
-    
+
     if (!user) {
         history.push('/');
         return <></>
     }
 
-    const iconIter = [FingerprintIcon, CakeIcon, WcIcon, GradeIcon, BusinessCenterIcon,
-        ExploreIcon, FilterVintageIcon, LanguageIcon];
-
     const iter = {
-        'Citizen Identification Number': user.info?.name ? user.info.name : 'Tran Trong Thuc',
+        'Identity': user.info?.name ? user.info.name : '321744444',
         'Date of Birth': user.info?.dob ? user.info.dob : 'September 1st, 2000',
         'Gender': user.info?.sex ? user.info.sex : 'Male',
         'Academic year': user.info?.grade ? user.info.grade : '3',
@@ -42,40 +26,13 @@ const InfoInfo = () => {
 
     const IterDraw = () => {
         return <>
-            {
-                Object.keys(iter).map((key, index) => {
-                    const NowIcon = iconIter[index];
-                    return (
-                        <Grid container key={`g${index}`}>
-                            <Grid item xs={12} className={classes.space} >' '</Grid>
-                            <Grid item md={3} sm={2} />
-                            <Grid item md={3} sm={4} xs={12} className={classes.root2}>
-                                <ListItem>
-                                    <ListItemAvatar>
-                                        <Avatar>
-                                            <NowIcon />
-                                        </Avatar>
-                                    </ListItemAvatar>
-                                    <ListItemText secondary={key} />
-                                </ListItem>
-                            </Grid>
-                            <Grid item md={3} sm={4} xs={12} className={classes.root3}>
-                                <ListItem className={classes.root6}>
-                                    <ListItemText primary={iter[key]} />
-                                </ListItem>
-                            </Grid>
-                            <Grid item md={3} sm={2} />
-
-                        </Grid>
-                    )
-                })
-            }
+            <Info data={iter}/>
         </>
     }
 
     return (
         <div className={classes.root}>
-            <Grid container spacing={0}>
+            <Grid container spacing={0} style={{ margin: '0px 0px 0px 0px' }}>
                 <IterDraw />
             </Grid>
         </div>

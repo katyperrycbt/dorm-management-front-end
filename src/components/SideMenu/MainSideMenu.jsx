@@ -18,7 +18,6 @@ import ExitToAppOutlinedIcon from "@material-ui/icons/ExitToAppOutlined";
 
 import InfoOutlinedIcon from "@material-ui/icons/InfoOutlined";
 import CallOutlinedIcon from "@material-ui/icons/CallOutlined";
-import DashboardIcon from "@material-ui/icons/Dashboard";
 import Tooltip from "@material-ui/core/Tooltip";
 
 import useStyles from "./styles";
@@ -42,8 +41,6 @@ export default function SwipeableTemporaryDrawer({ sideMenu, setSideMenu }) {
   const iOS = process.browser && /iPad|iPhone|iPod/.test(navigator.userAgent);
   const history = useHistory();
 
-  const admin = window.location.href.indexOf("admin.iu-dormitory.fun") === 8;
-
   const handleClose = (e) => {
     setSideMenu(false);
   };
@@ -58,15 +55,13 @@ export default function SwipeableTemporaryDrawer({ sideMenu, setSideMenu }) {
         history.push("/");
         break;
       case 1:
-        !admin ? history.push("/info") : history.push("/admins");
-
+        history.push("/info");
         break;
       case 2:
-        admin ? history.push('/dashboard') : history.push("/resident");
-
+        history.push("/resident");
         break;
       case 3:
-        !admin ? history.push("/bills") : history.push("/login");
+        history.push("/bills");
         break;
       case 4:
         history.push("/requests");
@@ -167,66 +162,6 @@ export default function SwipeableTemporaryDrawer({ sideMenu, setSideMenu }) {
     </div>
   );
 
-  const list2 = (anchor) => (
-    <div
-      className={clsx(classes.list, {
-        [classes.fullList]: anchor === "top" || anchor === "bottom",
-      })}
-      role="presentation"
-    >
-      <List style={{ padding: "10px 20px 10px 20px" }}>
-        <Typography variant="h4">IU's Dormitory</Typography>
-        <Typography variant="subtitle1">v4.16.2021</Typography>
-        <img src="bunk-bed512.png" alt="img" width={100} height={100} />
-      </List>
-      <Divider />
-      <List>
-        {["Home page", "Personal information", "Dashboard", "Log Out"].map(
-          (text, index) => (
-            <ListItem button key={text} onClick={handleAction1(index)}>
-              <ListItemIcon>
-                {index === 0 && <HomeOutlinedIcon />}
-                {index === 1 && <PermIdentityOutlinedIcon />}
-                {index === 2 && <DashboardIcon />}
-                {index === 3 && <ExitToAppOutlinedIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          )
-        )}
-      </List>
-      <Divider />
-      <List>
-        {["About"].map((text, index) => (
-          <ListItem button key={text} onClick={handleAction2(index)}>
-            <ListItemIcon>{index === 0 && <InfoOutlinedIcon />}</ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
-      </List>
-      <Divider />
-      <List style={{ padding: "5px 10px 5px 10px" }}>
-        <Typography variant="h6">IU Dormitory</Typography>
-        <HtmlTooltip
-          title={
-            <React.Fragment>
-              <Typography color="inherit">Property of IU</Typography>
-              {
-                "This website is owned by team PASS (International University), designed by a team called"
-              }{" "}
-              <b>KATYPERRYCBT</b>
-            </React.Fragment>
-          }
-        >
-          <Typography variant="body1">
-            Copyright &copy; 2021 Team PASS of the International University Ho
-            Chi Minh City. All rights reserved.
-          </Typography>
-        </HtmlTooltip>
-      </List>
-    </div>
-  );
-
   return (
     <div>
       <React.Fragment key="left">
@@ -238,7 +173,7 @@ export default function SwipeableTemporaryDrawer({ sideMenu, setSideMenu }) {
           disableBackdropTransition={!iOS}
           disableDiscovery={iOS}
         >
-          {admin ? list2("top") : list("top")}
+          {list("top")}
         </SwipeableDrawer>
       </React.Fragment>
     </div>

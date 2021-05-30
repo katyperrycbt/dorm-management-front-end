@@ -9,7 +9,9 @@ export default makeStyles((theme) => ({
         },
         flexDirection: 'column',
         alignItems: 'center',
-        padding: theme.spacing(2),
+        // paddingTop: theme.spacing(2),
+        // paddingBottom: theme.spacing(2),
+        margin: 0,
         color: 'white'
     },
     root2: {

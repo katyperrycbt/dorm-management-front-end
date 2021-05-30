@@ -44,7 +44,7 @@ export default function Review({ formData, setFormData }) {
     if (!formData.password) setFormData({ ...formData, password: generatePassword() })
     async function run() {
       dispatch({ type: SET_LINEAR, data: true });
-      getRoomBill().then((rs) => {
+      getRoomBill(formData.room, 12 - new Date(formData.from).getMonth() - 1).then((rs) => {
         dispatch({ type: SET_LINEAR, data: false });
         dispatch({
           type: SET_SNACK, data: {

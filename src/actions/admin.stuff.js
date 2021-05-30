@@ -10,7 +10,7 @@ export const getAvaiRoom = async (type) => {
     }
 }
 
-export const getRoomBill = async (type, howLong) => {
+export const getRoomBill = async (name, howLong) => {
     try {
         // const {data} = await api.getRoomBill(type, howLong);
         const data = {unit_price: 500000, total: 3500000};

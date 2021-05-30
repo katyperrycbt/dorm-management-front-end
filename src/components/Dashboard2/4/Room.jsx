@@ -145,8 +145,8 @@ export default function PaymentForm({ init, formData, setFormData }) {
                 }
               }}
               placeholder="Choose by click on the side button"
-              value={31556926000*(new Date().getFullYear() - 1970 + 1)} 
-              onChange={(e) => setFormData({ ...formData, to: e })}
+              value={new Date(31556926000 * (new Date().getFullYear() - 1970 + 1))} 
+              onChange={(e) => setFormData({ ...formData, to: new Date(31556926000 * (new Date().getFullYear() - 1970 + 1)) })}
               KeyboardButtonProps={{
                 'aria-label': 'change date',
               }}

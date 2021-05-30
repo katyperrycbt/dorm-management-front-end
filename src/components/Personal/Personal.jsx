@@ -39,26 +39,28 @@ const Personal = () => {
     //     profile.info = {};
     // }
 
-
+    const icon1 = [LocationOnIcon, LocationOnIcon, LocationOnIcon, EmailIcon, PhoneIcon];
     const content1 = {
-        'Province/City': [LocationOnIcon, profile.info?.city ? profile.info?.city : 'Ho Chi Minh City'],
-        'District': [LocationOnIcon, profile.info?.district ? profile.info?.district : 'Thu Duc'],
-        'Ward': [LocationOnIcon, profile.info?.ward ? profile.info?.ward : 'Linh Trung'],
-        'Email': [EmailIcon, profile.info?.email ? profile.info?.email : 'katyperrycbt@gmail.com'],
-        'Tel': [PhoneIcon, profile.info?.phone ? profile.info?.phone : '0123456789']
+        'Province/City': profile.info?.city ? profile.info?.city : 'Ho Chi Minh City',
+        'District': profile.info?.district ? profile.info?.district : 'Thu Duc',
+        'Ward': profile.info?.ward ? profile.info?.ward : 'Linh Trung',
+        'Email': profile.info?.email ? profile.info?.email : 'katyperrycbt@gmail.com',
+        'Tel': profile.info?.phone ? profile.info?.phone : '0123456789'
     }
 
+    const icon2 = [ContactPhoneIcon, HomeIcon, PhoneIcon];
     const content2 = {
-        'Contact Name': [ContactPhoneIcon, profile.info?.parentName ? profile.info?.parentName : 'Mr. A'],
-        'Address': [HomeIcon, profile.info?.parentAddr ? profile.info?.parentAddr : 'Thu Duc'],
-        'Contact Phone Number': [PhoneIcon, profile.info?.parentTel ? profile.info?.parentTel : '0987654321'],
+        'Contact Name': profile.info?.parentName ? profile.info?.parentName : 'Mr. A',
+        'Address': profile.info?.parentAddr ? profile.info?.parentAddr : 'Thu Duc',
+        'Contact Phone Number': profile.info?.parentTel ? profile.info?.parentTel : '0987654321',
     }
 
+    const icon3 = [SecurityIcon, CalendarTodayIcon, ArrowForwardIosIcon, ArrowBackIosIcon];
     const content3 = {
-        'Health Insurance Number': [SecurityIcon, profile.info?.insuranceNum ? profile.info?.insuranceNum : 'SV15486645648654654'],
-        'Date of Issue': [CalendarTodayIcon, profile.info?.insuranceIssue ? profile.info?.insuranceIssue : '05/05/2020'],
-        'Valid from': [ArrowForwardIosIcon, profile.info?.insuranceFrom ? profile.info?.insuranceFrom : '05/08/2020'],
-        'Valid to': [ArrowBackIosIcon, profile.info?.insuranceTo ? profile.info?.insuranceTo : '05/08/2021']
+        'Health Insurance Number': profile.info?.insuranceNum ? profile.info?.insuranceNum : 'SV15486645648654654',
+        'Date of Issue':profile.info?.insuranceIssue ? profile.info?.insuranceIssue : '05/05/2020',
+        'Valid from': profile.info?.insuranceFrom ? profile.info?.insuranceFrom : '05/08/2020',
+        'Valid to': profile.info?.insuranceTo ? profile.info?.insuranceTo : '05/08/2021'
     }
 
     return (
@@ -75,20 +77,20 @@ const Personal = () => {
                     </Grid>
                 </Grid>
                 <Grid item md={4} sm={1} xs={false} />
-                <Grid item md={4} sm={10} xs={12}>
+                <Grid item md={4} sm={10} xs={12} style={{ margin: '20px 0px 0px 0px', padding: 0 }}>
                     <InfoGeneral toggle={toggle} setToggle={setToggle} />
                 </Grid>
                 <Grid item md={4} sm={1} xs={false} />
                 {
-                    toggle === 0 && <Grid item xs={12}>
+                    toggle === 0 && <Grid item xs={12} style={{ margin: 0, padding: 0 }}>
                         <InfoInfo />
                     </Grid>
                 }
                 {
                     toggle === 1 && <Grid item xs={12}>
-                        <Contact header='Accommodation Information' content={content1}/>
-                        <Contact header='Contact Information' content={content2}/>
-                        <Contact header='Insurance Information' content={content3}/>
+                        <Contact header='Accommodation Information' content={content1} icon={icon1} />
+                        <Contact header='Contact Information' content={content2} icon={icon2}/>
+                        <Contact header='Insurance Information' content={content3} icon={icon3}/>
                     </Grid>
                 }
             </Grid>

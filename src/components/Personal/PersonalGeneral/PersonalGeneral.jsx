@@ -29,7 +29,9 @@ const PersonalGeneral = () => {
                         <FontDownloadIcon />
                     </Avatar>
                 </ListItemAvatar>
-                <ListItemText primary='Full name' secondary={user.info?.name ? user.info?.name : 'Tran Trong Thuc'} />
+                <ListItemText primary='Full name' secondaryTypographyProps={{style: {
+                    color: '#3f51b5'
+                }}} secondary={user.info?.name ? user.info?.name : 'Tran Trong Thuc'} style={{color: '#f44336'}}/>
             </ListItem>
             <Divider variant="inset" component="li" />
             <ListItem>
@@ -38,7 +40,9 @@ const PersonalGeneral = () => {
                         <SchoolIcon />
                     </Avatar>
                 </ListItemAvatar>
-                <ListItemText primary='Room' secondary={user.info?.school ? user.info.school : 'B3212'} />
+                <ListItemText primary='Room' secondaryTypographyProps={{style: {
+                    color: '#3f51b5'
+                }}} secondary={user.info?.school ? user.info.school : 'B3212'} style={{color: '#f44336'}}/>
             </ListItem>
         </List>
     )

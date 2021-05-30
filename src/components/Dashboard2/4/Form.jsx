@@ -13,6 +13,8 @@ import Review from './Review';
 import { SET_SNACK, SET_LINEAR } from '../../../constants/constants';
 import { useDispatch } from 'react-redux';
 
+import { adminSignUpStudent } from '../../../actions/admin.create.account';
+
 const useStyles = makeStyles((theme) => ({
   appBar: {
     position: 'relative',
@@ -113,6 +115,29 @@ export default function Checkout() {
   const dispatch = useDispatch();
 
   const handleNext = () => {
+    if (activeStep === steps.length - 1) {
+      dispatch({ type: SET_LINEAR, data: true });
+      adminSignUpStudent(formData).then((rs) => {
+        console.log(rs);
+        dispatch({ type: SET_LINEAR, data: false });
+        dispatch({
+          type: SET_SNACK, data: {
+            open: true,
+            msg: rs
+          }
+        });
+        setActiveStep(activeStep + 1);
+      }).catch((err) => {
+        console.log(err.message);
+        dispatch({ type: SET_LINEAR, data: false });
+        dispatch({
+          type: SET_SNACK, data: {
+            open: true,
+            msg: err.message
+          }
+        });
+      });
+    }
     setActiveStep(activeStep + 1);
   };
 
@@ -187,13 +212,15 @@ export default function Checkout() {
           <React.Fragment>
             {activeStep === steps.length ? (
               <React.Fragment>
-                <Typography variant="h5" gutterBottom>
-                  Thank you for your order.
+                <Typography variant="h5" gutterBottom style={{ color: '#3f51b5' }}>
+                  Account created!
                 </Typography>
-                <Typography variant="subtitle1">
-                  Your order number is #2001539. We have emailed your order confirmation, and will
-                  send you an update when your order has shipped.
+                <Typography style={{ color: '#3f51b5' }}>
+                  Send an email containing account's information here.
                 </Typography>
+                <Button onClick={handleBack} className={classes.button}>
+                  Back
+                </Button>
               </React.Fragment>
             ) : (
               <React.Fragment>

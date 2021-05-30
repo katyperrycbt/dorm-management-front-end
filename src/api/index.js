@@ -55,6 +55,9 @@ export const adminEditAccount = (formData) => API.post('/admin/edit/account', fo
 export const getAdminInfo = () => API.get('/admin/get/info');
 export const editAdminInfo = (formData) => API.patch('/admin/edit/info', formData);
 
+// create student account
+export const adminCreateStudentAccount = (formData) => API.post('/admin/create/studentAccount', formData);
+
 // database dashboard: allows admin to create/edit/delete into the databases
 
 /**
@@ -124,4 +127,4 @@ export const requestReturn = (formData) => API.post('/student/request/return', f
 // get suitable room
 export const getAvaiRoom = (type) => API.get(`/admin/get/availableRoom?type=${type}`);
 // get room bill
-export const getRoomBill = (type, howLong) => API.get(`/admin/get/roomBill?type=${type}&howLong=${howLong}`);
+export const getRoomBill = (roomName, howLong) => API.get(`/admin/get/roomBill?type=${roomName}&howLong=${howLong}`);

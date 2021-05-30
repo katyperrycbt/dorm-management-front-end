@@ -47,7 +47,7 @@ export const MainListItems = () => {
       <ListItemIcon>
         <DescriptionIcon />
       </ListItemIcon>
-      <ListItemText primary="Forms" />
+      <ListItemText primary="New Student" />
     </ListItem>
     <ListItem button onClick={() => {
       history.push('/new/admin/account');
@@ -55,7 +55,7 @@ export const MainListItems = () => {
       <ListItemIcon>
         <LayersIcon />
       </ListItemIcon>
-      <ListItemText primary="New Account" />
+      <ListItemText primary="New Admin" />
     </ListItem>
     <ListItem button onClick={() => {
       localStorage.clear();
