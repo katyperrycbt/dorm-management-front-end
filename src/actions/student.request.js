@@ -36,7 +36,7 @@ export const studentGetRequestFix = () => async (dispatch) => {
     }
 }
 
-export const studentGetReturnFix = () => async (dispatch) => {
+export const studentGetRequestReturn = () => async (dispatch) => {
     try {
         const {data} = await api.getRequestReturn();
 

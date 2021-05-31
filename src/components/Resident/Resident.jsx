@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect} from 'react';
 // import SnippetPaper from './SnippetPaper/SnippetPaper';
 import { Container } from '@material-ui/core';
 import useStyles from './styles';
@@ -12,9 +12,15 @@ import { see } from '../../actions/student.see';
 const Resident = () => {
     const classes = useStyles();
     const dispatch = useDispatch();
-    const [resident, setResident] = useState(useSelector((state) => state.studentSee));
+
     useEffect(() => {
         dispatch({ type: SET_LINEAR, data: true });
+        dispatch({
+            type: SET_SNACK, data: {
+                open: true,
+                msg: 'Loading...'
+            }
+        });
         dispatch(see(STUDENT_SEE_RESIDENT)).then((rs) => {
             dispatch({ type: SET_LINEAR, data: false });
             dispatch({
@@ -23,7 +29,6 @@ const Resident = () => {
                     msg: 'Done!'
                 }
             });
-            setResident(rs);
         }).catch((err) => {
             dispatch({ type: SET_LINEAR, data: false });
             dispatch({
@@ -33,7 +38,10 @@ const Resident = () => {
                 }
             })
         })
-    }, [dispatch])
+    }, [dispatch]);
+
+    const resident = useSelector((state) => state.studentSee);
+
 
     const residentSample = resident.residentList ? resident.residentList : {
         'Dorm': 'A',

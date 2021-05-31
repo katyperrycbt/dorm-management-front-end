@@ -30,10 +30,15 @@ const Personal = () => {
     const classes = useStyles();
     const [toggle, setToggle] = useState(0);
     const dispatch = useDispatch();
-    const [profile, setProfile] = useState(useSelector((state) => state.studentInfo))
 
     useEffect(() => {
         dispatch({ type: SET_LINEAR, data: true });
+        dispatch({
+            type: SET_SNACK, data: {
+                open: true,
+                msg: 'Loading...'
+            }
+        });
         dispatch(getStudentInfo()).then((rs) => {
             dispatch({ type: SET_LINEAR, data: false });
             dispatch({
@@ -42,7 +47,6 @@ const Personal = () => {
                     msg: 'Done!'
                 }
             });
-            setProfile(rs);
         }).catch((err) => {
             dispatch({ type: SET_LINEAR, data: false });
             dispatch({
@@ -53,6 +57,9 @@ const Personal = () => {
             })
         })
     }, [dispatch]);
+
+    const profile = useSelector((state) => state.studentInfo);
+
 
     const icon1 = [LocationOnIcon, LocationOnIcon, LocationOnIcon, EmailIcon, PhoneIcon];
     const content1 = {

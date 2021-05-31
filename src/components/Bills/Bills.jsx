@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import BillTabs from './BillTabs/BillTabs';
 
 import { useHistory } from 'react-router-dom';
@@ -9,12 +9,46 @@ import ResidentBill from './ResidenceBill/Alter';
 import UnpaidBill from './UnpaidBill/Alter';
 import UtilityBill from './UtilityBill/Alter';
 
+import { STUDENT_SEE_BILLS, SET_LINEAR, SET_SNACK } from '../../constants/constants';
+import { see } from '../../actions/student.see';
+import { useDispatch, useSelector } from 'react-redux';
+
+
 const Bills = () => {
     const history = useHistory();
     const profile = JSON.parse(localStorage.getItem('user'));
     const classes = useStyles();
-
+    const dispatch = useDispatch();
     const [activeTab, setActiveTab] = useState(0);
+
+    useEffect(() => {
+        dispatch({ type: SET_LINEAR, data: true });
+        dispatch({
+            type: SET_SNACK, data: {
+                open: true,
+                msg: 'Loading...'
+            }
+        });
+        dispatch(see(STUDENT_SEE_BILLS)).then((rs) => {
+            dispatch({ type: SET_LINEAR, data: false });
+            dispatch({
+                type: SET_SNACK, data: {
+                    open: true,
+                    msg: 'Done!'
+                }
+            });
+        }).catch((err) => {
+            dispatch({ type: SET_LINEAR, data: false });
+            dispatch({
+                type: SET_SNACK, data: {
+                    open: true,
+                    msg: err.message
+                }
+            })
+        })
+    }, [dispatch])
+
+    const bills = useSelector((state) => state.studentSee);
 
     if (!profile) {
         history.push('/');
@@ -74,7 +108,7 @@ const Bills = () => {
         <BillTabs activeTab={activeTab} setActiveTab={setActiveTab} />
         {activeTab === 0 && <ResidentBill billList={bill1} />}
         {activeTab === 1 && <UtilityBill billList={bill2} />}
-        {activeTab === 2 && <UnpaidBill billList={bill3}/>}
+        {activeTab === 2 && <UnpaidBill billList={bill3} />}
     </Container>;
 }
 

@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import useStyles from './styles';
 import PropTypes from 'prop-types';
 import SwipeableViews from 'react-swipeable-views';
 
-import Fix from './Fix/Fix';
+import Fix from './Fix/Alter';
 import Return from './Return/Return';
 import { Switch, Route, useHistory } from 'react-router-dom';
 
@@ -16,6 +16,18 @@ import { Container, Grid } from '@material-ui/core';
 import { useTheme } from '@material-ui/core/styles';
 import { useLocation } from 'react-router-dom'
 
+import {
+    studentRequestFix,
+    studentRequestReturn,
+    studentGetRequestFix,
+    studentGetRequestReturn
+} from '../../actions/student.request';
+
+import { see } from '../../actions/student.see';
+import { useDispatch, useState } from 'react-redux';
+import {
+    SET_LINEAR, SET_SNACK,
+} from '../../constants/constants';
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -55,6 +67,44 @@ export default function Requests() {
     const location = useLocation();
     const [value, setValue] = React.useState(location?.pathname === '/requests' ? 0 : 1);
     const history = useHistory();
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch({ type: SET_LINEAR, data: true });
+        dispatch({
+            type: SET_SNACK, data: {
+                open: true,
+                msg: 'Loading...'
+            }
+        });
+        dispatch(studentGetRequestFix()).then((rs) => {
+            dispatch(studentGetRequestReturn()).then((rs) => {
+                dispatch({ type: SET_LINEAR, data: false });
+                dispatch({
+                    type: SET_SNACK, data: {
+                        open: true,
+                        msg: 'Done!'
+                    }
+                });
+            }).catch((err) => {
+                dispatch({ type: SET_LINEAR, data: false });
+                dispatch({
+                    type: SET_SNACK, data: {
+                        open: true,
+                        msg: err.message
+                    }
+                })
+            })
+        }).catch((err) => {
+            dispatch({ type: SET_LINEAR, data: false });
+            dispatch({
+                type: SET_SNACK, data: {
+                    open: true,
+                    msg: err.message
+                }
+            })
+        })
+    }, [dispatch])
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
@@ -74,10 +124,35 @@ export default function Requests() {
         setValue(index);
     }
 
+
+    const sampleFixData = [
+        {
+            content: 'The exhaust fan in the bathroom is broken, hope to fix it soon',
+            image: 'https://5.imimg.com/data5/MO/SY/MY-910920/kitchen-exhaust-fan-500x500.jpg',
+            status: 0
+        },
+        {
+            content: 'Leaking shower',
+            image: 'https://cdn.vox-cdn.com/thumbor/10e8adIKzirF5E70DoSbxQr-_MM=/0x0:3000x2000/1200x800/filters:focal(1260x760:1740x1240)/cdn.vox-cdn.com/uploads/chorus_image/image/65890483/iStock_1176125291.9.jpg',
+            status: 1
+        }
+    ];
+
+    const sampleFix = [
+        {
+            'header': `${sampleFixData[0]['content'].slice(0, Math.floor(sampleFixData[0]['content'].length * 0.5))}..., Status: ${sampleFixData[0]['status'] === 0 ? 'Not fixed yet' : 'Fixed'}`,
+            'details': sampleFixData[0]
+        },
+        {
+            'header': `${sampleFixData[1]['content'].slice(0, Math.floor(sampleFixData[1]['content'].length * 0.5))}..., Status: ${sampleFixData[1]['status'] === 0 ? 'Not fixed yet' : 'Fixed'}`,
+            'details': sampleFixData[1]
+        }
+    ];
+
     return (
         <Container maxWidth='md' style={{ padding: 0 }}>
             <Grid className={classes.requests_root}>
-                <Typography variant="h3" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', color: '#e91e63', marginBottom: '10px' }}>Request</Typography>
+                <Typography variant="h2" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', color: '#3f51b5', marginBottom: '10px' }}>Request</Typography>
                 <AppBar position="static" color="default" style={{ borderRadius: "10px", zIndex: 1, }}>
                     <Tabs
                         value={value}
@@ -98,8 +173,8 @@ export default function Requests() {
                         onChangeIndex={handleChangeIndex}
                     >
 
-                        <TabPanel value={value} index={0} dir={theme.direction}>
-                            <Route exact path='/requests' render={props => <Fix {...props} />} />
+                        <TabPanel value={value} index={0} dir={theme.direction} style={{padding: 0}}>
+                            <Route exact path='/requests' render={props => <Fix {...props} requests={sampleFix} />} />
                         </TabPanel>
                         <TabPanel value={value} index={1} dir={theme.direction}>
                             <Route exact path='/requests/return' render={props => <Return {...props} />} />

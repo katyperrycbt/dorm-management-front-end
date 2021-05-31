@@ -10,7 +10,7 @@ const studentRequest = (studentRequest = [], action) => {
             return action?.data ? action.data: studentRequest;
         case STUDENT_REQUEST_FIX:
         case STUDENT_REQUEST_RETURN:
-            return [...studentRequest, action.data];
+            return action?.data ? [...studentRequest, action.data] : studentRequest;
         default:
             return studentRequest;
     }
