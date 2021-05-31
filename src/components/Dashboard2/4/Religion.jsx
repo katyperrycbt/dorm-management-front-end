@@ -55,7 +55,11 @@ export default function CountrySelect({ formData, setFormData }) {
                     label="Religion"
                     required
                     value={formData.religion ? formData.religion : null}
-                    shrink={formData.religion ? true : false}
+                    InputLabelProps={{
+                        shrink: formData?.religion ? true: false,
+                        color: 'primary'
+                    }}
+                                        
                     inputProps={{
                         ...params.inputProps,
                     }}

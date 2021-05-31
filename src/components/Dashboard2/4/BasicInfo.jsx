@@ -11,7 +11,7 @@ import CountrySelect from './CountrySelect';
 import Religion from './Religion';
 import Folk from './Folk';
 import CDW from './CDW';
-import AddressGG from './AddressGG';
+import AddressGG from './AlterGGPlace';
 
 import {
   MuiPickersUtilsProvider,
@@ -35,6 +35,8 @@ const useStyles = makeStyles((theme) => ({
   },
   pre: { outline: '1px solid #ccc', padding: '5px', margin: '5px', backgroundColor: 'white !important' },
 }));
+
+const dateConverter = (date) => ((date.getMonth() > 8) ? (date.getMonth() + 1) : ('0' + (date.getMonth() + 1))) + '/' + ((date.getDate() > 9) ? date.getDate() : ('0' + date.getDate())) + '/' + date.getFullYear();
 
 export default function AddressForm({ init, formData, setFormData }) {
   const [idcheck, setidcheck] = useState(false);
@@ -85,8 +87,8 @@ export default function AddressForm({ init, formData, setFormData }) {
             label="Full name"
             fullWidth
             type='text'
-            value={formData.full_name ? formData.full_name : null}
-            shrink={formData.full_name ? true : false}
+            value={formData.full_name ? formData.full_name : ''}
+            InputLabelProps={{ shrink: formData?.full_name ? true : false, color: "primary" }}
             onChange={(e) => setFormData({ ...formData, full_name: e.target.value })}
           />
         </Grid>
@@ -97,7 +99,8 @@ export default function AddressForm({ init, formData, setFormData }) {
               variant="inline"
               format="MM/dd/yyyy"
               id="date-picker-inline"
-              label={`Date of birth [01/01/${parseInt(new Date().getFullYear()) - 24} - 31/12/${parseInt(new Date().getFullYear()) - 18}]`}
+              label={`Date of birth [${dateConverter(new Date((new Date().getFullYear() - (24 + 1970)) * 31556926000))} 
+                - ${dateConverter(new Date((new Date().getFullYear() - (17 + 1970)) * 31556926000))}]`}
               required
               fullWidth
               InputLabelProps={{
@@ -129,8 +132,8 @@ export default function AddressForm({ init, formData, setFormData }) {
             <Select
               labelId="demo-simple-select-label"
               id="demo-simple-select"
-              value={formData.gender ? formData.gender : null}
-              shrink={formData.gender ? true : false}
+              value={formData.gender ? formData.gender : ''}
+              // InputLabelProps={{ shrink: formData?.gender ? true : false, color: "primary" }}
               onChange={(e) => setFormData({ ...formData, gender: e.target.value })}
             >
               <MenuItem value={'male'}>Male</MenuItem>
@@ -145,8 +148,8 @@ export default function AddressForm({ init, formData, setFormData }) {
             <Select
               labelId="demo-simple-select-label"
               id="demo-simple-select"
-              value={formData.academic_year ? formData.academic_year : null}
-              shrink={formData.academic_year ? true : false}
+              value={formData.academic_year ? formData.academic_year : ''}
+              // InputLabelProps={{ shrink: formData?.academic_year ? true : false, color: "primary" }}
               onChange={(e) => setFormData({ ...formData, academic_year: e.target.value })}
             >
               <MenuItem value={parseInt(new Date().getFullYear()) - 3}>
@@ -174,8 +177,8 @@ export default function AddressForm({ init, formData, setFormData }) {
             type='number'
             error={idcheck}
             helperText={idcheck ? 'Invalid identity number' : ''}
-            value={formData.identity_card ? formData.identity_card : null}
-            shrink={formData.identity_card ? true : false}
+            value={formData.identity_card ? formData.identity_card : ''}
+            InputLabelProps={{ shrink: formData?.identity_card ? true : false, color: "primary" }}
             onChange={(e) => {
               setFormData({ ...formData, identity_card: e.target.value })
               if (/^\d{9}(?:\d{3})?$/.test(parseInt(e.target.value))) {
@@ -200,8 +203,8 @@ export default function AddressForm({ init, formData, setFormData }) {
             required
             error={wrongEmail}
             helperText={wrongEmail ? 'Invalid email' : ''}
-            value={formData.email ? formData.email : null}
-            shrink={formData.email ? true : false}
+            value={formData.email ? formData.email : ''}
+            InputLabelProps={{ shrink: formData?.email ? true : false, color: "primary" }}
             onChange={(e) => {
               setFormData({ ...formData, email: e.target.value });
               if (/^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i
@@ -225,8 +228,8 @@ export default function AddressForm({ init, formData, setFormData }) {
             label="Field of major"
             fullWidth
             type='text'
-            value={formData.field_of_major ? formData.field_of_major : null}
-            shrink={formData.field_of_major ? true : false}
+            value={formData.field_of_major ? formData.field_of_major : ''}
+            InputLabelProps={{ shrink: formData?.field_of_major ? true : false, color: "primary" }}
             onChange={(e) => setFormData({ ...formData, field_of_major: e.target.value })}
           />
         </Grid>
@@ -263,8 +266,8 @@ export default function AddressForm({ init, formData, setFormData }) {
             type='number'
             error={idcheckPhone}
             helperText={idcheckPhone ? 'Invalid mobile number' : ''}
-            value={formData?.residentinfo?.telephone ? formData.residentinfo.telephone : null}
-            shrink={formData?.residentinfo?.telephone ? true : false}
+            value={formData?.residentinfo?.telephone ? formData.residentinfo.telephone : ''}
+            InputLabelProps={{ shrink: formData?.residentinfo?.telephone ? true : false, color: "primary" }}
             onChange={(e) => {
               setFormData({
                 ...formData, residentinfo: {
@@ -301,8 +304,8 @@ export default function AddressForm({ init, formData, setFormData }) {
             name='parent_name'
             label='Parent name'
             fullWidth
-            value={formData?.parentinfo?.name ? formData.parentinfo.name : null}
-            shrink={formData?.parentinfo?.name ? true : false}
+            value={formData?.parentinfo?.name ? formData.parentinfo.name : ''}
+            InputLabelProps={{ shrink: formData?.parentinfo?.name ? true : false, color: "primary" }}
             onChange={(e) => setFormData({ ...formData, parentinfo: { ...formData.parentinfo, name: e.target.value } })}
           />
         </Grid>
@@ -319,8 +322,8 @@ export default function AddressForm({ init, formData, setFormData }) {
             type='number'
             error={idcheckPhone2}
             helperText={idcheckPhone2 ? 'Invalid mobile number' : ''}
-            value={formData?.parentinfo?.tel ? formData.parentinfo.tel : null}
-            shrink={formData?.parentinfo?.tel ? true : false}
+            value={formData?.parentinfo?.tel ? formData.parentinfo.tel : ''}
+            InputLabelProps={{ shrink: formData?.parentinfo?.tel ? true : false, color: "primary" }}
             onChange={(e) => {
               setFormData({
                 ...formData, parentinfo: {
@@ -356,8 +359,8 @@ export default function AddressForm({ init, formData, setFormData }) {
             required
             error={checkInsurance}
             helperText={checkInsurance ? 'Invalid insurance number' : ''}
-            value={formData?.insurance?.id ? formData.insurance.id : null}
-            shrink={formData?.insurance?.id ? true : false}
+            value={formData?.insurance?.id ? formData.insurance.id : ''}
+            InputLabelProps={{ shrink: formData?.insurance?.id ? true : false, color: "primary" }}
             onChange={(e) => {
               setFormData({
                 ...formData, insurance: {
@@ -388,7 +391,6 @@ export default function AddressForm({ init, formData, setFormData }) {
               required
               fullWidth
               value={formData.insurance.date_of_issue ? formData.insurance.date_of_issue : null}
-            
               maxDate={Date.now()}
               onChange={(e) => setFormData({
                 ...formData, insurance: {
@@ -476,6 +478,7 @@ export default function AddressForm({ init, formData, setFormData }) {
                   root: classes.blue
                 }
               }}
+            
               InputProps={{
                 disabled: true,
                 classes: {

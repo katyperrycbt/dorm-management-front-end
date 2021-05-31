@@ -81,7 +81,7 @@ const init = {
     address: '',
     tel: ''
   },
-  academic_year: parseInt(new Date().getFullYear()),
+  academic_year: '',
   dob: '',
   identity_card: '',
   field_of_major: '',

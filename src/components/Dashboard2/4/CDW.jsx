@@ -62,6 +62,10 @@ export default function CountrySelect({ formData, setFormData }) {
                         {...params}
                         label="Ward, district and city"
                         required
+                        InputLabelProps={{
+                            shrink: formData?.residentinfo?.ward ? true: false,
+                            color: 'primary'
+                        }}
                         inputProps={{
                             ...params.inputProps,
                         }}

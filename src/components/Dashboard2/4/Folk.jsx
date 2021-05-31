@@ -60,7 +60,10 @@ export default function CountrySelect({ formData, setFormData }) {
                     label="Folk"
                     required
                     value={formData.folk ? formData.folk : null}
-                    shrink={formData.folk ? true : false}
+                    InputLabelProps={{
+                        shrink: formData?.folk ? true: false,
+                        color: 'primary'
+                    }}                    
                     inputProps={{
                         ...params.inputProps,
                     }}

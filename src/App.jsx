@@ -21,6 +21,7 @@ import { Snackbar } from '@material-ui/core';
 import { useSelector } from 'react-redux';
 import { SET_SNACK } from './constants/constants';
 import Landing from './Landing';
+import Notification from './components/Notification/Notification';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -86,6 +87,7 @@ const App = () => {
           <Route path="/requests" render={(props) => <Requests {...props} />} />
           <Route path="/about" render={(props) => <About {...props} />} />
           <Route path="/contact" render={(props) => <Contact {...props} />} />
+          <Route path="/notifications" render={(props) => <Notification {...props} />} />
         </Switch>
       </Container>
     </BrowserRouter>

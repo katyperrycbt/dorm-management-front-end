@@ -66,6 +66,9 @@ export default function SwipeableTemporaryDrawer({ sideMenu, setSideMenu }) {
       case 4:
         history.push("/requests");
         break;
+      case 5:
+        history.push("/notifications");
+        break;
       default:
         localStorage.clear();
         history.push("/");
