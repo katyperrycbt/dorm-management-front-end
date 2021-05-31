@@ -4,7 +4,8 @@ import PropTypes from 'prop-types';
 import SwipeableViews from 'react-swipeable-views';
 
 import Fix from './Fix/Alter';
-import Return from './Return/Return';
+import Return from './Return/Alter';
+
 import { Switch, Route, useHistory } from 'react-router-dom';
 
 import AppBar from '@material-ui/core/AppBar';
@@ -17,14 +18,12 @@ import { useTheme } from '@material-ui/core/styles';
 import { useLocation } from 'react-router-dom'
 
 import {
-    studentRequestFix,
-    studentRequestReturn,
     studentGetRequestFix,
     studentGetRequestReturn
 } from '../../actions/student.request';
 
-import { see } from '../../actions/student.see';
-import { useDispatch, useState } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+
 import {
     SET_LINEAR, SET_SNACK,
 } from '../../constants/constants';

@@ -48,10 +48,13 @@ const Account = ({ open, rawData, inputColor }) => {
                                                 <AccordionSummary
                                                     aria-controls="panel1bh-content"
                                                     id="panel1bh-header"
-                                                    style={{display: 'block', overflow: 'auto'}}
+                                                    style={{ display: 'block', overflow: 'auto' }}
                                                 >
-                                                    <Typography  className={classes.heading} >{key}</Typography>
-                                                    <Typography  className={classes.secondaryHeading}>{rawData['details'][key]}</Typography>
+                                                    <Typography className={classes.heading} >{key}</Typography>
+                                                    {
+                                                        key === 'image' ? <img src={rawData['details']['image']} alt='swww' style={{maxHeight: '200px'}} />
+                                                            : <Typography className={classes.secondaryHeading}>{rawData['details'][key]}</Typography>
+                                                    }
                                                 </AccordionSummary>
                                             </Accordion>
                                         )

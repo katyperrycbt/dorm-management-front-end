@@ -66,15 +66,22 @@ const ResidentBill = ({ open, requests }) => {
                 <Grid item xs={12} sm={4}>
                     <Paper elevation={0} style={{ border: '1px solid #f44336', borderRadius: '5px', padding: '5px' }}>
                         <Typography variant='h6' style={{ color: '#3f51b5' }}>
-                            What time do you need to pay the dormitory fee?
+                            My room has a damaged problem, how can I create a repair request?
                         </Typography>
                         <Typography>
-                            Usually around June and December every year. We will notify you 1 month in advance for you to prepare.                             </Typography>
+                            By clicking the blue circle button on this page, fill in the information and submit.
+                        </Typography>
                         <Typography variant='h6' style={{ color: '#3f51b5' }}>
-                            Are there errors in this data?
-                             </Typography>
+                            How long is the repair time?
+                        </Typography>
                         <Typography>
-                            Let us know at iu-dormitory@gmail.com
+                            Usually takes place within 1 week.
+                        </Typography>
+                        <Typography variant='h6' style={{ color: '#3f51b5' }}>
+                            Toilet blockage problem, need to be fixed immediately
+                        </Typography>
+                        <Typography>
+                            Contact the dormitory repair office - Room O.111.
                         </Typography>
                     </Paper>
                 </Grid>
