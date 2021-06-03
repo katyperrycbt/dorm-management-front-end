@@ -13,7 +13,7 @@ import Personal from "./components/Personal/Personal";
 import Resident from "./components/Resident/Resident";
 import Bills from "./components/Bills/Bills";
 import Requests from "./components/Request/Requests";
-import About from "./components/About/About";
+import About from "./components/About/Alter";
 import Contact from "./components/Contact/Contact";
 import Dashboard from './components/Dashboard2/Dashboard';
 import Login from './components/Login/Login';
