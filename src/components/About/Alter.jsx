@@ -1,5 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Container, Typography, Link, Grid, Paper, Box } from "@material-ui/core";
+import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
+import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
+
 import clsx from 'clsx';
 
 import useStyles from './styles2'
@@ -20,21 +23,92 @@ function Copyright() {
 
 const About = ({ open }) => {
     const [stik, setStik] = useState(false);
+    const [expand, setExpand] = useState(true);
+
     const classes = useStyles();
-    
+
+    const contact1 = useRef(null);
+    const contact2 = useRef(null);
+    const contact3 = useRef(null);
+    const contact4 = useRef(null);
+    const contact5 = useRef(null);
+    const contact6 = useRef(null);
+    const contact7 = useRef(null);
+    const contact8 = useRef(null);
+    const whatHeight = useRef(null);
+    const whatAll = useRef(null);
+
+    const [height, setHeight] = useState('auto');
+    const [heightAll, setHeightAll] = useState('auto');
+
+    const getHeight = () => {
+        return whatHeight.current.clientHeight;
+    }
+
+    const getHeightAll = () => {
+        return whatAll.current.clientHeight + 5;
+    }
+
     const listenToScroll = () => {
         const winScroll =
-          document.body.scrollTop || document.documentElement.scrollTop
+            document.body.scrollTop || document.documentElement.scrollTop
         if (winScroll > 258) {
             setStik(true);
         } else {
             setStik(false);
         }
-      }
+    }
+
+    const listenToResize = () => {
+        setHeight(getHeight());
+        setHeightAll(getHeightAll());
+    }
 
     useEffect(() => {
-        window.addEventListener('scroll', listenToScroll)
-    })
+        window.addEventListener('scroll', listenToScroll);
+        window.addEventListener('resize', listenToResize);
+        return () => {
+            window.removeEventListener('scroll', listenToScroll);
+            window.removeEventListener('resize', listenToResize);
+        }
+    });
+
+    useEffect(() => {
+        setHeight(getHeight());
+        setHeightAll(getHeightAll());
+    }, [])
+
+    const getRef = (name) => {
+        switch (name) {
+            case 'contact1':
+                return contact1;
+            case 'contact2':
+                return contact2;
+            case 'contact3':
+                return contact3;
+            case 'contact4':
+                return contact4;
+            case 'contact5':
+                return contact5;
+            case 'contact6':
+                return contact6;
+            case 'contact7':
+                return contact7;
+            case 'contact8':
+                return contact8;
+            default:
+                return contact1;
+        }
+    }
+
+    const handleScroll = (rrr) => {
+        const reff = getRef(rrr);
+        reff.current.scrollIntoView({
+            behavior: 'smooth',
+            block: 'center',
+            inline: 'center'
+        });
+    }
 
 
     return <Container maxWidth='lg' className={classes.root}>
@@ -49,31 +123,42 @@ const About = ({ open }) => {
                         <Typography align="center" variant='h5' style={{ color: '#f44336' }}>The following are the <u><b>terms and conditions</b></u> of use of the website.</Typography>
                     </Grid>
                     <Grid item xs={12} sm={4}>
-                        <div id={`diwejcccc`} className={stik ? classes.stik: ''} onScroll={listenToScroll}>
-                            <Paper elevation={0} style={{ border: '1px solid #f44336', borderRadius: '5px', padding: '5px' }}>
-                                <Typography align="center" variant='h5' style={{ color: '#f44336' }}>Effective from June 1, 2021</Typography>
-                                <Typography align="left" style={{ color: '#3f51b5'}} className={classes.shadow}>1. <font color='#357a38' className={classes.under}>Introduction</font></Typography>
-                                <Typography align="left" style={{ color: '#3f51b5'}} className={classes.shadow}>2. <font color='#357a38' className={classes.under}>The use of our service</font></Typography>
-                                <Typography align="left" style={{ color: '#3f51b5'}} className={classes.shadow}>3. <font color='#357a38' className={classes.under}>The use of third-party services</font></Typography>
-                                <Typography align="left" style={{ color: '#3f51b5'}} className={classes.shadow}>4. <font color='#357a38' className={classes.under}>User-generated content</font></Typography>
-                                <Typography align="left" style={{ color: '#3f51b5'}} className={classes.shadow}>5. <font color='#357a38' className={classes.under}>The rights you grant us</font></Typography>
-                                <Typography align="left" style={{ color: '#3f51b5'}} className={classes.shadow}>6. <font color='#357a38' className={classes.under}>Customer support</font></Typography>
-                                <Typography align="left" style={{ color: '#3f51b5'}} className={classes.shadow}>7. <font color='#357a38' className={classes.under}>Disclaimer</font></Typography>
-                                <Typography align="left" style={{ color: '#3f51b5'}} className={classes.shadow}>8. <font color='#357a38' className={classes.under}>Restrictions</font></Typography>
+                        <div id={`diwejcccc`} className={stik ? classes.stik : ''} onScroll={listenToScroll}>
+                            <Paper elevation={2} style={{ padding: '0px 5px 5px 5px', overflow: 'hidden', height: expand ? heightAll : height, transition: 'height 0.5s' }} className={`${classes.border}`}>
+                                <div ref={whatAll}>
+                                    <div ref={whatHeight} style={{
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        flexWrap: 'wrap',
+                                        justifyContent: 'center',
+                                        padding: '10px 10px 10px 10px'
+                                    }}>
+                                        <Typography align="center" variant='h6' style={{ color: '#f44336' }}>Effective from June 1, 2021</Typography>
+                                        {expand ? <KeyboardArrowUpIcon onClick={() => setExpand(old => !old)} className={classes.expand} color='primary' /> : <KeyboardArrowDownIcon onClick={() => setExpand(old => !old)} className={classes.expand} color='primary' />}
+                                    </div>
+                                    <Typography align="left" style={{ color: '#3f51b5', paddingLeft: '10px' }} className={classes.shadow} onClick={() => { handleScroll('contact1') }}>1. <font color='#357a38' className={classes.under}>Introduction</font></Typography>
+                                    <Typography align="left" style={{ color: '#3f51b5', paddingLeft: '10px' }} className={classes.shadow} onClick={() => { handleScroll('contact2') }}>2. <font color='#357a38' className={classes.under}>The use of our service</font></Typography>
+                                    <Typography align="left" style={{ color: '#3f51b5', paddingLeft: '10px' }} className={classes.shadow} onClick={() => { handleScroll('contact3') }}>3. <font color='#357a38' className={classes.under}>The use of third-party services</font></Typography>
+                                    <Typography align="left" style={{ color: '#3f51b5', paddingLeft: '10px' }} className={classes.shadow} onClick={() => { handleScroll('contact4') }}>4. <font color='#357a38' className={classes.under}>User-generated content</font></Typography>
+                                    <Typography align="left" style={{ color: '#3f51b5', paddingLeft: '10px' }} className={classes.shadow} onClick={() => { handleScroll('contact5') }}>5. <font color='#357a38' className={classes.under}>The rights you grant us</font></Typography>
+                                    <Typography align="left" style={{ color: '#3f51b5', paddingLeft: '10px' }} className={classes.shadow} onClick={() => { handleScroll('contact6') }}>6. <font color='#357a38' className={classes.under}>Customer support</font></Typography>
+                                    <Typography align="left" style={{ color: '#3f51b5', paddingLeft: '10px' }} className={classes.shadow} onClick={() => { handleScroll('contact7') }}>7. <font color='#357a38' className={classes.under}>Disclaimer</font></Typography>
+                                    <Typography align="left" style={{ color: '#3f51b5', paddingLeft: '10px' }} className={classes.shadow} onClick={() => { handleScroll('contact8') }}>8. <font color='#357a38' className={classes.under}>Restrictions</font></Typography>
+                                </div>
                             </Paper>
                         </div>
                     </Grid>
                     <Grid item xs={12} sm={8}>
-                        <Paper style={{ padding: '20px' }} id={`contact1`}>
-                            <Typography variant="h6" style={{ color: '#002984' }}>Introduction</Typography>
+                        <Paper elevation={3} style={{ padding: '20px' }} className={classes.borderr}>
+                            <Typography ref={contact1} variant="h6" style={{ color: '#002984' }} id={`contact1`}>Introduction</Typography>
                             <Typography align='justify' variant='body2'>
                                 Thank you for choosing IU- Dormitory website as well as choosing to stay at the dormitory of International University - National University of Ho Chi Minh City.
                                 </Typography><Typography align='justify' variant='body2'>
                                 By subscribing to or using any IU Dormitory service, including all related features and functions, websites and user interfaces, and all associated software applications and content in connection with our services (collectively, the "IU Dormitory Services" or the "Services"), or access any type of notices, policies or other content or materials made available through through the Service ("Content") with which you enter into a binding contract with the legal entity IU Dormitory.
                             </Typography>
                         </Paper>
-                        <Paper style={{ padding: '20px' }} id={`contact2`}>
-                            <Typography variant="h6" style={{ color: '#002984' }}>The use of our service</Typography>
+                        <Paper elevation={3} style={{ padding: '20px' }} className={classes.borderr}>
+                            <Typography ref={contact2} variant="h6" style={{ color: '#002984' }} id={`contact2`}>The use of our service</Typography>
                             <Typography align='justify' variant='body2'>
                                 The IU Dormitory Service and Content are the property of IU Dormitory and its licensors. We grant you a limited, non-exclusive and revocable license to use the IU Dormitory Service and a limited, non-exclusive and revocable personal, non-commercial use of the Content (call) generally "Access Rights"). This access will remain in effect unless and until you or IU Dormitory terminate this right. You represent and agree that you are using the IU Dormitory Service and Content for your personal, non-commercial use, and that you will not redistribute or otherwise transfer the IU Dormitory Service or Content.
                                 </Typography>
@@ -90,14 +175,14 @@ const About = ({ open }) => {
                                 Third-party software (for example, an open-source software library) in the IU Dormitory Service is made available to you under the appropriate license terms of the third-party software library as described in the help section. or settings on our desktop and mobile apps and/or on our website.
                             </Typography>
                         </Paper>
-                        <Paper style={{ padding: '20px' }} id={`contact3`}>
-                            <Typography variant="h6" style={{ color: '#002984' }}>The use of third-party services</Typography>
+                        <Paper elevation={3} style={{ padding: '20px' }} className={classes.borderr}>
+                            <Typography ref={contact3} variant="h6" style={{ color: '#002984' }} id={`contact3`}>The use of third-party services</Typography>
                             <Typography align='justify' variant='body2'>
                                 The IU Dormitory Service is integrated with or may interact with third-party applications, websites and services ("Third Party Applications") and Third Party Devices to provide the IU Dormitory Service to friend. These Third Party Applications and Devices may have their own terms and conditions of use and privacy policy, and use of these Third Party Applications and Devices will be subject to these terms and conditions. such terms and conditions and privacy policy. You understand and agree that IU Dormitory does not endorse and is not responsible or liable for the conduct, features or content of any Third Party App or Device or for any other transaction. which services you may engage with with third-party Device and Application providers. Also, IU Dormitory does not guarantee the compatibility or long-term compatibility of Third-Party Apps and Devices with the Service.
                             </Typography>
                         </Paper>
-                        <Paper style={{ padding: '20px' }} id={`contact4`}>
-                            <Typography variant="h6" style={{ color: '#002984' }}>User-generated content</Typography>
+                        <Paper elevation={3} style={{ padding: '20px' }} className={classes.borderr}>
+                            <Typography ref={contact4} variant="h6" style={{ color: '#002984' }} id={`contact4`}>User-generated content</Typography>
                             <Typography align='justify' variant='body2'>
                                 IU Dormitory users may post, upload, or contribute content to the Service (which may include images, text, messages, information, playlist titles, descriptions and compilations and/or other content types) ("User Content"). For the avoidance of doubt, "User Content" includes any content posted to the IU Dormitory Support Community as well as any other part of the IU Dormitory Service.
                             </Typography>
@@ -108,8 +193,8 @@ const About = ({ open }) => {
                             <Typography align='justify' variant='body2'>
                                 You are solely responsible for all User Content that you post.  IU Dormitory is not responsible for User Content and does not endorse any opinions in User Content. YOU AGREE THAT IF ANY PERSON HAS ANY COMPLAINTS OF IU Dormitory RELATED TO THE USER CONTENT THAT YOU POST, TO THE SUPER PERMITTED BY LOCAL LAW, YOU WILL BE COMPLETED AND WRONG. , LOSS AND EXPENSES OF ANYTHING (INCLUDING REASONABLE AGENTS AND CHARGES) ARRIVING FROM THAT CLAIM.                             </Typography>
                         </Paper>
-                        <Paper style={{ padding: '20px' }} id={`contact5`}>
-                            <Typography variant="h6" style={{ color: '#002984' }}>The rights you grant us</Typography>
+                        <Paper elevation={3} style={{ padding: '20px' }} className={classes.borderr}>
+                            <Typography ref={contact5} variant="h6" style={{ color: '#002984' }} id={`contact5`}>The rights you grant us</Typography>
                             <Typography align='justify' variant='body2'>
                                 In consideration of the rights granted to you under these Agreements, you grant us the right (1) to permit the IU Dormitory Service to use the processor, bandwidth, and storage hardware of your Device to create conditions for the Service to operate, (2) provide advertising and other information to you, and (3) enable our business partners to perform similar activities. In any part of the IU Dormitory Service, the Content you access, including its selection and placement, may be affected by commercial guidelines, including IU Dormitory's agreements with third parties. . Certain Content licensed, syndicated, created by or prepared by IU Dormitory (e.g. podcast audio files) may include advertising as part of the Content. The IU Dormitory Service provides such Content in an unedited state to you.
                             </Typography>
@@ -120,8 +205,8 @@ const About = ({ open }) => {
                                 You grant IU Dormitory a non-exclusive, transferable, sublicensable, royalty-free, perpetual license (or for a period equal to the term of the Agreement plus twenty (20) ) year when in regions where this is not permitted by law), irrevocable, fully payable, valid worldwide for use, reproduction, public release (in particular performance or display), publish, translate, modify, create derivative works from, and distribute any of your User Content in connection with the Service through any medium, whether either separately or in combination with other Content or Materials by any means, method or technology, whether known now or later created in the future. In addition to the rights specifically set forth herein, you reserve the right to own all rights, including intellectual property rights, to the User Content. If permitted and applicable by applicable law, you also agree to waive and not exercise any "moral rights" or equivalent rights, such as the right to be recognized as the author of any Content. any user, including Feedback and the right to object to the handling of Offensive User Content.
                             </Typography>
                         </Paper>
-                        <Paper style={{ padding: '20px' }} id={`contact6`}>
-                            <Typography variant="h6" style={{ color: '#002984' }}>Customer support</Typography>
+                        <Paper elevation={3} style={{ padding: '20px' }} className={classes.borderr}>
+                            <Typography ref={contact6} variant="h6" style={{ color: '#002984' }} id={`contact6`}>Customer support</Typography>
                             <Typography align='justify' variant='body2'>
                                 IU Dormitory respects intellectual property rights and hopes you do too. We have established a few ground rules that you must follow when using the Service, to ensure that IU Dormitory remains an attractive service for everyone. You must abide by these rules and encourage other users to do the same.                            </Typography>
                             <Typography align='justify' variant='body2'>
@@ -217,8 +302,8 @@ const About = ({ open }) => {
                                 Your password protects your user account, and you are solely responsible for keeping your password safe and secure. You understand that you are responsible for all use (including unauthorized use) of your username and password on the Service. If your username or password is lost or stolen, or if you believe that a third party has gained unauthorized access to your account, you must immediately notify us and change your password within a short period of time. earliest time.
                             </Typography>
                         </Paper>
-                        <Paper style={{ padding: '20px' }} id={`contact7`}>
-                            <Typography variant="h6" style={{ color: '#002984' }}>Disclamer</Typography>
+                        <Paper elevation={3} style={{ padding: '20px' }} className={classes.borderr}>
+                            <Typography ref={contact7} variant="h6" style={{ color: '#002984' }} id={`contact7`}>Disclamer</Typography>
                             <Typography align='justify' variant='body2'>
                                 YOU UNDERSTAND AND AGREE THAT IU Dormitory SERVICES ARE PROVIDED "AS IS" AND "AS AVAILABLE" AND WITHOUT EXPRESS OR IMPLIED WARRANTY OF ANYTHING. IU Dormitory AND ALL CONTENT OWNERS DO NOT COMMITMENT AND DISCLAIMER ANY RESPONSIBILITIES OR CONDITIONS OF QUALITY, MERCHANTABILITY, COMPATIBILITY FOR A NON-USE PURPOSE. IU Dormitory AND THE CONTENTS OWNER DO NOT WARRANT THAT THE IU Dormitory SERVICE IS FREE OF MANY MONEY OR OTHER HARMFUL COMPONENTS. ALSO, IU Dormitory DOES NOT WARRANT OR WARRANTIES OR WARRANTIES, WARRANTIES, WARRANTIES, OR RESPONSIBILITIES FOR ANY THIRD PARTY APPS (OR CONTENT) ANYTHING IS ADVERTISED, PROMOTED, OR PROVIDED BY THIRD PARTY ON OR THROUGH THE IU Dormitory SERVICE OR ANY SUPER LINKS SITE, OR AN ANSWER HAVE AN OBLIGATIONS FOR ANY TRANSACTION BETWEEN YOU AND THE THIRD PARTY SUPPLYING THE ABOVE CONTENT.
                             </Typography>
@@ -232,8 +317,8 @@ const About = ({ open }) => {
                                 THIS SECTION DOES NOT INCLUDE YOUR PROVISIONAL RIGHTS AS A CONSUMER.
                             </Typography>
                         </Paper>
-                        <Paper style={{ padding: '20px' }} id={`contact8`}>
-                            <Typography variant="h6" style={{ color: '#002984' }}>Restrictions</Typography>
+                        <Paper elevation={3} style={{ padding: '20px' }} className={classes.borderr}>
+                            <Typography ref={contact8} variant="h6" style={{ color: '#002984' }} id={`contact8`}>Restrictions</Typography>
                             <Typography align='justify' variant='body2'>
                                 YOU AGREE THAT YOUR ONLY REMEDY FOR THE PROBLEMS OR WHEN DISPATIBLE WITH IU Dormitory'S SERVICE IS TO INSTALL THE SOFTWARE AND STOP USING THE IU Dormitory SERVICE. YOU AGREE THAT IU Dormitory HAS NO OBLIGATIONS OR RESPONSIBILITIES OUT OF OR IN RELATED TO THIRD PARTY APPLICATIONS OR CONTENT PROVIDED THROUGH OR IN RELATED TO YOUR SERVICES AND SERVICES OF THE IU Dormitory THAT THIRD PARTY APP may be GOVERNED UNDER THE PROVISIONS IN THE SEPARATE AGREEMENT BETWEEN YOU AND THAT THIRD PARTY, YOUR ONLY REMEDY, LIKE IU Dormitory, FOR ISSUES NOT LOOKING FOR THIRD PARTY APPS OR CONTENT IS TO INSTALL AND/OR STOP USING THE THIRD PARTY APPLICATION.
                             </Typography>

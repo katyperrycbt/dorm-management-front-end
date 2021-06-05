@@ -37,7 +37,7 @@ export default makeStyles((theme) => ({
     },
     container: {
         paddingBottom: theme.spacing(4),
-        backgroundColor: 'white',
+        backgroundColor: '#f5f5f5',
         borderRadius: '10px',
         // paddingLeft: theme.spacing(1),
         // paddingRight: theme.spacing(1),
@@ -64,7 +64,7 @@ export default makeStyles((theme) => ({
     under: {
         cursor: 'pointer',
         '&:hover': {
-            'text-decoration': 'underline'
+            // 'text-decoration': 'underline'
         }
     },
     stik: {
@@ -75,8 +75,30 @@ export default makeStyles((theme) => ({
     shadow: {
         cursor: 'pointer',
         '&:hover': {
+            borderRadius: theme.spacing(1),
             backgroundColor: '#eeeeee',
         },
+    },
+    border: {
+        borderRadius: theme.spacing(1.5),
+    },
+    borderr: {
+        borderRadius: theme.spacing(1.5),
+        marginBottom: theme.spacing(1)
+    },
+    expand: {
+        cursor: 'pointer',
+        marginLeft: theme.spacing(1),
+        '&:hover': {
+            borderRadius: theme.spacing(1),
+            backgroundColor: '#eeeeee',
+        },
+    },
+    lea: {
+        transition: 'height 2s'
+    },
+    ent: {
+        transition: 'height 2s'
     },
     [theme.breakpoints.down('sm')]: {
         stik: {
@@ -86,7 +108,7 @@ export default makeStyles((theme) => ({
     },
     [theme.breakpoints.down('xs')]: {
         stik: {
-            top: 75,
+            top: 60,
             width: '72%',
         }
     }
