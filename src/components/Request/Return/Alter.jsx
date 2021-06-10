@@ -11,6 +11,10 @@ import EditIcon from '@material-ui/icons/Edit';
 import DateFnsUtils from '@date-io/date-fns';
 import SendIcon from '@material-ui/icons/Send';
 
+import { useDispatch } from 'react-redux';
+import { SET_SNACK, SET_LINEAR } from '../../../constants/constants';
+import { studentRequestReturn } from '../../../actions/student.request';
+
 import {
     MuiPickersUtilsProvider,
     //   KeyboardTimePicker,
@@ -48,8 +52,51 @@ function Copyright() {
 
 const ResidentBill = ({ open }) => {
     const classes = useStyles();
-    const [newRequest, setNewRequest] = useState(false);
+    // const [newRequest, setNewRequest] = useState(false);
     const [formData, setFormData] = useState({ reason: '', leavingDate: new Date() });
+    const dispatch = useDispatch();
+
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        dispatch({ type: SET_LINEAR, data: true });
+        dispatch({
+            type: SET_SNACK, data: {
+                open: true,
+                msg: 'Sending...'
+            }
+        });
+
+        dispatch(studentRequestReturn(formData)).then((rs) => {
+            if (rs.message) {
+                dispatch({ type: SET_LINEAR, data: false });
+                dispatch({
+                    type: SET_SNACK, data: {
+                        open: true,
+                        msg: rs.message
+                    }
+                });
+
+            } else {
+                dispatch({ type: SET_LINEAR, data: false });
+                dispatch({
+                    type: SET_SNACK, data: {
+                        open: true,
+                        msg: 'Done!'
+                    }
+                });
+            }
+        }).catch((err) => {
+            dispatch({ type: SET_LINEAR, data: false });
+            dispatch({
+                type: SET_SNACK, data: {
+                    open: true,
+                    msg: err.message
+                }
+            });
+        });
+    }
 
     return <main className={clsx(classes.content, {
         [classes.contentShift]: open,
@@ -57,7 +104,7 @@ const ResidentBill = ({ open }) => {
         <div className={classes.appBarSpacer} />
         <Container maxWidth={'lg'} className={classes.container} style={{ margin: 0 }}>
             <Grid container spacing={3} style={{ padding: '5px' }}>
-                <Grid item xs={12}>
+                {/* <Grid item xs={12}>
                     <Tooltip title='Make request' className={classes.newButton}>
                         <Fab
                             color='primary'
@@ -66,17 +113,17 @@ const ResidentBill = ({ open }) => {
                             <EditIcon />
                         </Fab>
                     </Tooltip>
-                </Grid>
+                </Grid> */}
                 <Grid item xs={12}>
-                    <Typography align="center" variant='h3' style={{ color: '#3f51b5' }}>Return Requests</Typography>
+                    <Typography align="center" variant='h3' style={{ color: '#3f51b5' }}>Return Request</Typography>
                     <Typography align="center" variant='h5' style={{ color: '#f44336' }}>Note, this is a check-out request, so make sure you're looking to check out and leave.</Typography>
                 </Grid>
                 <Grid item xs={12} sm={8}>
                     <Paper style={{ padding: '2px 5px 5px 5px' }}>
                         <Typography style={{ color: '#009688' }}>Stating the reason and details will be a good example of getting a refund</Typography>
-                        <Grid container style={{margin: '0px 0px 0px 0px'}}>
+                        <Grid container style={{ margin: '0px 0px 0px 0px' }}>
                             <Grid item xs={12} >
-                                <form noValidate autoComplete="off" style={{ marginTop: '5px' }}>
+                                <form noValidate autoComplete="off" style={{ marginTop: '5px' }} onSubmit={handleSubmit}>
                                     <Grid container spacing={2}>
                                         <Grid item xs={12}>
                                             <ThemeProvider theme={theme}>
@@ -96,6 +143,7 @@ const ResidentBill = ({ open }) => {
                                                         required
                                                         fullWidth
                                                         className={{ margin: '20px', padding: 0 }}
+                                                        minDate={Date.now()}
                                                     />
                                                 </MuiPickersUtilsProvider>
                                             </ThemeProvider>
@@ -111,6 +159,7 @@ const ResidentBill = ({ open }) => {
                                                 value={formData.reason}
                                                 onChange={(e) => setFormData({ ...formData, reason: e.target.value })}
                                                 fullWidth
+                                                required
                                             />
                                         </Grid>
                                         <Grid item xs={12} md={6} lg={3}>
@@ -119,6 +168,7 @@ const ResidentBill = ({ open }) => {
                                                 color="primary"
                                                 endIcon={<SendIcon />}
                                                 style={{ width: '100%' }}
+                                                type='submit'
                                             >
                                                 Send
                                             </Button>

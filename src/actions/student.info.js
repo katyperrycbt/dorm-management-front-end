@@ -9,6 +9,7 @@ export const getStudentInfo = () => async (dispatch) => {
         // const data = {
             
         // }
+        console.log('get student info', data)
         return dispatch({ type: GET_STUDENT_INFO, data });
     } catch (error) {
         return { message: error.response.data.message }

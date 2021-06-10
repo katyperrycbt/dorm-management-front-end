@@ -44,7 +44,7 @@ const App = () => {
   if (admin) {
     return (
       <BrowserRouter>
-        <Snackbar anchorOrigin={{ vertical: 'top', horizontal: 'right' }} open={snack} onClose={handleClose} message={snackMSG} />
+        <Snackbar anchorOrigin={{ vertical: 'top', horizontal: 'right', zIndex: 10000000 }} open={snack} onClose={handleClose} message={snackMSG} />
         {
           linear && <div className={classes.linearProgress} style={{ position: 'fixed', top: 0, zIndex: 10000000 }}>
             <LinearProgress color="secondary" classes={{ colorSecondary: classes.customColor, barColorSecondary: classes.customColor2 }} />

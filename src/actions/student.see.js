@@ -18,10 +18,26 @@ export const see = (seeWhat) => async (dispatch) => {
         let data
         switch (seeWhat) {
             case STUDENT_SEE_RESIDENT:
-                data = (await api.getResidentInfo()).data;
+                const temp = (await api.getResidentInfo()).data;
+
+                console.log('resident info', temp)
+                data = temp.stayindorm;
+                console.log('data resident', data)
                 break;
             case STUDENT_SEE_BILLS:
-                data = (await api.getBill()).data;
+                console.log('reach bill');
+                const roomID = JSON.parse(localStorage.getItem('user')).user.room;
+                console.log(roomID);
+                const temp2 = (await api.getBill(roomID)).data;
+           
+
+                const prepareData = [
+                    [...temp2.bill],
+                    [...temp2.utilityBill]
+                ]
+
+                data = prepareData;
+
                 break;
             case STUDENT_SEE_NOTIFICATIONS:
                 data = (await api.getAnnouncementAndEMail()).data;
@@ -33,6 +49,7 @@ export const see = (seeWhat) => async (dispatch) => {
         return dispatch({type: STUDENT_SEE_DATA, data})
 
     } catch (error) {
+        console.log(error);
         return {message: error.response.data.message}
     }
 }

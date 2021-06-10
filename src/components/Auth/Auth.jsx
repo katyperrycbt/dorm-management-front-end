@@ -32,12 +32,11 @@ const Auth = (props) => {
     const [progress, setProgress] = useState(false);
     const [errors, setErrors] = useState(undefined);
     const [success, setSuccess] = useState(undefined);
-    const { setLinear } = props;
 
-    
 
     const handleSubmit = (e) => {
         e.preventDefault();
+
 
     }
 
@@ -94,9 +93,9 @@ const Auth = (props) => {
                                 <Grid container justify="flex-end">
                                     <Grid item>
                                         <Tooltip title="Assume that you are already logged in!">
-                                            <Button color="secondary" variant="outlined" 
-                                            onClick={()=> {localStorage.setItem('iu-student', JSON.stringify({hello: 'yes'})); history.push('/')}}>
-                                               Assume that logged in successfully, NEXT here!
+                                            <Button color="secondary" variant="outlined"
+                                                onClick={() => { localStorage.setItem('iu-student', JSON.stringify({ hello: 'yes' })); history.push('/') }}>
+                                                Assume that logged in successfully, NEXT here!
                                             </Button>
                                         </Tooltip>
                                     </Grid>

@@ -11,6 +11,7 @@ import Fab from '@material-ui/core/Fab';
 import EditIcon from '@material-ui/icons/Edit';
 import ModalForm from './ModalForm/ModalForm';
 
+
 function Copyright() {
     return (
         <Typography variant="body2" color="textSecondary" align="center" style={{ color: '#3f51b5' }}>
@@ -23,6 +24,7 @@ function Copyright() {
         </Typography>
     );
 }
+
 
 const ResidentBill = ({ open, requests }) => {
     const classes = useStyles();

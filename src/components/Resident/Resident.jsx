@@ -1,4 +1,4 @@
-import { useEffect} from 'react';
+import { useEffect } from 'react';
 // import SnippetPaper from './SnippetPaper/SnippetPaper';
 import { Container } from '@material-ui/core';
 import useStyles from './styles';
@@ -42,22 +42,39 @@ const Resident = () => {
 
     const resident = useSelector((state) => state.studentSee);
 
+    // console.log(resident);
 
-    const residentSample = resident.residentList ? resident.residentList : {
-        'Dorm': 'A',
-        'Block': 'B',
-        'Room': '3212',
-        'Semester': 'Full year (2020-2021)',
-        'Created at': '04/16/2021 8h49pm',
-        'Room type': 'classical',
-        'Dorm ID': 'AB3212',
-        'From': '04/16/2021',
-        'To': '04/16/2022',
-        'Note': ''
+    // const residentSample = resident.residentList ? resident.residentList : {
+    //     'Dorm': 'A',
+    //     'Block': 'B',
+    //     'Room': '3212',
+    //     'Semester': 'Full year (2020-2021)',
+    //     'Created at': '04/16/2021 8h49pm',
+    //     'Room type': 'classical',
+    //     'Dorm ID': 'AB3212',
+    //     'From': '04/16/2021',
+    //     'To': '04/16/2022',
+    //     'Note': ''
+    // }
+
+    // const sampleHeader = `Dorm ${residentSample['Dorm']} - Block ${residentSample['Block']} - Room ${residentSample['Room']}. ${residentSample['Semester']}`;
+    const residentList = [];
+
+    for (let i = 0; i < resident.length; i++) {
+        const tempHeader = `Dorm ${resident[i]['dorm']} - Block ${resident[i]['block']} - Room ID ${resident[i]['dorm_ID']}`;
+
+        const tempDetails = {
+            'Dorm': resident[i]?.dorm ? resident[i].dorm : 'Not found',
+            'Block': resident[i]?.block ? resident[i].block : 'Not found',
+            'Floor': resident[i]?.floor ? resident[i].floor : 'Not found',
+            'Room': resident[i]?.room ? resident[i].room : 'Not found',
+            'Room type': resident[i]?.room_type ? resident[i].room_type : 'Not found',
+            'Dorm ID': resident[i]?.dorm_ID ? resident[i].dorm_ID : 'Not found',
+            'Note': resident[i]?.note ? resident[i].note : 'Not found'
+        }
+
+        residentList.push({ 'header': tempHeader, 'details': tempDetails });
     }
-
-    const sampleHeader = `Dorm ${residentSample['Dorm']} - Block ${residentSample['Block']} - Room ${residentSample['Room']}. ${residentSample['Semester']}`;
-    const residentList = [{ 'header': sampleHeader, 'details': residentSample }];
 
     return <Container maxWidth='lg' className={classes.root}>
         {/* <SnippetPaper residentList={residentList} /> */}

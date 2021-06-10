@@ -59,38 +59,37 @@ const Personal = () => {
     }, [dispatch]);
 
     const profile = useSelector((state) => state.studentInfo);
-
-
+    
     const icon1 = [LocationOnIcon, LocationOnIcon, LocationOnIcon, EmailIcon, PhoneIcon];
     const content1 = {
-        'Province/City': profile?.city ? profile.city : 'Ho Chi Minh City',
-        'District': profile?.district ? profile.district : 'Thu Duc',
-        'Ward': profile?.ward ? profile.ward : 'Linh Trung',
+        'Province/City': profile?.residentinfo?.province ? profile.residentinfo.province : 'Ho Chi Minh City',
+        'District': profile?.residentinfo?.district ? profile.residentinfo.district : 'Thu Duc',
+        'Ward': profile?.residentinfo?.ward ? profile.residentinfo.ward : 'Linh Trung',
         'Email': profile?.email ? profile.email : 'katyperrycbt@gmail.com',
-        'Tel': profile?.phone ? profile.phone : '0123456789'
+        'Tel': profile?.residentinfo?.phone ? profile.residentinfo.phone : '0123456789'
     }
 
     const icon2 = [ContactPhoneIcon, HomeIcon, PhoneIcon];
     const content2 = {
-        'Contact Name': profile?.parentName ? profile.parentName : 'Mr. A',
-        'Address': profile?.parentAddr ? profile.parentAddr : 'Thu Duc',
-        'Contact Phone Number': profile?.parentTel ? profile.parentTel : '0987654321',
+        'Contact Name': profile?.parentinfo?.name ? profile.parentinfo.name : 'Mr. A',
+        'Address': profile?.parentinfo?.address ? profile.parentinfo.address : 'Thu Duc',
+        'Contact Phone Number': profile?.parentinfo?.tel ? profile.parentinfo.tel : '0987654321',
     }
 
     const icon3 = [SecurityIcon, CalendarTodayIcon, ArrowForwardIosIcon, ArrowBackIosIcon];
     const content3 = {
-        'Health Insurance Number': profile?.insuranceNum ? profile.insuranceNum : 'SV15486645648654654',
-        'Date of Issue':profile?.insuranceIssue ? profile.insuranceIssue : '05/05/2020',
-        'Valid from': profile?.insuranceFrom ? profile.insuranceFrom : '05/08/2020',
-        'Valid to': profile?.insuranceTo ? profile.insuranceTo : '05/08/2021'
+        'Health Insurance Number': profile?.insurance?.id ? profile?.insurance?.id : 'SV15486645648654654',
+        'Date of Issue': profile?.insurance?.dateofissue ? profile?.insurance?.dateofissue : '05/05/2020',
+        'Valid from':  profile?.insurance?.validfrom ? profile?.insurance?.validfrom : '05/08/2020',
+        'Valid to':  profile?.insurance?.validto ? profile?.insurance?.validto : '05/08/2021'
     }
 
     const iter = {
-        'Identity': profile?.name ? profile.name : '321744444',
+        'Identity': profile?.identity_card ? profile.identity_card : '321744444',
         'Date of Birth': profile?.dob ? profile.dob : 'September 1st, 2000',
-        'Gender': profile?.sex ? profile.sex : 'Male',
-        'Academic year': profile?.grade ? profile.grade : '3',
-        'Field of Major': profile?.field ? profile.field : 'Computer Science',
+        'Gender': profile?.gender ? profile.gender : 'Male',
+        'Academic year': profile?.academic_year ? profile.academic_year : '3',
+        'Field of Major': profile?.field_of_major ? profile.field_of_major : 'Computer Science',
         'Folk': profile?.folk ? profile.folk : 'Kinh',
         'Religion': profile?.religion ? profile.religion : 'None',
         'Country': profile?.country ? profile.country : 'Vietnam'

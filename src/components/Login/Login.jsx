@@ -21,9 +21,9 @@ import { SET_SNACK, SET_LINEAR } from '../../constants/constants';
 
 function Copyright() {
     return (
-        <Typography variant="body2" color="textSecondary" align="center" style={{color: '#3f51b5'}}>
+        <Typography variant="body2" color="textSecondary" align="center" style={{ color: '#3f51b5' }}>
             {'Copyright © '}
-            <Link color="inherit" href="https://iu-dormitory.fun/" style={{color: '#f44036'}}>
+            <Link color="inherit" href="https://iu-dormitory.fun/" style={{ color: '#f44036' }}>
                 IU Dormitory
       </Link>{' '}
             {new Date().getFullYear()}
@@ -41,69 +41,94 @@ export default function Login() {
     const [remember, setRemember] = useState(false);
     const history = useHistory();
 
-    const admin = window.location.href.indexOf('admin.iu-dormitory.fun') === 8;
+    const admin = window.location.href.indexOf('admin') === 8 || window.location.href.indexOf('admin') === 7;
 
     const handleLogin = (e) => {
         e.preventDefault();
         dispatch({ type: SET_LINEAR, data: true });
-        setTimeout(() => {
-            if (!admin) {
-                dispatch(adminSignIn(formData, remember)).then((result) => {
-                    dispatch({ type: SET_LINEAR, data: false });
-                    dispatch({
-                        type: SET_SNACK, data: {
-                            open: true,
-                            msg: 'Login successfully!'
-                        }
-                    })
-                }).catch((err) => {
-                    //send some error noti
-                    dispatch({ type: SET_LINEAR, data: false });
-                    dispatch({
-                        type: SET_SNACK, data: {
-                            open: true,
-                            msg: err.message
-                        }
-                    })
-                });
-            } else {
-                dispatch(studentSignIn(formData, remember)).then(() => {
 
-                    dispatch({ type: SET_LINEAR, data: false });
+        if (admin) {
+            dispatch(adminSignIn(formData, remember)).then((rs) => {
+
+                dispatch({ type: SET_LINEAR, data: false });
+                if (rs.message) {
+                    dispatch({
+                        type: SET_SNACK, data: {
+                            open: true,
+                            msg: rs.message
+                        }
+                    });
+                    alert(rs.message)
+                } else {
+                    dispatch({
+                        type: SET_SNACK, data: {
+                            open: true,
+                            msg: 'Login successfully!'
+                        }
+                    });
+                    history.push('/');
+                }
+
+            }).catch((err) => {
+                //send some error noti
+                dispatch({ type: SET_LINEAR, data: false });
+                dispatch({
+                    type: SET_SNACK, data: {
+                        open: true,
+                        msg: err.message
+                    }
+                })
+            });
+
+        } else {
+            dispatch(studentSignIn(formData, remember)).then((rs) => {
+
+                dispatch({ type: SET_LINEAR, data: false });
+                if (rs.message) {
+                    dispatch({
+                        type: SET_SNACK, data: {
+                            open: true,
+                            msg: rs.message
+                        }
+                    });
+                    alert(rs.message)
+                } else {
                     dispatch({
                         type: SET_SNACK, data: {
                             open: true,
                             msg: 'Login successfully!'
                         }
                     })
-                    //send some noti
-                }).catch((err) => {
-                    //send some error noti
-                    dispatch({ type: SET_LINEAR, data: false });
-                    dispatch({
-                        type: SET_SNACK, data: {
-                            open: true,
-                            msg: err.message
-                        }
-                    })
-                });
-            }
-            // test only
-            localStorage.setItem('user', JSON.stringify({ hello: 'yes' }));
-            history.push('/');
-        }, 2000)
+                    history.push('/');
+                }
+
+                //send some noti
+            }).catch((err) => {
+                //send some error noti
+                dispatch({ type: SET_LINEAR, data: false });
+                dispatch({
+                    type: SET_SNACK, data: {
+                        open: true,
+                        msg: err.message
+                    }
+                })
+            });
+        }
+        // test only
+        // localStorage.setItem('user', JSON.stringify({ hello: 'yes' }));
+        // history.push('/');
     }
 
     return (
         <Grid container component="main" className={classes.root}>
             <CssBaseline />
             <Grid item xs={false} sm={4} md={7} className={classes.image} />
-            <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square classes={{root: classes.custom}}>
+            <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square classes={{ root: classes.custom }}>
                 <div className={classes.paper}>
                     <Avatar className={classes.avatar}>
                         <LockOutlinedIcon />
                     </Avatar>
-                    <Typography component="h1" variant="h5" style={{color: '#3f51b5'}}>
+                    <Typography component="h1" variant="h5" style={{ color: '#3f51b5' }}>
                         Sign in
                     </Typography>
                     <form className={classes.form} onSubmit={handleLogin}>
@@ -146,12 +171,12 @@ export default function Login() {
                         </Button>
                         <Grid container>
                             <Grid item xs>
-                                <Link href="#" variant="body2" style={{color: '#3f51b5'}}>
+                                <Link href="#" variant="body2" style={{ color: '#3f51b5' }}>
                                     Forgot password?
                                 </Link>
                             </Grid>
                             <Grid item>
-                                <Link href="#" variant="body2" style={{color: '#3f51b5'}}>
+                                <Link href="#" variant="body2" style={{ color: '#3f51b5' }}>
                                     {"Don't have an account? Sign Up"}
                                 </Link>
                             </Grid>

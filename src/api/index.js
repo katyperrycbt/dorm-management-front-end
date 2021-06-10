@@ -5,6 +5,13 @@ dotenv.config();
 
 const API = axios.create({ baseURL: 'http://localhost:5000'});
 
+API.interceptors.request.use((req) => {
+    if (localStorage.getItem('user')) {
+        req.headers.authorization = `Bearer ${JSON.parse(localStorage.getItem('user')).token}`;
+    }
+    return req;
+})
+
 // STUDENTS
 // Step 1: Student send a request form for residence
 export const requestResidence = (formData) => API.post('/student/request/newRequest', formData);
@@ -23,7 +30,7 @@ export const requestResidence = (formData) => API.post('/student/request/newRequ
 // NOTE: see Database board for the API
 
 // Step 5: Student uses the account given from that email to login to the system.
-export const signIn = (formData, remember) => API.post(`/student/login/${remember ? 'remember' : ''}`, formData);
+export const signIn = (formData, remember) => API.post(`/student/login/${remember ? 'remember' : 'dontremember'}`, formData);
 //     if forgot the account
 export const forgotAccount = (formData) => API.post('/student/forgot', formData);
 // Step 6: Logged in succesfully, automatically create new request to get 
@@ -34,7 +41,7 @@ export const getAnnouncementAndEMail = () => API.get('/student/get/announcementA
 // ADMINS
 // Step 1: Some accounts first created by the developers
 // Step 2: One admin uses the account to signin to the system
-export const adminSignIn = (formData, remember) => API.post(`/admin/login/${remember ? 'remember' : ''}`, formData);
+export const adminSignIn = (formData, remember) => API.post(`/admin/login/${remember ? 'remember' : 'dontremember'}`, formData);
 //     if forgot the account
 export const adminForgotAccount = (formData) => API.post('/admin/forgot', formData);
 // Step 3: Also, automatically create new request to get announcements
@@ -111,10 +118,11 @@ export const getStudentInfo = () => API.get('/student/get/info');
 export const editStudentInfo = (formData) => API.patch('/student/edit/info', formData);
 
 // resident info
-export const getResidentInfo = () => API.get('/student/get/resident');
+// export const getResidentInfo = () => API.get('/student/get/resident');
+export const getResidentInfo = () =>  API.get('/student/get/info');
 
 // bill info => should return all bills: utility, resident and unpaid
-export const getBill = () => API.get('/student/get/bill');
+export const getBill = (roomID) => API.get(`/student/get/bill/${roomID}`);
 
 // request fix
 export const getRequestFix = () => API.get('/student/get/request/fix');

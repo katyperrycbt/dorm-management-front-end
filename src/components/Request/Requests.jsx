@@ -123,30 +123,52 @@ export default function Requests() {
         setValue(index);
     }
 
+    const requestFix = useSelector((state) => state.studentRequestFix);
+    const requestReturn = useSelector((state) => state.studentRequestReturn);
+    console.log('request FIXXXXX', requestFix);
+    console.log('requestReturnnnnnnnnn', requestReturn);
 
-    const sampleFixData = [
-        {
-            content: 'The exhaust fan in the bathroom is broken, hope to fix it soon',
-            image: 'https://5.imimg.com/data5/MO/SY/MY-910920/kitchen-exhaust-fan-500x500.jpg',
-            status: 0
-        },
-        {
-            content: 'Leaking shower',
-            image: 'https://cdn.vox-cdn.com/thumbor/10e8adIKzirF5E70DoSbxQr-_MM=/0x0:3000x2000/1200x800/filters:focal(1260x760:1740x1240)/cdn.vox-cdn.com/uploads/chorus_image/image/65890483/iStock_1176125291.9.jpg',
-            status: 1
-        }
-    ];
+    let data = [];
 
-    const sampleFix = [
-        {
-            'header': `${sampleFixData[0]['content'].slice(0, Math.floor(sampleFixData[0]['content'].length * 0.5))}..., Status: ${sampleFixData[0]['status'] === 0 ? 'Not fixed yet' : 'Fixed'}`,
-            'details': sampleFixData[0]
-        },
-        {
-            'header': `${sampleFixData[1]['content'].slice(0, Math.floor(sampleFixData[1]['content'].length * 0.5))}..., Status: ${sampleFixData[1]['status'] === 0 ? 'Not fixed yet' : 'Fixed'}`,
-            'details': sampleFixData[1]
+    if (requestFix) {
+        for (let i = 0; i < requestFix.length; i++) {
+            const tempHeader = `${requestFix[i]['fixnote'].slice(0, Math.floor(requestFix[i]['fixnote'].length * 0.5))}..., Status: ${requestFix[i]['accept'] === true ? 'Fixed' : 'Not fixed yet'}`
+            const tempDetails = {
+                content: requestFix[i]?.fixnote ? requestFix[i].fixnote : 'Not found',
+                image: requestFix[i]?.image ? requestFix[i].image : 'Not found',
+                status: requestFix[i]['accept'] === true ? 'Fixed' : 'Not fixed yet'
+            }
+
+            data.push({
+                'header': tempHeader,
+                'details': tempDetails
+            });
         }
-    ];
+    }
+    console.log('dataaaa', data);
+    // const sampleFixData = [
+    //     {
+    //         content: 'The exhaust fan in the bathroom is broken, hope to fix it soon',
+    //         image: 'https://5.imimg.com/data5/MO/SY/MY-910920/kitchen-exhaust-fan-500x500.jpg',
+    //         status: 0
+    //     },
+    //     {
+    //         content: 'Leaking shower',
+    //         image: 'https://cdn.vox-cdn.com/thumbor/10e8adIKzirF5E70DoSbxQr-_MM=/0x0:3000x2000/1200x800/filters:focal(1260x760:1740x1240)/cdn.vox-cdn.com/uploads/chorus_image/image/65890483/iStock_1176125291.9.jpg',
+    //         status: 1
+    //     }
+    // ];
+
+    // const sampleFix = [
+    //     {
+    //         'header': `${sampleFixData[0]['content'].slice(0, Math.floor(sampleFixData[0]['content'].length * 0.5))}..., Status: ${sampleFixData[0]['status'] === 0 ? 'Not fixed yet' : 'Fixed'}`,
+    //         'details': sampleFixData[0]
+    //     },
+    //     {
+    //         'header': `${sampleFixData[1]['content'].slice(0, Math.floor(sampleFixData[1]['content'].length * 0.5))}..., Status: ${sampleFixData[1]['status'] === 0 ? 'Not fixed yet' : 'Fixed'}`,
+    //         'details': sampleFixData[1]
+    //     }
+    // ];
 
     return (
         <Container maxWidth='md' style={{ padding: 0 }}>
@@ -172,8 +194,8 @@ export default function Requests() {
                         onChangeIndex={handleChangeIndex}
                     >
 
-                        <TabPanel value={value} index={0} dir={theme.direction} style={{padding: 0}}>
-                            <Route exact path='/requests' render={props => <Fix {...props} requests={sampleFix} />} />
+                        <TabPanel value={value} index={0} dir={theme.direction} style={{ padding: 0 }}>
+                            <Route exact path='/requests' render={props => <Fix {...props} requests={data} />} />
                         </TabPanel>
                         <TabPanel value={value} index={1} dir={theme.direction}>
                             <Route exact path='/requests/return' render={props => <Return {...props} />} />

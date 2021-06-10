@@ -4,6 +4,7 @@ const studentAuth = (studentAuth = {}, action) => {
     switch (action.type) {
         case STUDENT_SIGN_IN:
         case STUDENT_EDIT_ACCOUNT:
+            localStorage.setItem('user', JSON.stringify(action.data));
             return action?.data ? action.data : studentAuth;
         case STUDENT_SIGN_OUT:
             localStorage.clear();

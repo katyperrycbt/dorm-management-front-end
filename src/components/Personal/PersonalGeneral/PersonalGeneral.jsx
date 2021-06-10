@@ -42,7 +42,7 @@ const PersonalGeneral = () => {
                     style: {
                         color: '#3f51b5'
                     }
-                }} secondary={user?.room ? user.room : 'B3212'} style={{ color: '#f44336' }} />
+                }} secondary={user?.room?.dorm_ID ? user.room.dorm_ID : 'Not found'} style={{ color: '#f44336' }} />
             </ListItem>
         </List>
     )

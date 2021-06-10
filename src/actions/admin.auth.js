@@ -5,24 +5,25 @@ import {ADMIN_SIGN_IN, ADMIN_SIGN_OUT, ADMIN_EDIT_ACCOUNT} from '../constants/co
 export const adminSignIn = (formData, remember) => async (dispatch) => {
     try {
         
-        // const {data} = await api.adminSignIn(formData, remember);
-        const data = undefined;
-        const fakeData = {
-            token: 'dwdsadwszdqwsz',
-            user: {
-                email: 'abc@gmail.com',
-                password: 'thisishashedpassword',
-                name: 'abc',
-                age: '20',
-                role: 'admin'
-            }
-        }
+        const {data} = await api.adminSignIn(formData, remember);
 
-        return dispatch({type: ADMIN_SIGN_IN, data: data || fakeData});
+        // const data = undefined;
+        // const fakeData = {
+        //     token: 'dwdsadwszdqwsz',
+        //     user: {
+        //         email: 'abc@gmail.com',
+        //         password: 'thisishashedpassword',
+        //         name: 'abc',
+        //         age: '20',
+        //         role: 'admin'
+        //     }
+        // }
+        console.log('admin data', data);
+        return dispatch({type: ADMIN_SIGN_IN, data: data});
 
     } catch (error) {
         console.log(error);
-        return {message: error.response.data.message}
+        return {message: error.response.data.error}
     }
 }
 

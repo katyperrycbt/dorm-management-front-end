@@ -14,7 +14,7 @@ export const studentRequestFix = (formData) => async (dispatch) => {
 
 export const studentRequestReturn = (formData) => async (dispatch) => {
     try {
-        const {data} = await api.requestFix(formData);
+        const {data} = await api.requestReturn(formData);
 
         return dispatch({type: STUDENT_REQUEST_RETURN, data});
 
@@ -27,7 +27,7 @@ export const studentRequestReturn = (formData) => async (dispatch) => {
 export const studentGetRequestFix = () => async (dispatch) => {
     try {
         const {data} = await api.getRequestFix();
-
+        console.log('request fix ', data);
         return dispatch({type: STUDENT_GET_FIX_REQUEST, data});
 
     } catch (error) {
@@ -40,6 +40,8 @@ export const studentGetRequestReturn = () => async (dispatch) => {
     try {
         const {data} = await api.getRequestReturn();
 
+        console.log('request return ', data);
+        
         return dispatch({type: STUDENT_GET_RETURN_REQUEST, data});
 
     } catch (error) {

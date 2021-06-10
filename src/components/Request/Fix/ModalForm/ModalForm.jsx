@@ -11,19 +11,57 @@ import SendIcon from '@material-ui/icons/Send';
 
 // import { useHistory } from 'react-router-dom';
 import { Typography } from '@material-ui/core';
-
+import { studentRequestFix } from '../../../../actions/student.request';
+import { useDispatch } from 'react-redux';
+import { SET_LINEAR, SET_SNACK } from '../../../../constants/constants';
 
 export default function RequestForm({ open, setOpen }) {
-    const [formData, setFormData] = React.useState({ title: '', image: '' });
+    const [formData, setFormData] = React.useState({ fixnote: '', image: '' });
     const [link, setLink] = React.useState('');
 
     // const history = useHistory();
     const classes = useStyles();
 
-    // const dispatch = useDispatch();
+    const dispatch = useDispatch();
 
-    const handleSubmit = () => {
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        dispatch({ type: SET_LINEAR, data: true });
+        dispatch({
+            type: SET_SNACK, data: {
+                open: true,
+                msg: 'Sending...'
+            }
+        });
 
+        dispatch(studentRequestFix(formData)).then((rs) => {
+            if (rs.message) {
+                dispatch({ type: SET_LINEAR, data: false });
+                dispatch({
+                    type: SET_SNACK, data: {
+                        open: true,
+                        msg: rs.message
+                    }
+                });
+
+            } else {
+                dispatch({ type: SET_LINEAR, data: false });
+                dispatch({
+                    type: SET_SNACK, data: {
+                        open: true,
+                        msg: 'Done!'
+                    }
+                });
+            }
+        }).catch((err) => {
+            dispatch({ type: SET_LINEAR, data: false });
+            dispatch({
+                type: SET_SNACK, data: {
+                    open: true,
+                    msg: err.message
+                }
+            });
+        });
     }
 
     const handleClose = () => {
@@ -38,7 +76,7 @@ export default function RequestForm({ open, setOpen }) {
         setFormData({ ...formData, image: base64 });
         setLink(URL.createObjectURL(event.target.files[0]));
     }
-    
+
     const convertBase64 = (file) => {
         return new Promise((resolve, reject) => {
             const fileReader = new FileReader();
@@ -69,7 +107,7 @@ export default function RequestForm({ open, setOpen }) {
                         <Typography variant='h6' style={{ backgroundColor: "lightblue", padding: '30px', textAlign: 'center' }}>Request Form</Typography>
                         <Typography>Please fill all the information below</Typography>
                         <form className={classes.request} noValidate autoComplete="off" onSubmit={handleSubmit}>
-                            <TextField required id="fix_content" name='title' label="Content" variant="outlined" rowsMin={3} onChange={(e) => setFormData({ ...formData, [e.target.name]: e.target.value })} />
+                            <TextField required id="fix_content" name='fixnote' label="Content" variant="outlined" rowsMin={3} onChange={(e) => setFormData({ ...formData, [e.target.name]: e.target.value })} />
                             <TextField
                                 id="fix_image"
                                 type="file"
