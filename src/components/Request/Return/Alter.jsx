@@ -5,15 +5,16 @@ import {
 
 import clsx from 'clsx';
 import useStyles from './styles2';
-import { Tooltip, TextField, FormControl, InputLabel, Select, MenuItem, Button } from '@material-ui/core';
-import Fab from '@material-ui/core/Fab';
-import EditIcon from '@material-ui/icons/Edit';
+import { TextField, Button } from '@material-ui/core';
 import DateFnsUtils from '@date-io/date-fns';
 import SendIcon from '@material-ui/icons/Send';
 
 import { useDispatch } from 'react-redux';
 import { SET_SNACK, SET_LINEAR } from '../../../constants/constants';
 import { studentRequestReturn } from '../../../actions/student.request';
+
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
 
 import {
     MuiPickersUtilsProvider,
@@ -50,7 +51,7 @@ function Copyright() {
     );
 }
 
-const ResidentBill = ({ open }) => {
+const ResidentBill = ({ open, data }) => {
     const classes = useStyles();
     // const [newRequest, setNewRequest] = useState(false);
     const [formData, setFormData] = useState({ reason: '', leavingDate: new Date() });
@@ -119,65 +120,88 @@ const ResidentBill = ({ open }) => {
                     <Typography align="center" variant='h5' style={{ color: '#f44336' }}>Note, this is a check-out request, so make sure you're looking to check out and leave.</Typography>
                 </Grid>
                 <Grid item xs={12} sm={8}>
-                    <Paper style={{ padding: '2px 5px 5px 5px' }}>
-                        <Typography style={{ color: '#009688' }}>Stating the reason and details will be a good example of getting a refund</Typography>
-                        <Grid container style={{ margin: '0px 0px 0px 0px' }}>
-                            <Grid item xs={12} >
-                                <form noValidate autoComplete="off" style={{ marginTop: '5px' }} onSubmit={handleSubmit}>
-                                    <Grid container spacing={2}>
-                                        <Grid item xs={12}>
-                                            <ThemeProvider theme={theme}>
-                                                <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                                                    <KeyboardDatePicker
-                                                        disableToolbar
-                                                        variant="dialog"
-                                                        format="MM/dd/yyyy"
-                                                        margin="normal"
-                                                        id="date-picker-inline"
-                                                        label="Leaving Date"
-                                                        value={formData.leavingDate}
-                                                        onChange={(e) => setFormData({ ...formData, leavingDate: e })}
-                                                        KeyboardButtonProps={{
-                                                            'arial-label': 'change date'
-                                                        }}
-                                                        required
-                                                        fullWidth
-                                                        className={{ margin: '20px', padding: 0 }}
-                                                        minDate={Date.now()}
-                                                    />
-                                                </MuiPickersUtilsProvider>
-                                            </ThemeProvider>
-                                        </Grid>
-                                        <Grid item xs={12}>
-                                            <TextField
-                                                id="outlined-multiline-static"
-                                                label="Reason"
-                                                multiline
-                                                rows={10}
-                                                // defaultValue=""
-                                                variant="outlined"
-                                                value={formData.reason}
-                                                onChange={(e) => setFormData({ ...formData, reason: e.target.value })}
-                                                fullWidth
-                                                required
-                                            />
-                                        </Grid>
-                                        <Grid item xs={12} md={6} lg={3}>
-                                            <Button
-                                                variant="contained"
-                                                color="primary"
-                                                endIcon={<SendIcon />}
-                                                style={{ width: '100%' }}
-                                                type='submit'
-                                            >
-                                                Send
+                    {
+                        !data &&
+                        <Paper style={{ padding: '5px 5px 5px 5px' }}>
+
+                            <Typography style={{ color: '#009688' }}>Stating the reason and details will be a good example of getting a refund</Typography>
+                            <Grid container style={{ margin: '0px 0px 0px 0px' }}>
+                                <Grid item xs={12} >
+                                    <form noValidate autoComplete="off" style={{ marginTop: '5px' }} onSubmit={handleSubmit}>
+                                        <Grid container spacing={2}>
+                                            <Grid item xs={12}>
+                                                <ThemeProvider theme={theme}>
+                                                    <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                                                        <KeyboardDatePicker
+                                                            disableToolbar
+                                                            variant="dialog"
+                                                            format="MM/dd/yyyy"
+                                                            margin="normal"
+                                                            id="date-picker-inline"
+                                                            label="Leaving Date"
+                                                            value={formData.leavingDate}
+                                                            onChange={(e) => setFormData({ ...formData, leavingDate: e })}
+                                                            KeyboardButtonProps={{
+                                                                'arial-label': 'change date'
+                                                            }}
+                                                            required
+                                                            fullWidth
+                                                            className={{ margin: '20px', padding: 0 }}
+                                                            minDate={Date.now()}
+                                                        />
+                                                    </MuiPickersUtilsProvider>
+                                                </ThemeProvider>
+                                            </Grid>
+                                            <Grid item xs={12}>
+                                                <TextField
+                                                    id="outlined-multiline-static"
+                                                    label="Reason"
+                                                    multiline
+                                                    rows={10}
+                                                    // defaultValue=""
+                                                    variant="outlined"
+                                                    value={formData.reason}
+                                                    onChange={(e) => setFormData({ ...formData, reason: e.target.value })}
+                                                    fullWidth
+                                                    required
+                                                />
+                                            </Grid>
+                                            <Grid item xs={12} md={6} lg={3}>
+                                                <Button
+                                                    variant="contained"
+                                                    color="primary"
+                                                    endIcon={<SendIcon />}
+                                                    style={{ width: '100%' }}
+                                                    type='submit'
+                                                >
+                                                    Send
                                             </Button>
+                                            </Grid>
                                         </Grid>
-                                    </Grid>
-                                </form>
+                                    </form>
+                                </Grid>
                             </Grid>
-                        </Grid>
-                    </Paper>
+                        </Paper>
+                    }
+                    {
+                        data &&
+                        <Paper style={{ padding: '5px 5px 5px 5px' }}>
+                            <Card>
+                                <CardContent>
+                                    <Typography className={classes.title} color="textSecondary" gutterBottom style={{ color: '#009688' }}>
+                                        You have requested to check out
+                                </Typography>
+                                    <Typography className={classes.pos} color="textSecondary" style={{ color: 'red' }}>
+                                        Status: {(data?.accept === true) ? 'Approved' : 'Pending'}
+                                    </Typography>
+                                    <Typography variant="body2" component="p">
+                                        Please note that, once the status is approved, you cannot undo. If the status is under review, and you want to cancel, please contact the student office.
+                                    </Typography>
+                                </CardContent>
+                            </Card>
+                        </Paper>
+                    }
+
                 </Grid>
                 <Grid item xs={12} sm={4}>
                     <Paper elevation={0} style={{ border: '1px solid #f44336', borderRadius: '5px', padding: '5px' }}>

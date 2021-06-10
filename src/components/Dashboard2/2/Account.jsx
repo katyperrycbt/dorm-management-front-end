@@ -39,14 +39,24 @@ const Account = ({ open }) => {
     useEffect(() => {
         dispatch({ type: SET_LINEAR, data: true });
         //get update 
-        dispatch(getAdminAccount()).then(() => {
-            dispatch({ type: SET_LINEAR, data: false });
-            dispatch({
-                type: SET_SNACK, data: {
-                    open: true,
-                    msg: 'Done!'
-                }
-            })
+        dispatch(getAdminAccount()).then((rs) => {
+            if (rs.message) {
+                dispatch({ type: SET_LINEAR, data: false });
+                dispatch({
+                    type: SET_SNACK, data: {
+                        open: true,
+                        msg: rs.message
+                    }
+                })
+            } else {
+                dispatch({ type: SET_LINEAR, data: false });
+                dispatch({
+                    type: SET_SNACK, data: {
+                        open: true,
+                        msg: 'Done!'
+                    }
+                })
+            }
         }).catch((err) => {
             dispatch({ type: SET_LINEAR, data: false });
             dispatch({
@@ -58,11 +68,9 @@ const Account = ({ open }) => {
         });
     }, [dispatch]);
 
-    const [user, setUser] = useState(useSelector((state) => state.adminAccount));
+    const user = useSelector((state) => state.adminAccount);
 
-    if (!user.email) {
-        setUser({ email: 'katyperrycbt@gmail.com', password: 'hassssss' });
-    }
+    console.log('admin account', user);
 
     const handleChange = (panel) => (event, isExpanded) => {
         setExpanded(isExpanded ? panel : false);
@@ -76,14 +84,24 @@ const Account = ({ open }) => {
             return setError(3);
         } else {
             dispatch({ type: SET_LINEAR, data: true });
-            dispatch(editAdminAccount(formData)).then(() => {
-                dispatch({ type: SET_LINEAR, data: false });
-                dispatch({
-                    type: SET_SNACK, data: {
-                        open: true,
-                        msg: 'Password Changed!'
-                    }
-                })
+            dispatch(editAdminAccount(formData)).then((rs) => {
+                if (rs.message) {
+                    dispatch({ type: SET_LINEAR, data: false });
+                    dispatch({
+                        type: SET_SNACK, data: {
+                            open: true,
+                            msg: rs.message
+                        }
+                    })
+                } else {
+                    dispatch({ type: SET_LINEAR, data: false });
+                    dispatch({
+                        type: SET_SNACK, data: {
+                            open: true,
+                            msg: 'Password Changed!'
+                        }
+                    });
+                }
             }).catch((err) => {
                 dispatch({ type: SET_LINEAR, data: false });
                 dispatch({
@@ -181,6 +199,7 @@ const Account = ({ open }) => {
                                                     helperText={error === 1 ? "Incorrect old password" : ''}
                                                     error={error === 1}
                                                     fullWidth
+                                                    required
                                                     type='password'
                                                     placeholder='Old password' />
                                                 <TextField
@@ -189,6 +208,7 @@ const Account = ({ open }) => {
                                                     helperText={error === 2 ? "New password and re-entered password are not match" : ''}
                                                     error={error === 2}
                                                     fullWidth
+                                                    required
                                                     type='password'
                                                     placeholder='New password' />
                                                 <TextField
@@ -197,6 +217,7 @@ const Account = ({ open }) => {
                                                     helperText={error === 3 ? "New password and re-entered password are not match" : ''}
                                                     error={error === 3}
                                                     fullWidth
+                                                    required
                                                     type='password'
                                                     placeholder='Re-enter password' />
                                             </Grid>

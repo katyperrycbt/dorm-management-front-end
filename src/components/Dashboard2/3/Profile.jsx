@@ -55,15 +55,8 @@ const Profile = ({ open }) => {
         });
     }, [dispatch]);
 
-    const [user, setUser] = useState(useSelector((state) => state.adminInfo));
+    const user = useSelector((state) => state.adminInfo);
 
-    if (!user.name) {
-        setUser({
-            name: 'Thuc',
-            gender: 'male',
-            tel: '0328519993'
-        });
-    }
 
     const handleChange = (panel) => (event, isExpanded) => {
         setExpanded(isExpanded ? panel : false);
@@ -72,14 +65,25 @@ const Profile = ({ open }) => {
     const handleSubmit = () => {
 
         dispatch({ type: SET_LINEAR, data: true });
-        dispatch(editAdminInfo(formData)).then(() => {
-            dispatch({ type: SET_LINEAR, data: false });
-            dispatch({
-                type: SET_SNACK, data: {
-                    open: true,
-                    msg: 'Info Changed!'
-                }
-            })
+        dispatch(editAdminInfo(formData)).then((rs) => {
+            console.log(rs);
+            if (rs.message) {
+                dispatch({ type: SET_LINEAR, data: false });
+                dispatch({
+                    type: SET_SNACK, data: {
+                        open: true,
+                        msg: rs.message
+                    }
+                })
+            } else {
+                dispatch({ type: SET_LINEAR, data: false });
+                dispatch({
+                    type: SET_SNACK, data: {
+                        open: true,
+                        msg: 'Info Changed!'
+                    }
+                })
+            }
         }).catch((err) => {
             dispatch({ type: SET_LINEAR, data: false });
             dispatch({
@@ -145,7 +149,7 @@ const Profile = ({ open }) => {
                                     <Typography style={{ color: '#3f51b5' }}>
                                         Change gender here
                                     </Typography>
-                                    <TextField type='text' fullWidth placeholder='New name' name='name'
+                                    <TextField type='text' fullWidth placeholder='New gender' name='gender'
                                         onChange={(e) => setFormData({ ...formData, [e.target.name]: e.target.value })}
                                         onKeyDown={handleEnter}
                                     />
@@ -166,7 +170,7 @@ const Profile = ({ open }) => {
                                     <Typography style={{ color: '#3f51b5' }}>
                                         Change tel here
                                     </Typography>
-                                    <TextField type='text' fullWidth placeholder='New name' name='name'
+                                    <TextField type='text' fullWidth placeholder='New tetephone' name='tel'
                                         onChange={(e) => setFormData({ ...formData, [e.target.name]: e.target.value })}
                                         onKeyDown={handleEnter}
                                     />

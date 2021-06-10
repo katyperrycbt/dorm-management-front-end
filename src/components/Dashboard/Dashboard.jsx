@@ -97,19 +97,24 @@ export default function Dashboard() {
   const dispatch = useDispatch();
 
   const [chipData, setChipData] = React.useState([
-    { key: 0, label: 'Student information', value: 'student-information', current: 'student-information' === whatDatabase ? true : false },
-    { key: 1, label: 'Student residence', value: 'student-residence', current: 'student-residence' === whatDatabase ? true : false },
-    { key: 2, label: 'Utility bills', value: 'utility', current: 'utility' === whatDatabase ? true : false },
-    { key: 3, label: 'Resident bills', value: 'resident', current: 'resident' === whatDatabase ? true : false },
-    { key: 4, label: 'Unpaid bills', value: 'unpaid', current: 'unpaid' === whatDatabase ? true : false },
-    { key: 5, label: 'Accounts', value: 'accounts', current: 'accounts' === whatDatabase ? true : false },
-    { key: 6, label: 'Residence requests', value: 'residence-request', current: 'residence-request' === whatDatabase ? true : false },
-    { key: 7, label: 'Fix requests', value: 'fix-request', current: 'fix-request' === whatDatabase ? true : false },
-    { key: 8, label: 'Leaving requests', value: 'leaving-request', current: 'leaving-request' === whatDatabase ? true : false },
+    { key: 0, label: 'Student Accounts', value: 'student-information', current: 'student-information' === whatDatabase ? true : false },
+    { key: 1, label: 'Utility Bills', value: 'utility', current: 'utility' === whatDatabase ? true : false },
+    { key: 2, label: 'Resident Bills', value: 'resident', current: 'resident' === whatDatabase ? true : false },
+    { key: 3, label: 'Admin Accounts', value: 'admin-accounts', current: 'admin-accounts' === whatDatabase ? true : false },
+    { key: 4, label: 'Fix Requests', value: 'fix-request', current: 'fix-request' === whatDatabase ? true : false },
+    { key: 5, label: 'Return Requests', value: 'return-request', current: 'leaving-request' === whatDatabase ? true : false },
+    { key: 6, label: 'Room', value: 'room', current: 'room' === whatDatabase ? true : false },
+    { key: 7, label: 'StayInDorm/SA', value: 'stayindorm', current: 'stayindorm' === whatDatabase ? true : false },
+    { key: 8, label: 'ResidentInfo/SA', value: 'residentinfo', current: 'residentinfo' === whatDatabase ? true : false },
+    { key: 9, label: 'ParentInfo/SA', value: 'parentinfo', current: 'parentinfo' === whatDatabase ? true : false },
+    { key: 10, label: 'Insurance/SA', value: 'insurance', current: 'insurance' === whatDatabase ? true : false },
+    { key: 11, label: 'StudentList/R', value: 'studentlist', current: 'studentlist' === whatDatabase ? true : false },
+    { key: 12, label: 'Power/UB', value: 'power', current: 'power' === whatDatabase ? true : false },
+    { key: 13, label: 'Water/UB', value: 'water', current: 'water' === whatDatabase ? true : false },
   ]);
 
   useEffect(() => {
-    dispatch(getDashboard("abc"));
+    dispatch(getDashboard("student-information"));
   }, [dispatch]);
 
   let rows = useSelector((state) => state.dashboard);
@@ -393,7 +398,7 @@ export default function Dashboard() {
                             {
                               (cell ? ((row['_id'] ? cell['id'] === row['_id'] : cell['id'] === row[keyNames[0]]) && cell['field'] === key) : false) ?
                                 <TextField onKeyDown={handleKeyDown} onBlur={handleSubmit} autoFocus variant='outlined' value={cell['value']} onChange={handleCellChange} /> :
-                                row[key]
+                                (typeof row[key] === 'object' && row[key] !== null ? "Object" : row[key])
                             }
 
                           </TableCell>
