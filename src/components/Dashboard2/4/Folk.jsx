@@ -48,7 +48,7 @@ export default function CountrySelect({ formData, setFormData }) {
                     {option.alias}
                 </React.Fragment>
             )}
-            value={formData.country ? folk.find(x => x.label === formData.folk) : null}
+            value={formData.folk ? folk.find(x => x.label === formData.folk) : null}
             onChange={(e, value) => {
                 if (value?.label) {
                     setFormData({ ...formData, folk: value.label });

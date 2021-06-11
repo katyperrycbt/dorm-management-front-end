@@ -19,6 +19,8 @@ import Item1 from './1/Dashboard';
 import Item2 from './2/Account';
 import Item3 from './3/Profile';
 import Item4 from './4/New.Student';
+import EmailIcon from '@material-ui/icons/Email';
+import TestEmail from './TestEmail';
 
 const drawerWidth = 240;
 
@@ -128,6 +130,8 @@ const useStyles = makeStyles((theme) => ({
 export default function Dashboard() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
+  const [openEmail, setOpenEmail] = React.useState(false);
+
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -138,6 +142,7 @@ export default function Dashboard() {
   return (
     <div className={classes.root}>
       <CssBaseline />
+      {openEmail && <TestEmail open={openEmail} setOpen={setOpenEmail} />}
       <AppBar position="absolute" className={clsx(classes.appBar, open && classes.appBarShift)}>
         <Toolbar className={classes.toolbar}>
           <IconButton
@@ -152,9 +157,9 @@ export default function Dashboard() {
           <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
             Dashboard
           </Typography>
-          <IconButton color="inherit">
-            <Badge badgeContent={4} color="secondary">
-              <NotificationsIcon />
+          <IconButton color="inherit" onClick={() => setOpenEmail(old => !old)}>
+            <Badge badgeContent={0} color="secondary">
+              <EmailIcon />
             </Badge>
           </IconButton>
         </Toolbar>
@@ -172,15 +177,15 @@ export default function Dashboard() {
           </IconButton>
         </div>
         <Divider />
-        <List><MainListItems/></List>
+        <List><MainListItems /></List>
         <Divider />
-        <List><SecondaryListItems/></List>
+        <List><SecondaryListItems /></List>
       </Drawer>
       <Switch>
-        <Route exact path='/' render={(props) => <Item1 {...props} open={open}/>}/>
-        <Route exact path='/me/account' render={(props) => <Item2 {...props} open={open}/>}/>
-        <Route exact path='/me/profile' render={(props) => <Item3 {...props} open={open}/>}/>
-        <Route exact path='/new/student/account' render={(props) => <Item4 {...props} open={open}/>}/>
+        <Route exact path='/' render={(props) => <Item1 {...props} open={open} />} />
+        <Route exact path='/me/account' render={(props) => <Item2 {...props} open={open} />} />
+        <Route exact path='/me/profile' render={(props) => <Item3 {...props} open={open} />} />
+        <Route exact path='/new/student/account' render={(props) => <Item4 {...props} open={open} />} />
       </Switch>
     </div>
   );

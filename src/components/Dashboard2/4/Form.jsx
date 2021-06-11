@@ -65,7 +65,7 @@ const init = {
   folk: '',
   photo: '',
   religion: '',
-  stayindorm: [],
+  // stayindorm: [],
   email: '',
   password: generatePassword(),
   full_name: '',
@@ -119,14 +119,24 @@ export default function Checkout() {
       dispatch({ type: SET_LINEAR, data: true });
       adminSignUpStudent(formData).then((rs) => {
         console.log(rs);
-        dispatch({ type: SET_LINEAR, data: false });
-        dispatch({
-          type: SET_SNACK, data: {
-            open: true,
-            msg: rs
-          }
-        });
-        setActiveStep(activeStep + 1);
+        if (rs.message) {
+          dispatch({ type: SET_LINEAR, data: false });
+          dispatch({
+            type: SET_SNACK, data: {
+              open: true,
+              msg: rs.message
+            }
+          });
+        } else {
+          dispatch({ type: SET_LINEAR, data: false });
+          dispatch({
+            type: SET_SNACK, data: {
+              open: true,
+              msg: 'Create successfully!'
+            }
+          });
+          setActiveStep(activeStep + 1);
+        }
       }).catch((err) => {
         console.log(err.message);
         dispatch({ type: SET_LINEAR, data: false });

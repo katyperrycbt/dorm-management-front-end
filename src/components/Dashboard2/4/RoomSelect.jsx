@@ -29,16 +29,16 @@ export default function CountrySelect({ formData, setFormData, rooms }) {
             }}
             autoHighlight
             autoSelect
-            getOptionLabel={(option) => option}
+            getOptionLabel={(option) => option.dorm_ID}
             renderOption={(option) => (
                 <React.Fragment>
-                    {option}
+                    {option.dorm_ID}
                 </React.Fragment>
             )}
-            value={formData.room ? formData.room: null}
+            value={formData.room ? rooms.find(x => x._id === formData.room) : null}
             onChange={(e, value) => {
                 if (value) {
-                    setFormData({ ...formData, room: value });
+                    setFormData({ ...formData, room: value._id });
                 }
             }}
             renderInput={(params) => (

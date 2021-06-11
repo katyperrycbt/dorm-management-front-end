@@ -2,9 +2,11 @@ import * as api from '../api';
 
 export const getAvaiRoom = async (type) => {
     try {
-        // const {data} = await api.getAvaiRoom(type);
-        const data = ['B3212', 'B1234'];
-        return data;
+        let {data} = await api.getAvaiRoom(type);
+        console.log('roomsss', data);
+        data = data.data;
+        console.log('ddddd', data);
+        return data ? data: [];
     } catch (error) {
         return {message: error.response.data.message}
     }

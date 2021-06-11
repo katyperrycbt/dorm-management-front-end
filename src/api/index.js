@@ -133,6 +133,6 @@ export const requestReturn = (formData) => API.post('/student/request/return', f
 
 
 // get suitable room
-export const getAvaiRoom = (type) => API.get(`/admin/get/availableRoom?type=${type}`);
+export const getAvaiRoom = (type) => API.get(`/room/showAvailableRoom/${type}`);
 // get room bill
 export const getRoomBill = (roomName, howLong) => API.get(`/admin/get/roomBill?type=${roomName}&howLong=${howLong}`);

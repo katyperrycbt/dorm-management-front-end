@@ -14,13 +14,12 @@ export const adminSignUpAdmin = (formData) => async (dispatch) => {
 
 export const adminSignUpStudent = async (formData) => {
     try {
-        // const  {data} = await api.adminCreateStudentAccount(formData);
-        console.log(formData);
-        const data = 'Create successfully!';
+        const  {data} = await api.adminCreateStudentAccount(formData);
+        console.log(data);
+
         return data;
         // return dispatch({type: ADMIN_SIGN_UP_ADMIN, data});
     } catch (error) {
-        return {message: error.response.data.message}
-
+        return {message: error.response.data.error}
     }
 }

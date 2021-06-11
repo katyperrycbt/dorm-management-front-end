@@ -86,9 +86,15 @@ export default function PaymentForm({ init, formData, setFormData }) {
             </Select>
           </FormControl>
         </Grid>
-        <Grid item xs={12} md={6}>
+        {
+          rooms.length > 0 && <Grid item xs={12} md={6}>
+            <RoomSelect formData={formData} setFormData={setFormData} rooms={rooms} />
+          </Grid>
+        }
+        {/* Hello */}
+        {/* <Grid item xs={12} md={6}>
           <RoomSelect formData={formData} setFormData={setFormData} rooms={rooms} />
-        </Grid>
+        </Grid> */}
         <Grid item xs={12} md={6}>
           <MuiPickersUtilsProvider utils={DateFnsUtils}>
             <KeyboardDatePicker
@@ -145,7 +151,7 @@ export default function PaymentForm({ init, formData, setFormData }) {
                 }
               }}
               placeholder="Choose by click on the side button"
-              value={new Date(31556926000 * (new Date().getFullYear() - 1970 + 1))} 
+              value={new Date(31556926000 * (new Date().getFullYear() - 1970 + 1))}
               onChange={(e) => setFormData({ ...formData, to: new Date(31556926000 * (new Date().getFullYear() - 1970 + 1)) })}
               KeyboardButtonProps={{
                 'aria-label': 'change date',

@@ -198,7 +198,7 @@ export default function Requests() {
                             <Route exact path='/requests' render={props => <Fix {...props} requests={data} />} />
                         </TabPanel>
                         <TabPanel value={value} index={1} dir={theme.direction}>
-                            <Route exact path='/requests/return' render={props => <Return {...props} data={requestReturn} />} />
+                            <Route exact path='/requests/return' render={props => <Return {...props} data={requestReturn?.length ? requestReturn: null} />} />
                         </TabPanel>
                     </SwipeableViews>
                 </Switch>
