@@ -8,7 +8,7 @@
   4. The directory structure should be like this:
         - client
         - server
-            + docker-compose.yml
+        - docker-compose.yml
   5. In root directory, run this 
 ```console 
 docker-compose.exe up --force-recreate --build 
