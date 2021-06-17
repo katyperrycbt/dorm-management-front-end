@@ -17,6 +17,8 @@ import About from "./components/About/Alter";
 import Contact from "./components/Contact/Contact";
 import Dashboard from "./components/Dashboard2/Dashboard";
 import Login from "./components/Login/Login";
+import ChangePassword from './components/ChangeStudentPassword/ChangePassword';
+
 import { Snackbar } from "@material-ui/core";
 import { useSelector } from "react-redux";
 import { SET_SNACK } from "./constants/constants";
@@ -52,6 +54,8 @@ const App = () => {
           open={snack}
           onClose={handleClose}
           message={snackMSG}
+          classes={{root: classes.zzz}}
+
         />
         {linear && (
           <div
@@ -91,6 +95,7 @@ const App = () => {
         open={snack}
         onClose={handleClose}
         message={snackMSG}
+        classes={{root: classes.zzz}}
       />
       {linear && (
         <div
@@ -125,6 +130,7 @@ const App = () => {
           <Route path="/requests" render={(props) => <Requests {...props} />} />
           <Route path="/about" render={(props) => <About {...props} />} />
           <Route path="/contact" render={(props) => <Contact {...props} />} />
+          <Route path="/account" render={(props) => <ChangePassword {...props} />} />
           <Route
             path="/notifications"
             render={(props) => <Notification {...props} />}

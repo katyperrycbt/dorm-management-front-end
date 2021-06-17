@@ -8,7 +8,7 @@ export const getStudentAccount = () => async (dispatch) => {
 
         return dispatch({ type: GET_STUDENT_ACCOUNT, data });
     } catch (error) {
-        return { message: error.response.data.message }
+        return { message: error.response.data.error }
     }
 }
 
@@ -18,6 +18,6 @@ export const editStudentAccount = (formData) => async (dispatch) => {
 
         return dispatch({type: EDIT_STUDENT_ACCOUNT, data})
     } catch (error) {
-        return {message: error.response.data.message}
+        return {message: error.response.data.error}
     }
 }

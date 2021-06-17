@@ -395,12 +395,7 @@ export default function Dashboard() {
                             onClick={(event) => handleClickEdit(event, row['_id'] || row[keyNames[0]], key, row[key])}
                             key={`dsdid${index}${Date.now()}${Math.random()}`}
                           >
-                            {
-                              (cell ? ((row['_id'] ? cell['id'] === row['_id'] : cell['id'] === row[keyNames[0]]) && cell['field'] === key) : false) ?
-                                <TextField onKeyDown={handleKeyDown} onBlur={handleSubmit} autoFocus variant='outlined' value={cell['value']} onChange={handleCellChange} /> :
-                                (typeof row[key] === 'object' && row[key] !== null ? "Object" : row[key])
-                            }
-
+                            {typeof row[key] === 'object' && row[key] !== null ? "Object" : row[key]}
                           </TableCell>
                         })
                       }

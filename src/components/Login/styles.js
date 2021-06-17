@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 export default makeStyles((theme) => ({
     root: {
         height: '100vh',
-        zIndex: 10000,
+        zIndex: 1101,
         position: 'absolute',
         left: 0,
     },
@@ -24,6 +24,10 @@ export default makeStyles((theme) => ({
     avatar: {
         margin: theme.spacing(1),
         backgroundColor: theme.palette.secondary.main,
+    },
+    avatarr: {
+        margin: theme.spacing(1),
+        backgroundColor: '#4caf50',
     },
     form: {
         width: '100%', // Fix IE 11 issue.

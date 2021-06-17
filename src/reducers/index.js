@@ -15,6 +15,7 @@ import studentRequestReturn from './student.request.return';
 import adminSee from './admin.see';
 import snack from './snack';
 import linear from './linear';
+import recovery from './recovery';
 
 export default combineReducers({ 
     auth, 
@@ -32,7 +33,8 @@ export default combineReducers({
     studentRequestFix,
     studentRequestReturn, 
     adminSee,
-    snack, linear
+    snack, linear,
+    recovery
 });
 
 

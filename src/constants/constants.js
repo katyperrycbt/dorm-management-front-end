@@ -66,3 +66,5 @@ export const ADMIN_SEE_NOTIFICATION = 'ADMIN_SEE_NOTIFICATION'
 export const SET_SNACK = 'SET_SNACK'
 
 export const SET_LINEAR = 'SET_LINEAR'
+
+export const RECOVERY = 'RECOVERY'

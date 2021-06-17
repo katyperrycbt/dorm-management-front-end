@@ -26,7 +26,7 @@ export default function Deposits() {
     <React.Fragment>
       <Title>Exchange rate (from USD)</Title>
       <Typography component="p" variant="h4">
-        đ {cal}
+        đ {cal !== 0 ? cal : 23400}
       </Typography>
       <Typography color="textSecondary" className={classes.depositContext}>
         on {new Date(Date.now()).toLocaleDateString(undefined, { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}

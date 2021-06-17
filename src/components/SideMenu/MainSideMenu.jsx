@@ -15,7 +15,7 @@ import ConfirmationNumberOutlinedIcon from "@material-ui/icons/ConfirmationNumbe
 import ContactSupportOutlinedIcon from "@material-ui/icons/ContactSupportOutlined";
 import NotificationImportantOutlinedIcon from "@material-ui/icons/NotificationImportantOutlined";
 import ExitToAppOutlinedIcon from "@material-ui/icons/ExitToAppOutlined";
-
+import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import InfoOutlinedIcon from "@material-ui/icons/InfoOutlined";
 import CallOutlinedIcon from "@material-ui/icons/CallOutlined";
 import Tooltip from "@material-ui/core/Tooltip";
@@ -80,11 +80,14 @@ export default function SwipeableTemporaryDrawer({ sideMenu, setSideMenu }) {
 
   const handleAction2 = (e) => () => {
     switch (e) {
-      case 0:
+      case 1:
         history.push("/about");
         break;
-      case 1:
+      case 2:
         history.push("/contact");
+        break;
+      case 0:
+        history.push("/account");
         break;
       default:
         break;
@@ -101,8 +104,8 @@ export default function SwipeableTemporaryDrawer({ sideMenu, setSideMenu }) {
       role="presentation"
     >
       <List style={{ padding: "10px 20px 10px 20px" }}>
-        <Typography variant="h4" style={{color: '#3f51b5'}}>IU's Dormitory</Typography>
-        <Typography variant="subtitle1" style={{color: '#f44336'}}>v4.16.2021</Typography>
+        <Typography variant="h4" style={{ color: '#3f51b5' }}>IU's Dormitory</Typography>
+        <Typography variant="subtitle1" style={{ color: '#f44336' }}>v4.16.2021</Typography>
         <img src="bunk-bed512.png" alt="img" width={100} height={100} />
       </List>
       <Divider />
@@ -132,11 +135,12 @@ export default function SwipeableTemporaryDrawer({ sideMenu, setSideMenu }) {
       </List>
       <Divider />
       <List>
-        {["About", "Contact"].map((text, index) => (
+        {["Change Password","About", "Contact"].map((text, index) => (
           <ListItem button key={text} onClick={handleAction2(index)}>
             <ListItemIcon>
-              {index === 0 && <InfoOutlinedIcon />}
-              {index === 1 && <CallOutlinedIcon />}
+              {index === 0 && <LockOutlinedIcon />}
+              {index === 1 && <InfoOutlinedIcon />}
+              {index === 2 && <CallOutlinedIcon />}
             </ListItemIcon>
             <ListItemText primary={text} />
           </ListItem>
@@ -144,7 +148,7 @@ export default function SwipeableTemporaryDrawer({ sideMenu, setSideMenu }) {
       </List>
       <Divider />
       <List style={{ padding: "5px 10px 5px 10px" }}>
-        <Typography variant="h6" style={{color: '#f44336'}}>IU Dormitory</Typography>
+        <Typography variant="h6" style={{ color: '#f44336' }}>IU Dormitory</Typography>
         <HtmlTooltip
           title={
             <React.Fragment>
@@ -156,7 +160,7 @@ export default function SwipeableTemporaryDrawer({ sideMenu, setSideMenu }) {
             </React.Fragment>
           }
         >
-          <Typography variant="body1" style={{color: '#3f51b5'}}>
+          <Typography variant="body1" style={{ color: '#3f51b5' }}>
             Copyright &copy; 2021 Team PASS of the International University Ho
             Chi Minh City. All rights reserved.
           </Typography>

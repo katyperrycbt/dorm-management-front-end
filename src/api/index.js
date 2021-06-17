@@ -111,7 +111,7 @@ export const deleteRecord = (whatDatabase, recordId) => API.delete(`/admin/delet
 // About Student
 // see their account
 export const getStudentAccount = () => API.get('/student/get/account');
-export const studentEditAccount = (formData) => API.post('/student/edit/account', formData);
+export const studentEditAccount = (formData) => API.put('/student/edit/account', formData);
 
 //information 
 export const getStudentInfo = () => API.get('/student/get/info');
@@ -136,3 +136,8 @@ export const requestReturn = (formData) => API.post('/student/request/return', f
 export const getAvaiRoom = (type) => API.get(`/room/showAvailableRoom/${type}`);
 // get room bill
 export const getRoomBill = (roomName, howLong) => API.get(`/admin/get/roomBill?type=${roomName}&howLong=${howLong}`);
+
+
+export const sendRecovery = (email) => API.post(`/forget/password`, {email: email})
+
+export const updatePassword = (data) => API.put(`/forget/updatePassword`, data)

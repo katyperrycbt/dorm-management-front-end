@@ -29,6 +29,9 @@ export default makeStyles((theme) => ({
   customColor2: {
     backgroundColor: '#b39ddb'
   },
+  zzz : {
+    zIndex: 100000
+  },
   [theme.breakpoints.down('xs')]: {
     mainGrid: {
       flexDirection: 'column-reverse'
