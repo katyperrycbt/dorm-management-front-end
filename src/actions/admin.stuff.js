@@ -62,6 +62,26 @@ export const activateAccount = async (formData) => {
         return data ? data : {}
     } catch (error) {
         return { message: error.response.data.error }
+    }
+}
+
+export const getAllRoom = async () => {
+    try {
+        const { data } = await api.getAllRoom();
+
+        return data ? data : []
+    } catch (error) {
+        return { message: error.response.data.error }
+    }
+}
+
+export const createUtilityBill = async (formData) => {
+    try {
+        const {data} = await api.createUtilityBill(formData);
+
+        return data ? data : {}
+    } catch (error) {
+        return { message: error.response.data.error }
 
     }
 }

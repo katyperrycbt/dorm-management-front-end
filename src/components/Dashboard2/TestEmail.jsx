@@ -64,7 +64,7 @@ export default function FormDialog({ open, setOpen }) {
     return (
         <div>
             <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-                <Typography id="form-diadddlog-title" variant="h4" style={{ color: '#3f51b5', margin: '10px 0px 0px 10px' }}>Test Email</Typography>
+                <Typography id="form-diadddlog-title" align="center" variant="h4" style={{ color: '#3f51b5', margin: '10px 15px 10px 15px' }}>Send Email</Typography>
                 <form onSubmit={handleSubmit}>
                     <DialogContent>
                         <TextField

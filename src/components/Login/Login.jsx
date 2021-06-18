@@ -70,7 +70,7 @@ export default function Login() {
             setRecoveryCode(paramObj.recovery);
             setRecoveryMail(paramObj.email);
         }
-    }, []);
+    }, [history]);
 
     const handleLogin = (e) => {
         e.preventDefault();

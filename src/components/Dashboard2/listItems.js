@@ -4,7 +4,6 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListSubheader from '@material-ui/core/ListSubheader';
 import DashboardIcon from '@material-ui/icons/Dashboard';
-import LayersIcon from '@material-ui/icons/Layers';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import DescriptionIcon from '@material-ui/icons/Description';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
@@ -12,6 +11,7 @@ import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import SubscriptionsIcon from '@material-ui/icons/Subscriptions';
 import EmailIcon from '@material-ui/icons/Email';
 import HotelIcon from '@material-ui/icons/Hotel';
+import ReceiptIcon from '@material-ui/icons/Receipt';
 
 import { useHistory } from 'react-router-dom';
 
@@ -59,6 +59,14 @@ export const MainListItems = () => {
       <ListItemText primary="Room Arrangement" />
     </ListItem>
     <ListItem button onClick={() => {
+      history.push('/new/bill/utility');
+    }}>
+      <ListItemIcon>
+        <ReceiptIcon />
+      </ListItemIcon>
+      <ListItemText primary="Utility Bill" />
+    </ListItem>
+    <ListItem button onClick={() => {
       localStorage.clear();
       history.push('/');
     }}>
@@ -71,14 +79,14 @@ export const MainListItems = () => {
 };
 
 
-export const SecondaryListItems = () => {
+export const SecondaryListItems = ({setOpenEmail}) => {
   const history = useHistory();
 
   return (
     <div>
       <ListSubheader inset>Other tools</ListSubheader>
       <ListItem button onClick={() => {
-        history.push('/email/html');
+        setOpenEmail(old => !old)
       }}>
         <ListItemIcon>
           <EmailIcon />
@@ -87,7 +95,7 @@ export const SecondaryListItems = () => {
       </ListItem>
       <ListItem button onClick={() => {
         history.push('/email/subcriptions');
-      }}>
+      }} disabled>
         <ListItemIcon>
           <SubscriptionsIcon />
         </ListItemIcon>
