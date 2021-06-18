@@ -22,6 +22,7 @@ import Item4 from './4/New.Student';
 import EmailIcon from '@material-ui/icons/Email';
 import TestEmail from './TestEmail';
 import Item5 from './5/NewAdmin';
+import Item6 from './6/RoomArrangement';
 
 const drawerWidth = 240;
 
@@ -188,6 +189,7 @@ export default function Dashboard() {
         <Route exact path='/me/profile' render={(props) => <Item3 {...props} open={open} />} />
         <Route exact path='/new/student/account' render={(props) => <Item4 {...props} open={open} />} />
         <Route exact path='/new/admin/account' render={(props) => <Item5 {...props} open={open} />} />
+        <Route exact path='/room' render={(props) => <Item6 {...props} open={open} />} />
       </Switch>
     </div>
   );

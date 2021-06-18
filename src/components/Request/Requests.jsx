@@ -136,7 +136,8 @@ export default function Requests() {
             const tempDetails = {
                 content: requestFix[i]?.fixnote ? requestFix[i].fixnote : 'Not found',
                 image: requestFix[i]?.image ? requestFix[i].image : 'Not found',
-                status: requestFix[i]['accept'] === true ? 'Fixed' : 'Not fixed yet'
+                status: requestFix[i]?.accept === true ? 'Fixed' : 'Not fixed yet',
+                _id: requestFix[i]?._id ? requestFix[i]._id : 'Not found',
             }
 
             data.push({

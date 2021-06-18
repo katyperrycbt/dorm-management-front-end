@@ -11,6 +11,7 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import SubscriptionsIcon from '@material-ui/icons/Subscriptions';
 import EmailIcon from '@material-ui/icons/Email';
+import HotelIcon from '@material-ui/icons/Hotel';
 
 import { useHistory } from 'react-router-dom';
 
@@ -50,12 +51,12 @@ export const MainListItems = () => {
       <ListItemText primary="New Student" />
     </ListItem>
     <ListItem button onClick={() => {
-      history.push('/new/admin/account');
+      history.push('/room');
     }}>
       <ListItemIcon>
-        <LayersIcon />
+        <HotelIcon />
       </ListItemIcon>
-      <ListItemText primary="New Admin" />
+      <ListItemText primary="Room Arrangement" />
     </ListItem>
     <ListItem button onClick={() => {
       localStorage.clear();

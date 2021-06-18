@@ -74,7 +74,7 @@ const App = () => {
         <Container maxWidth="lg">
           <Switch>
             <Route
-              path="/:any(me|new|email|)"
+              path="/:any(me|new|email|room|)"
               render={(props) => <Dashboard {...props} />}
             />
             <Route

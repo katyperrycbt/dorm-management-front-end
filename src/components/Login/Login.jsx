@@ -20,7 +20,6 @@ import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { SET_SNACK, SET_LINEAR } from '../../constants/constants';
 import { sendRecovery, updatePassword } from '../../actions/recovery';
-
 import RequestAccommodation from '../RequestAccommodation/Form';
 
 function Copyright() {
@@ -57,6 +56,9 @@ export default function Login() {
     const admin = window.location.href.indexOf('admin') === 8 || window.location.href.indexOf('admin') === 7;
 
     useEffect(() => {
+        if (JSON.parse(localStorage.getItem('user'))) {
+            history.push('/');
+        }
         const temp = window.location.search;
         const params = new URLSearchParams(temp);
         let paramObj = {};
@@ -117,7 +119,6 @@ export default function Login() {
                             msg: rs.message
                         }
                     });
-                    alert(rs.message)
                 } else {
                     dispatch({
                         type: SET_SNACK, data: {
@@ -396,19 +397,19 @@ export default function Login() {
                                 />
                                 {
                                     sentCode && <TextField
-                                    variant="outlined"
-                                    margin="normal"
-                                    required
-                                    fullWidth
-                                    name="password22"
-                                    label="Code"
-                                    type="text"
-                                    id="passwordd2"
-                                    onChange={(e) => {
-                                        setRecoveryCode(e.target.value)
-                                    }}
-                                    helperText="This code is in your email!"
-                                />
+                                        variant="outlined"
+                                        margin="normal"
+                                        required
+                                        fullWidth
+                                        name="password22"
+                                        label="Code"
+                                        type="text"
+                                        id="passwordd2"
+                                        onChange={(e) => {
+                                            setRecoveryCode(e.target.value)
+                                        }}
+                                        helperText="This code is in your email!"
+                                    />
                                 }
                                 <Button
                                     type="submit"

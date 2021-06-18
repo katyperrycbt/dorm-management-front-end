@@ -138,6 +138,14 @@ export const getAvaiRoom = (type) => API.get(`/room/showAvailableRoom/${type}`);
 export const getRoomBill = (roomName, howLong) => API.get(`/admin/get/roomBill?type=${roomName}&howLong=${howLong}`);
 
 
-export const sendRecovery = (email) => API.post(`/forget/password`, {email: email})
+export const sendRecovery = (email) => API.post(`/forget/password`, {email: email});
 
-export const updatePassword = (data) => API.put(`/forget/updatePassword`, data)
+export const updatePassword = (data) => API.put(`/forget/updatePassword`, data);
+
+export const getAllStudentsWithTheirRoomInfo = () => API.get(`admin/get/getAllStudentsWithTheirRoomInfo`);
+export const updateStudentRoom = (formData) => API.put(`/admin/update/room`, formData);
+export const deactivateAccount = (formData) => API.put(`/admin/deactivate/account`, formData)
+export const activateAccount = (formData) => API.put(`/admin/activate/account`, formData)
+
+export const removeRequestFix = (id) => API.delete(`/student/remove/request/fix/${id}`);
+

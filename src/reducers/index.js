@@ -16,6 +16,7 @@ import adminSee from './admin.see';
 import snack from './snack';
 import linear from './linear';
 import recovery from './recovery';
+import getAllStudentsWithTheirRoomInfo from './admin.roomArrangement';
 
 export default combineReducers({ 
     auth, 
@@ -34,7 +35,8 @@ export default combineReducers({
     studentRequestReturn, 
     adminSee,
     snack, linear,
-    recovery
+    recovery,
+    getAllStudentsWithTheirRoomInfo
 });
 
 

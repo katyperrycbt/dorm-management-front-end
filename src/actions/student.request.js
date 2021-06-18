@@ -1,6 +1,6 @@
 import * as api from '../api'
 
-import { STUDENT_REQUEST_FIX, STUDENT_REQUEST_RETURN, STUDENT_GET_FIX_REQUEST, STUDENT_GET_RETURN_REQUEST } from '../constants/constants'
+import { STUDENT_REQUEST_FIX, STUDENT_REQUEST_RETURN, STUDENT_GET_FIX_REQUEST, STUDENT_GET_RETURN_REQUEST, STUDENT_DELETE_REQUEST_FIX } from '../constants/constants'
 
 export const studentRequestFix = (formData) => async (dispatch) => {
     try {
@@ -8,7 +8,7 @@ export const studentRequestFix = (formData) => async (dispatch) => {
 
         return dispatch({type: STUDENT_REQUEST_FIX, data});
     } catch (error) {
-        return {message: error.response.data.message}
+        return {message: error.response.data.error}
     }
 }
 
@@ -19,7 +19,7 @@ export const studentRequestReturn = (formData) => async (dispatch) => {
         return dispatch({type: STUDENT_REQUEST_RETURN, data});
 
     } catch (error) {
-        return {message: error.response.data.message}
+        return {message: error.response.data.error}
 
     }
 }
@@ -31,7 +31,7 @@ export const studentGetRequestFix = () => async (dispatch) => {
         return dispatch({type: STUDENT_GET_FIX_REQUEST, data});
 
     } catch (error) {
-        return {message: error.response.data.message}
+        return {message: error.response.data.error}
 
     }
 }
@@ -45,7 +45,17 @@ export const studentGetRequestReturn = () => async (dispatch) => {
         return dispatch({type: STUDENT_GET_RETURN_REQUEST, data});
 
     } catch (error) {
-        return {message: error.response.data.message}
+        return {message: error.response.data.error}
 
+    }
+}
+
+export const studentDeleteRequestFix = (id) => async (dispatch) => {
+    try {
+        await api.removeRequestFix(id);
+
+        return dispatch({type: STUDENT_DELETE_REQUEST_FIX, data: id})
+    } catch (error) {
+        return {message: error.response.data.error}
     }
 }

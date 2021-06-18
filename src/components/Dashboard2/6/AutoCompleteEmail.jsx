@@ -17,35 +17,35 @@ const useStyles = makeStyles({
     },
 });
 
-export default function CountrySelect({ formData, setFormData, rooms }) {
+export default function CountrySelect({ email, setEmail, data, disabled }) {
     const classes = useStyles();
     
     return (
         <Autocomplete
-            id={`country-seledwqqqqqqasct-demo${Math.random()}${Date.now()}`}
-            options={rooms}
+            id={`country-seledwqqqqqqasct-demo-email${Date.now()}${Math.random()}`}
+            options={data}
             classes={{
                 option: classes.option,
             }}
             autoHighlight
             autoSelect
-            fullWidth
-            getOptionLabel={(option) => option.dorm_ID}
+            disabled={disabled}
+            getOptionLabel={(option) => option.email}
             renderOption={(option) => (
                 <React.Fragment>
-                    {option.dorm_ID}
+                    {option.email}
                 </React.Fragment>
             )}
-            value={formData.room ? rooms.find(x => x._id === formData.room) : null}
+            value={email ? data.find(x => x.email === email) : null}
             onChange={(e, value) => {
                 if (value) {
-                    setFormData({ ...formData, room: value._id });
+                    setEmail(value.email);
                 }
             }}
             renderInput={(params) => (
                 <TextField
                     {...params}
-                    label="Available rooms"
+                    label="Student Email"
                     required
                     inputProps={{
                         ...params.inputProps,
