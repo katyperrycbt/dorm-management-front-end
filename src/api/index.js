@@ -149,7 +149,6 @@ export const activateAccount = (formData) => API.put(`/admin/activate/account`, 
 // delete
 export const removeRequestFix = (id) => API.delete(`/student/remove/request/fix/${id}`);
 
-
 // about bills
 export const getAllRoom = () => API.get('/room/showAllRoom');
 export const createUtilityBill = (formData) => API.post('/utilitybill/addUtilityBill', formData);

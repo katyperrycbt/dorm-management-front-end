@@ -33,7 +33,7 @@ export default function RequestForm({ open, setOpen }) {
                 msg: 'Sending...'
             }
         });
-
+        console.log(formData);
         dispatch(studentRequestFix(formData)).then((rs) => {
             if (rs.message) {
                 dispatch({ type: SET_LINEAR, data: false });

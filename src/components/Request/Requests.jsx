@@ -132,7 +132,7 @@ export default function Requests() {
 
     if (requestFix) {
         for (let i = 0; i < requestFix.length; i++) {
-            const tempHeader = `${requestFix[i]['fixnote'].slice(0, Math.floor(requestFix[i]['fixnote'].length * 0.5))}..., Status: ${requestFix[i]['accept'] === true ? 'Fixed' : 'Not fixed yet'}`
+            const tempHeader = `${requestFix[i]?.fixnote?.slice(0, Math.floor(requestFix[i]['fixnote'].length * 0.5))}..., Status: ${requestFix[i]['accept'] === true ? 'Fixed' : 'Not fixed yet'}`
             const tempDetails = {
                 content: requestFix[i]?.fixnote ? requestFix[i].fixnote : 'Not found',
                 image: requestFix[i]?.image ? requestFix[i].image : 'Not found',
